@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f813668c88050c4ebffdeebe55b742e, type: 3}
-  m_Name: TouchTheCar
+  m_Name: PickCarKey
   m_EditorClassIdentifier: 
-  <QuestText>k__BackingField: Go to the car and interact with it.
+  <QuestText>k__BackingField: Pick up car key

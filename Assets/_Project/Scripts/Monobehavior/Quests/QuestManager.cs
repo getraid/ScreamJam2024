@@ -12,12 +12,13 @@ public class QuestManager : MonoBehaviour
     [SerializeField] TMP_Text _uiQuestPrefab;
     [SerializeField] Transform _questUIParent;
     [SerializeField] List<QuestSO> _chronologicalQuests;
+    
 
     List<(IQuest SceneQuest, QuestSO QuestData,TMP_Text QuestUIText)> _allChronologicalQuests = new List<(IQuest, QuestSO,TMP_Text)>();
     int _lastCompletedQuest = 0;
     void Start()
     {
-        List<IQuest> allGameQuests = FindObjectsOfType<MonoBehaviour>().OfType<IQuest>().ToList();
+        List<IQuest> allGameQuests = Resources.FindObjectsOfTypeAll<MonoBehaviour>().OfType<IQuest>().ToList();
 
         for(int i=0;i< _chronologicalQuests.Count;i++)
         {
@@ -42,6 +43,10 @@ public class QuestManager : MonoBehaviour
 
     private void OnQuestCompletion(QuestSO sO)
     {
+        QuestItemSO questItemNeeded = _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestItemNeeded;
+        if (questItemNeeded != null && (!InventoryManager.Instance.RemoveQuestItemSO(questItemNeeded)))             //If player doesnt have right quest item for quest, do not complete the quest
+            return;
+
         _allChronologicalQuests[_lastCompletedQuest].QuestUIText.color = Color.green;
         _allChronologicalQuests[_lastCompletedQuest].QuestUIText.text= _allChronologicalQuests[_lastCompletedQuest].QuestUIText.text.Insert(0,"<s>");   //Temporary strikethrough
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestCompleted?.Invoke();
@@ -53,5 +58,12 @@ public class QuestManager : MonoBehaviour
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.TryCompleteQuest += OnQuestCompletion;
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestActivated?.Invoke();
         _allChronologicalQuests[_lastCompletedQuest].QuestUIText.enabled = true;
+
+        PlayQuestCompleteSound();
+    }
+
+    void PlayQuestCompleteSound()
+    {
+        //TODO
     }
 }
