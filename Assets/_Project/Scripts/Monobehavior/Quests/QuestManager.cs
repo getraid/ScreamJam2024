@@ -18,16 +18,16 @@ public class QuestManager : MonoBehaviour
     int _lastCompletedQuest = 0;
     void Start()
     {
-        List<IQuest> allGameQuests = Resources.FindObjectsOfTypeAll<MonoBehaviour>().OfType<IQuest>().ToList();
+        List<IQuest> allGameQuests = FindObjectsOfType<MonoBehaviour>(true).OfType<IQuest>().ToList();
 
         for(int i=0;i< _chronologicalQuests.Count;i++)
         {
             List<IQuest> sceneQuests= allGameQuests.FindAll(x => x.QuestData == _chronologicalQuests[i]);
 
             if (sceneQuests.Count > 1)
-                Debug.LogError($"Same quest is used on multiple places in game, it must be used only on one place [{_chronologicalQuests[i].name}]!!!");
+                Debug.LogError($"Same quest is used on multiple places in game, it must be used only on one place [{_chronologicalQuests[i].name} ({String.Join(",",sceneQuests)})]!!!");
             else if (sceneQuests.Count == 0)
-                Debug.LogError($"The quest is not inside the scene, but is in QuestManager [{_chronologicalQuests[i].name}]!!!");
+                Debug.LogError($"The quest is not inside the scene, but is in QuestManager [{_chronologicalQuests[i].name} ]!!!");
             else
             {
                 TMP_Text tmpText = Instantiate(_uiQuestPrefab, _questUIParent);
