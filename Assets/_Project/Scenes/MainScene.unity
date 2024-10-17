@@ -376,8 +376,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 14.594788, y: -13.404205}
+  m_SizeDelta: {x: -29.1896, y: -26.8083}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &68994683
 MonoBehaviour:
@@ -5362,6 +5362,7 @@ MonoBehaviour:
   <QuestCompleted>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
+  _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 0}
 --- !u!1 &154127431
 GameObject:
@@ -5887,7 +5888,7 @@ Transform:
   m_Children:
   - {fileID: 278786577}
   - {fileID: 1897941729}
-  - {fileID: 1857139669}
+  - {fileID: 882988037}
   m_Father: {fileID: 769798666}
   m_LocalEulerAnglesHint: {x: 0, y: 40.7, z: 0}
 --- !u!1 &567454655
@@ -6757,6 +6758,82 @@ MonoBehaviour:
   interactDistance: 2
   interactIcon: {fileID: 1192731019}
   interactText: {fileID: 567454657}
+--- !u!1 &882988036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 882988037}
+  - component: {fileID: 882988039}
+  - component: {fileID: 882988038}
+  m_Layer: 0
+  m_Name: Car - EngineStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &882988037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882988036}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 3, y: 1, z: 6}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 540761037}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &882988038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882988036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b831d93231f064d835996a5f56163b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <QuestData>k__BackingField: {fileID: 11400000, guid: 938e6ad0f2fe35b49960a5f2a2e1135a, type: 2}
+  <QuestItemNeeded>k__BackingField: {fileID: 11400000, guid: cb31536a03a84664b9ec7e5fa27e3a0b, type: 2}
+  <QuestActivated>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <QuestCompleted>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  _disableOnQuestCompletion: 0
+  _questItemToPickUp: {fileID: 0}
+--- !u!65 &882988039
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882988036}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &914609719
 GameObject:
   m_ObjectHideFlags: 0
@@ -7568,6 +7645,7 @@ MonoBehaviour:
   <QuestCompleted>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
+  _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 11400000, guid: cb31536a03a84664b9ec7e5fa27e3a0b, type: 2}
 --- !u!1 &1458543894
 GameObject:
@@ -7740,6 +7818,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 0}
 --- !u!1 &1470813630
 GameObject:
@@ -7954,6 +8033,7 @@ MonoBehaviour:
   <QuestCompleted>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
+  _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 11400000, guid: 77274415601691742ba81c7bd0e1127f, type: 2}
 --- !u!1 &1576201819
 GameObject:
@@ -8249,8 +8329,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 658.1135, y: 163.34216}
-  m_SizeDelta: {x: -1316.2297, y: -326.6843}
+  m_AnchoredPosition: {x: 639.88806, y: 145.15015}
+  m_SizeDelta: {x: -1352.6807, y: -363.0683}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1669358662
 MonoBehaviour:
@@ -8643,93 +8723,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiQuestItemPrefab: {fileID: 8024064219451213371, guid: 7b00e9316bb122a4097ba4394a0c2496, type: 3}
   _uiQuestParent: {fileID: 1669358661}
---- !u!1 &1857139668
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1857139669}
-  - component: {fileID: 1857139671}
-  - component: {fileID: 1857139670}
-  m_Layer: 0
-  m_Name: Car - StartTrigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1857139669
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857139668}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 3, y: 1, z: 6}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 540761037}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1857139670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857139668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1b831d93231f064d835996a5f56163b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <QuestData>k__BackingField: {fileID: 11400000, guid: 938e6ad0f2fe35b49960a5f2a2e1135a, type: 2}
-  <QuestItemNeeded>k__BackingField: {fileID: 11400000, guid: cb31536a03a84664b9ec7e5fa27e3a0b, type: 2}
-  <QuestActivated>k__BackingField:
-    m_PersistentCalls:
-      m_Calls: []
-  <QuestCompleted>k__BackingField:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 53214127}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  _questItemToPickUp: {fileID: 0}
---- !u!65 &1857139671
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857139668}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1897941728
 GameObject:
   m_ObjectHideFlags: 0
@@ -8868,6 +8861,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  _disableOnQuestCompletion: 1
   _questItemToPickUp: {fileID: 0}
 --- !u!1 &2046031583
 GameObject:
@@ -9068,6 +9062,7 @@ MonoBehaviour:
   <QuestCompleted>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
+  _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

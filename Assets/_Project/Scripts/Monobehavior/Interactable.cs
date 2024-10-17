@@ -10,15 +10,25 @@ public class Interactable : MonoBehaviour, IInteractable,IQuest
     [field: SerializeField] public QuestItemSO QuestItemNeeded { get; set; }
     [field: SerializeField] public UnityEvent QuestActivated { get; set; }
     [field: SerializeField] public UnityEvent QuestCompleted { get; set; }
+    [SerializeField] bool _disableOnQuestCompletion;
     public Action<QuestSO> TryCompleteQuest { get; set; }
 
     [SerializeField] QuestItemSO _questItemToPickUp;
+
+    private void Start()
+    {
+        if (_disableOnQuestCompletion)
+            QuestCompleted.AddListener(() => { enabled = false; });
+    }
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
         TryCompleteQuest?.Invoke(QuestData);
 
-        if(_questItemToPickUp != null)
+        if (_questItemToPickUp != null)
+        {
             InventoryManager.Instance.AddQuestItemSO(_questItemToPickUp);
+            Destroy(gameObject);
+        }
     }
 }
