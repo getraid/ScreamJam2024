@@ -4,16 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Interactable : MonoBehaviour, IInteractable,IQuest
+public class QuestColliderTrigger :MonoBehaviour, IQuest
 {
     [field:SerializeField] public QuestSO QuestData { get; set; }
     [field: SerializeField] public UnityEvent QuestActivated { get; set; }
     [field: SerializeField] public UnityEvent QuestCompleted { get; set; }
     public Action<QuestSO> TryCompleteQuest { get; set; }
 
-    public void Interact()
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Interacted with " + gameObject.name);
         TryCompleteQuest?.Invoke(QuestData);
     }
 }
