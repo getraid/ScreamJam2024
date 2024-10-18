@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,24 +29,34 @@ public class Interactor : MonoBehaviour
 
         // Raycast
         Ray r = new Ray(interactorSource.position, interactorSource.forward);
-        if (Physics.Raycast(r, out RaycastHit hitInfo, interactDistance))
+        RaycastHit[] hits = Physics.RaycastAll(r, interactDistance);
+        if(hits.Length > 0 )
         {
-            bool is_hit = hitInfo.collider.TryGetComponent(out _targetInteractable);
+            for(int i=0;i<hits.Length; i++)
+            {
+                Interactable[] interactables = hits[i].collider.gameObject.GetComponents<Interactable>();
 
-            // Check if Script is active
-            if (_targetInteractable != null && !_targetInteractable.enabled)
-                _targetInteractable = null;
+                Interactable found = interactables.FirstOrDefault(x => x.enabled);
 
-            _targetParent = is_hit ? hitInfo.collider.transform.parent : null;
+                if(found!=null)
+                {
+                    _targetInteractable = found;
+
+                    _targetParent = found.transform.parent;
+
+
+                    if (_isInteract)
+                    {
+                        _targetInteractable?.Interact();
+                    }
+                    break;
+                }
+                
+            }
         }
-
         SetIconActive(_targetInteractable != null);
         SetText(_targetInteractable != null ? _targetParent.name : "");
 
-        if (_isInteract)
-        {
-            _targetInteractable?.Interact();
-        }
     }
 
     private void SetIconActive(bool isActive)
