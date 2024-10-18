@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Interactable : MonoBehaviour, IInteractable,IQuest
+public class Interactable : MonoBehaviour, IQuest
 {
     [field:SerializeField] public QuestSO QuestData { get; set; }
     [field: SerializeField] public QuestItemSO QuestItemNeeded { get; set; }

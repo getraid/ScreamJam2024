@@ -4,10 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-interface IInteractable
-{
-    public void Interact();
-}
 
 public class Interactor : MonoBehaviour
 {
@@ -18,7 +14,7 @@ public class Interactor : MonoBehaviour
 
     private bool _isInteract;
 
-    private IInteractable _targetInteractable;
+    private Interactable _targetInteractable;
     private Transform _targetParent;
 
     private void Update()
@@ -27,13 +23,17 @@ public class Interactor : MonoBehaviour
         _targetInteractable = null;
 
         // Get Input
-        _isInteract = Input.GetKeyDown(KeyCode.E);
+        _isInteract = Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.F) || Input.GetMouseButtonDown(0);
 
         // Raycast
         Ray r = new Ray(interactorSource.position, interactorSource.forward);
         if (Physics.Raycast(r, out RaycastHit hitInfo, interactDistance))
         {
             bool is_hit = hitInfo.collider.TryGetComponent(out _targetInteractable);
+
+            // Check if Script is active
+            if (_targetInteractable != null && !_targetInteractable.enabled)
+                _targetInteractable = null;
 
             _targetParent = is_hit ? hitInfo.collider.transform.parent : null;
         }
