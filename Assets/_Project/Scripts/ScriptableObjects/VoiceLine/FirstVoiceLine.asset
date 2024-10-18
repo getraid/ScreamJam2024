@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd2e65695ff6434dafdb05eb817e352, type: 3}
+  m_Name: FirstVoiceLine
+  m_EditorClassIdentifier: 
+  <VoiceLineDataVoiceLines>k__BackingField:
+  - Text: '"Heeeeellloooo? Earth to Jake! You still alive, man? Or did Bigfoot get
+      you?"'
+    Audio: {fileID: 8300000, guid: 847c37ae15b8842468268be195aa7c7f, type: 3}
+    TimeDelay: 0
+  - Text: The voice is mocking, dragged out the words as if the guy on the other
+      end is enjoying himself a little too much.
+    Audio: {fileID: 8300000, guid: 3edab0df1a3f34140af55e290e4a3812, type: 3}
+    TimeDelay: 0
+  - Text: (maybe laughter, directly after their comment, or even after a short pause
+      for added tension)
+    Audio: {fileID: 8300000, guid: 35925816989d2c44ba2d345b6b7f9771, type: 3}
+    TimeDelay: 0
