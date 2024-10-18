@@ -15,9 +15,9 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
   m_Fog: 1
-  m_FogColor: {r: 0, g: 0, b: 0, a: 1}
-  m_FogMode: 3
-  m_FogDensity: 0
+  m_FogColor: {r: 0.12941177, g: 0.15686275, b: 0.35686275, a: 1}
+  m_FogMode: 2
+  m_FogDensity: 0.04
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.13977176, g: 0.14173642, b: 0.16320963, a: 1}
@@ -741,11 +741,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 703233302473530044, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 250
+      value: 213.9
       objectReference: {fileID: 0}
     - target: {fileID: 703233302473530044, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 6.82
       objectReference: {fileID: 0}
     - target: {fileID: 703233302473530044, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1816,11 +1816,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &814779867 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4629494155048330582, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
-  m_PrefabInstance: {fileID: 5564513181557127230}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &839822852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2445,11 +2440,6 @@ MonoBehaviour:
         m_CallState: 2
   _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 11400000, guid: cb31536a03a84664b9ec7e5fa27e3a0b, type: 2}
---- !u!4 &1458543895 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5297915196709981402, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
-  m_PrefabInstance: {fileID: 5564513181557127230}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1458874993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2621,7 +2611,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 814779867}
+  - {fileID: 938537792325541224}
   - {fileID: 769798666}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3435,14 +3425,14 @@ PrefabInstance:
     - target: {fileID: 1591657404359637383, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 1458543895}
+      objectReference: {fileID: 341401164647642340}
     - target: {fileID: 3387502028253269034, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 250
+      value: 213.9
       objectReference: {fileID: 0}
     - target: {fileID: 3387502028253269034, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 6.82
       objectReference: {fileID: 0}
     - target: {fileID: 3387502028253269034, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4047,6 +4037,21 @@ MonoBehaviour:
       m_Calls: []
   _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 0}
+--- !u!4 &341401164647642340 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5297915196709981402, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
+  m_PrefabInstance: {fileID: 7599713047131220048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &938537792325541224 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4629494155048330582, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
+  m_PrefabInstance: {fileID: 7599713047131220048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!108 &3491782228354777056 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 9095993030534509277, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+  m_PrefabInstance: {fileID: 429800416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4040632960674853143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4109,7 +4114,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1925236124438909062, guid: c5664af70b1f73f47b91057642a54f84, type: 3}
   m_PrefabInstance: {fileID: 4040632960674853143}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5564513181557127230
+--- !u!1001 &7599713047131220048
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -4129,6 +4134,10 @@ PrefabInstance:
       propertyPath: interactorSource
       value: 
       objectReference: {fileID: 963194228}
+    - target: {fileID: 2130688786338706443, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
+      propertyPath: <PlayerLight>k__BackingField
+      value: 
+      objectReference: {fileID: 3491782228354777056}
     - target: {fileID: 3793904856152269596, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
       propertyPath: volume
       value: 
@@ -4139,11 +4148,11 @@ PrefabInstance:
       objectReference: {fileID: 839822856}
     - target: {fileID: 4629494155048330582, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 250
+      value: 213.9
       objectReference: {fileID: 0}
     - target: {fileID: 4629494155048330582, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.25
+      value: 6.07
       objectReference: {fileID: 0}
     - target: {fileID: 4629494155048330582, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
       propertyPath: m_LocalPosition.z
