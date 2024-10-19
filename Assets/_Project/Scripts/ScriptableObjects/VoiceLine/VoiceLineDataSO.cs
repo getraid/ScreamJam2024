@@ -7,7 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/VoiceLineData", order = 1)]
 public class VoiceLineDataSO : ScriptableObject
 {
-    [field:SerializeField] public List<VoiceLineData> VoiceLineDataVoiceLines { get; set; }
+    [field:SerializeField] public List<VoiceLineData> VoiceLines { get; set; }
 
 }
 

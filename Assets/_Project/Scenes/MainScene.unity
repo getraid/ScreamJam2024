@@ -414,6 +414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 154127432}
+  - component: {fileID: 154127433}
   m_Layer: 0
   m_Name: CarKey
   m_TagString: Untagged
@@ -438,6 +439,19 @@ Transform:
   - {fileID: 475178499}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &154127433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154127431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b76324d4f68bb418124a5a2cbc6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentActivityToTrack: []
 --- !u!1001 &278786576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -927,7 +941,7 @@ GameObject:
   - component: {fileID: 475940340}
   - component: {fileID: 475940342}
   m_Layer: 0
-  m_Name: Text (TMP)
+  m_Name: Subtitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2445,6 +2459,51 @@ MonoBehaviour:
         m_CallState: 2
   _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 11400000, guid: cb31536a03a84664b9ec7e5fa27e3a0b, type: 2}
+  _voiceLineToActivate: {fileID: 0}
+--- !u!1 &1420092213
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1420092214}
+  - component: {fileID: 1420092215}
+  m_Layer: 0
+  m_Name: SaveSystemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1420092214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420092213}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2046031584}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1420092215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420092213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4c9881f2a0e97c4d9806d1a7b2d2fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1458543895 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297915196709981402, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
@@ -2592,6 +2651,7 @@ MonoBehaviour:
         m_CallState: 2
   _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 0}
+  _voiceLineToActivate: {fileID: 0}
 --- !u!1 &1470813630
 GameObject:
   m_ObjectHideFlags: 0
@@ -2822,9 +2882,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _voiceLineAudio: {fileID: 1515273166}
-  _VoiceLineText: {fileID: 475940340}
-  _VoiceLineAnimator: {fileID: 475940342}
-  _lengthOfVoiceLineDataAnimation: 0.33333334
+  _voiceLineText: {fileID: 475940340}
+  _voiceLineAnimator: {fileID: 475940342}
+  _subtitleAnimationClip: {fileID: 7400000, guid: 5a6e8b536d92a5e4394cfd1780b70526, type: 2}
 --- !u!1 &1520355934
 GameObject:
   m_ObjectHideFlags: 0
@@ -2950,9 +3010,22 @@ MonoBehaviour:
       m_Calls: []
   <QuestCompleted>k__BackingField:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1520355934}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 11400000, guid: 77274415601691742ba81c7bd0e1127f, type: 2}
+  _voiceLineToActivate: {fileID: 0}
 --- !u!1 &1576201819
 GameObject:
   m_ObjectHideFlags: 0
@@ -3626,6 +3699,7 @@ MonoBehaviour:
         m_CallState: 2
   _disableOnQuestCompletion: 1
   _questItemToPickUp: {fileID: 0}
+  _voiceLineToActivate: {fileID: 0}
 --- !u!114 &1897941734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3648,6 +3722,7 @@ MonoBehaviour:
       m_Calls: []
   _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 0}
+  _voiceLineToActivate: {fileID: 0}
 --- !u!1 &1972539141
 GameObject:
   m_ObjectHideFlags: 0
@@ -3763,6 +3838,7 @@ Transform:
   - {fileID: 1515273165}
   - {fileID: 2046354722}
   - {fileID: 811429409}
+  - {fileID: 1420092214}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2046354721
@@ -4047,6 +4123,7 @@ MonoBehaviour:
       m_Calls: []
   _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 0}
+  _voiceLineToActivate: {fileID: 0}
 --- !u!1001 &4040632960674853143
 PrefabInstance:
   m_ObjectHideFlags: 0

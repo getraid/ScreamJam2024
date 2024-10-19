@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class VoiceLineManager : MonoBehaviour
+public class VoiceLineManager : MonoBehaviour,ISaveable
 {
     [SerializeField] AudioSource _voiceLineAudio;
-    [SerializeField] TMP_Text _VoiceLineText;
-    [SerializeField] Animator _VoiceLineAnimator;
+    [SerializeField] TMP_Text _voiceLineText;
+    [SerializeField] Animator _voiceLineAnimator;
+    [SerializeField] AnimationClip _subtitleAnimationClip;
 
-    [SerializeField] float _lengthOfVoiceLineDataAnimation = 1/3f;
+    float _lengthOfVoiceLineDataAnimation;
+    Coroutine _runningCoroutine;
     public static VoiceLineManager Instance { get; private set; }
 
     private void Awake()
@@ -21,30 +23,44 @@ public class VoiceLineManager : MonoBehaviour
         else
         {
             Instance = this;
+            _lengthOfVoiceLineDataAnimation = _subtitleAnimationClip.length;
         }
     }
 
     public void PlayVoiceLine(VoiceLineDataSO voiceLineData)
     {
-        StartCoroutine(ShowVoiceLineDatas());
+        _runningCoroutine=StartCoroutine(ShowVoiceLineDatas());
 
         IEnumerator ShowVoiceLineDatas()
         {
-            for (int i = 0; i < voiceLineData.VoiceLineDataVoiceLines.Count; i++)
+            for (int i = 0; i < voiceLineData.VoiceLines.Count; i++)
             {
-                yield return new WaitForSeconds(voiceLineData.VoiceLineDataVoiceLines[i].TimeDelay);
+                yield return new WaitForSeconds(voiceLineData.VoiceLines[i].TimeDelay);
 
-                _VoiceLineAnimator.SetBool("SubtitleShown", true);
-                _VoiceLineText.text = voiceLineData.VoiceLineDataVoiceLines[i].Text;
-                _voiceLineAudio.clip = voiceLineData.VoiceLineDataVoiceLines[i].Audio;
+                _voiceLineAnimator.SetBool("SubtitleShown", true);
+                _voiceLineText.text = voiceLineData.VoiceLines[i].Text;
+                _voiceLineAudio.clip = voiceLineData.VoiceLines[i].Audio;
                 _voiceLineAudio.Play();
 
-                yield return new WaitForSeconds(voiceLineData.VoiceLineDataVoiceLines[i].Audio.length);
-                _VoiceLineAnimator.SetBool("SubtitleShown", false);
+                yield return new WaitForSeconds(voiceLineData.VoiceLines[i].Audio.length);
+                _voiceLineAnimator.SetBool("SubtitleShown", false);
 
                 yield return new WaitForSeconds(_lengthOfVoiceLineDataAnimation);
             } 
         }
     }
 
+    public void ReloadFromSafe(int saveIndex)
+    {
+        if(_runningCoroutine!=null)
+            StopCoroutine(_runningCoroutine);
+
+        _voiceLineAudio.Stop();
+        _voiceLineAnimator.SetBool("SubtitleShown", false);
+    }
+
+    public void SaveData()
+    {
+        //
+    }
 }

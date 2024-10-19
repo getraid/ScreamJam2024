@@ -7,7 +7,7 @@ using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class QuestManager : MonoBehaviour
+public class QuestManager : MonoBehaviour,ISaveable
 {
     [SerializeField] TMP_Text _uiQuestPrefab;
     [SerializeField] Transform _questUIParent;
@@ -16,6 +16,8 @@ public class QuestManager : MonoBehaviour
 
     List<(IQuest SceneQuest, QuestSO QuestData,TMP_Text QuestUIText)> _allChronologicalQuests = new List<(IQuest, QuestSO,TMP_Text)>();
     int _lastCompletedQuest = 0;
+    
+    List<int> _questSaveData=new List<int>();
     void Start()
     {
         List<IQuest> allGameQuests = FindObjectsOfType<MonoBehaviour>(true).OfType<IQuest>().ToList();
@@ -65,5 +67,28 @@ public class QuestManager : MonoBehaviour
     void PlayQuestCompleteSound()
     {
         //TODO
+    }
+
+    public void ReloadFromSafe(int saveIndex)
+    {
+        _allChronologicalQuests[_lastCompletedQuest].SceneQuest.TryCompleteQuest -= OnQuestCompletion;
+
+        _lastCompletedQuest = _questSaveData[saveIndex];
+
+        for(int i=_lastCompletedQuest+1;i<_chronologicalQuests.Count;i++)                 //On the quest list returning to the previous task
+            _allChronologicalQuests[i].QuestUIText.enabled = false;
+        for (int i = _lastCompletedQuest; i < _chronologicalQuests.Count; i++)
+        { 
+            _allChronologicalQuests[i].QuestUIText.text = _allChronologicalQuests[i].QuestUIText.text.Replace("<s>", "");
+            _allChronologicalQuests[i].QuestUIText.color = Color.white;
+        }
+
+        _allChronologicalQuests[_lastCompletedQuest].SceneQuest.TryCompleteQuest += OnQuestCompletion;
+
+    }
+
+    public void SaveData()
+    {
+        _questSaveData.Add(_lastCompletedQuest);
     }
 }

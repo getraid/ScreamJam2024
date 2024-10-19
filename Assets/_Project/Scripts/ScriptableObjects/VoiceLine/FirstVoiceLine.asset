@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd2e65695ff6434dafdb05eb817e352, type: 3}
   m_Name: FirstVoiceLine
   m_EditorClassIdentifier: 
-  <VoiceLineDataVoiceLines>k__BackingField:
+  <VoiceLines>k__BackingField:
   - Text: '"Heeeeellloooo? Earth to Jake! You still alive, man? Or did Bigfoot get
       you?"'
     Audio: {fileID: 8300000, guid: 847c37ae15b8842468268be195aa7c7f, type: 3}
