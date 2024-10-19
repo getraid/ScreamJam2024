@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float addedRunSpeed = 1.5f;
     [SerializeField] private float jumpHeight = 1f;
     [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float maxVerticalDelta = 1f; // Prevents skipping when moving down slopes
 
     [SerializeField] private float stamina = 10f;
     [SerializeField] private float jumpStaminaCost = 1f;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float fatigueSpeed = 0.3f;
 
     [SerializeField] private bool hasInhaler = true;
+    [SerializeField] private float inhalerActivationThreshold = 0.3f;
     [SerializeField] private float inhalerStaminaRecoveryTime = 1f;
     [SerializeField] private float inhalerSpeed = 0.6f;
     [SerializeField] private float inhalerCooldown = 30f;
@@ -89,11 +91,14 @@ public class PlayerController : MonoBehaviour
         move.Normalize();
         move.y = 0f;
 
+        // Set Rotation to Camera Forward while staying upright
+        transform.forward = new Vector3(_camera.transform.forward.x, 0f, _camera.transform.forward.z);
+
         // Check for Movement
         float move_speed = (_inputAxis.magnitude >= 0.1f) ? moveSpeed : 0f;
 
         // Check for Inhaler
-        if (_qPressed && hasInhaler && _currentInhalerCooldown <= 0f && _currentStamina < stamina)
+        if (_qPressed && hasInhaler && _currentInhalerCooldown <= inhalerActivationThreshold && _currentStamina < stamina)
         {
             _isInhaling = true;
             _currentInhalerCooldown = inhalerCooldown;
@@ -133,7 +138,23 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        _controller.Move(move_speed * Time.deltaTime * move);
+        Vector3 move_delta = move_speed * Time.deltaTime * move;
+
+        // Fix Skipping when moving down slopes
+        if (_isGrounded && move_delta.magnitude > 0f)
+        {
+            // Raycast forward and down to check for slopes
+            float ray_length = maxVerticalDelta + _controller.height * 0.5f;
+            Vector3 move_direction = new Vector3(move_delta.x, 0f, move_delta.z);
+
+            if (Physics.Raycast(transform.position + move_direction, Vector3.down, ray_length))
+            {
+                // Add the y difference to the move delta based on the hit point
+                move_delta.y = -ray_length + _controller.height * 0.5f;
+            }
+        }
+
+        _controller.Move(move_delta);
 
         // Check for Fatigue
         if (_currentStamina <= 0f)
