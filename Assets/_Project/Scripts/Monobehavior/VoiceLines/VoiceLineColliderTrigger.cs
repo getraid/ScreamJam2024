@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class VoiceLineColliderTrigger : MonoBehaviour,ISaveable
 {
     [SerializeField] VoiceLineDataSO _voiceLineData;
+    [SerializeField] bool _activateWalkieTalkie=false;
+    [SerializeField] UnityEvent _onVoiceLineCompleted;
 
     bool _hasBeenTriggered = false;
 
@@ -28,7 +31,7 @@ public class VoiceLineColliderTrigger : MonoBehaviour,ISaveable
         if(!_hasBeenTriggered)
         {
             _hasBeenTriggered = true;
-            VoiceLineManager.Instance.PlayVoiceLine(_voiceLineData);
+            VoiceLineManager.Instance.PlayVoiceLine(_voiceLineData, _activateWalkieTalkie, _onVoiceLineCompleted);
         }
     }
 }

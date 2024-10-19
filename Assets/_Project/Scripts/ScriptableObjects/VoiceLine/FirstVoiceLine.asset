@@ -16,12 +16,14 @@ MonoBehaviour:
   - Text: '"Heeeeellloooo? Earth to Jake! You still alive, man? Or did Bigfoot get
       you?"'
     Audio: {fileID: 8300000, guid: 847c37ae15b8842468268be195aa7c7f, type: 3}
+    TimeDelay: 1
+  - Text: Hey, uhh do you remember the documents for the  initiation of our frat
+    Audio: {fileID: 8300000, guid: bfdee2aa52e76d9458333f15114ee07c, type: 3}
     TimeDelay: 0
-  - Text: The voice is mocking, dragged out the words as if the guy on the other
-      end is enjoying himself a little too much.
-    Audio: {fileID: 8300000, guid: 3edab0df1a3f34140af55e290e4a3812, type: 3}
+  - Text: Listen, we may or may not have hid those around here somewhere
+    Audio: {fileID: 8300000, guid: 9a69571360b4ca94fbb8016132cba330, type: 3}
     TimeDelay: 0
-  - Text: (maybe laughter, directly after their comment, or even after a short pause
-      for added tension)
-    Audio: {fileID: 8300000, guid: 35925816989d2c44ba2d345b6b7f9771, type: 3}
+  - Text: Why?.... we just felt like it. If you are able to find it, a biiiig surprise
+      is waiting for ya
+    Audio: {fileID: 8300000, guid: 1aa6189b5acedde42afb4c9e3b485766, type: 3}
     TimeDelay: 0

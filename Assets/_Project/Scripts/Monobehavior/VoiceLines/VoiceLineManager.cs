@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class VoiceLineManager : MonoBehaviour,ISaveable
 {
@@ -10,6 +11,7 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
     [SerializeField] TMP_Text _voiceLineText;
     [SerializeField] Animator _voiceLineAnimator;
     [SerializeField] AnimationClip _subtitleAnimationClip;
+    [SerializeField] WalkieTalkiActivation _walkieTalkieActivation;
 
     float _lengthOfVoiceLineDataAnimation;
     Coroutine _runningCoroutine;
@@ -28,7 +30,7 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
         }
     }
 
-    public void PlayVoiceLine(VoiceLineDataSO voiceLineData)
+    public void PlayVoiceLine(VoiceLineDataSO voiceLineData,bool activateWalkieTalkie,UnityEvent callBackOnVoiceLineCompleted)
     {
         if (_runningCoroutine != null)
             StopCoroutine(_runningCoroutine);
@@ -37,6 +39,9 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
 
         IEnumerator ShowVoiceLineDatas()
         {
+            if(activateWalkieTalkie)
+                _walkieTalkieActivation.Activate();
+
             for (int i = 0; i < voiceLineData.VoiceLines.Count; i++)
             {
                 yield return new WaitForSeconds(voiceLineData.VoiceLines[i].TimeDelay);
@@ -52,6 +57,10 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
                 yield return new WaitForSeconds(_lengthOfVoiceLineDataAnimation);
             }
             _runningCoroutine = null;
+            if (activateWalkieTalkie)
+                _walkieTalkieActivation.Deactivate();
+
+            callBackOnVoiceLineCompleted?.Invoke();
         }
     }
 

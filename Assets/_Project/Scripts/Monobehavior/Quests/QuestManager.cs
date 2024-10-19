@@ -11,10 +11,16 @@ public class QuestManager : MonoBehaviour,ISaveable
 {
     [SerializeField] TMP_Text _uiQuestPrefab;
     [SerializeField] Transform _questUIParent;
-    [SerializeField] List<QuestSO> _chronologicalQuests;
-    
+    [SerializeField] List<ChronologicalQuests> _chronologicalQuests;
 
-    List<(IQuest SceneQuest, QuestSO QuestData,TMP_Text QuestUIText)> _allChronologicalQuests = new List<(IQuest, QuestSO,TMP_Text)>();
+    [Serializable]
+    public struct ChronologicalQuests
+    {
+        public QuestSO Quest;
+        public float DelayBeforeShownInQuickTasks;
+    }
+
+    List<(IQuest SceneQuest, ChronologicalQuests QuestData,TMP_Text QuestUIText)> _allChronologicalQuests = new List<(IQuest, ChronologicalQuests, TMP_Text)>();
     int _lastCompletedQuest = 0;
     
     Dictionary<DateTime,int> _questSaveData= new Dictionary<DateTime, int>();
@@ -24,23 +30,29 @@ public class QuestManager : MonoBehaviour,ISaveable
 
         for(int i=0;i< _chronologicalQuests.Count;i++)
         {
-            List<IQuest> sceneQuests= allGameQuests.FindAll(x => x.QuestData == _chronologicalQuests[i]);
+            List<IQuest> sceneQuests= allGameQuests.FindAll(x => x.QuestData == _chronologicalQuests[i].Quest);
 
             if (sceneQuests.Count > 1)
-                Debug.LogError($"Same quest is used on multiple places in game, it must be used only on one place [{_chronologicalQuests[i].name} ({String.Join(",",sceneQuests)})]!!!");
+                Debug.LogError($"Same quest is used on multiple places in game, it must be used only on one place [{_chronologicalQuests[i].Quest.name} ({String.Join(",",sceneQuests)})]!!!");
             else if (sceneQuests.Count == 0)
-                Debug.LogError($"The quest is not inside the scene, but is in QuestManager [{_chronologicalQuests[i].name} ]!!!");
+                Debug.LogError($"The quest is not inside the scene, but is in QuestManager [{_chronologicalQuests[i].Quest.name} ]!!!");
             else
             {
                 TMP_Text tmpText = Instantiate(_uiQuestPrefab, _questUIParent);
-                tmpText.text = _chronologicalQuests[i].QuestText;
+                tmpText.text = _chronologicalQuests[i].Quest.QuestText;
                 _allChronologicalQuests.Add(new(sceneQuests.First(), _chronologicalQuests[i], tmpText));
             }
         }
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.TryCompleteQuest += OnQuestCompletion;
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestActivated?.Invoke();
 
-        _allChronologicalQuests[_lastCompletedQuest].QuestUIText.enabled = true;
+        StartCoroutine(EnableWithDelay(_allChronologicalQuests[_lastCompletedQuest].QuestUIText, _allChronologicalQuests[_lastCompletedQuest].QuestData.DelayBeforeShownInQuickTasks));
+    }
+
+    IEnumerator EnableWithDelay(TMP_Text text, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        text.enabled = true;
     }
 
     private void OnQuestCompletion(QuestSO sO)
@@ -59,7 +71,8 @@ public class QuestManager : MonoBehaviour,ISaveable
 
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.TryCompleteQuest += OnQuestCompletion;
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestActivated?.Invoke();
-        _allChronologicalQuests[_lastCompletedQuest].QuestUIText.enabled = true;
+
+        StartCoroutine(EnableWithDelay(_allChronologicalQuests[_lastCompletedQuest].QuestUIText, _allChronologicalQuests[_lastCompletedQuest].QuestData.DelayBeforeShownInQuickTasks));
 
         PlayQuestCompleteSound();
     }

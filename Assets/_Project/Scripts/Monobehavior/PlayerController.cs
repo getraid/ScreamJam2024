@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,6 +34,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float inhalerSpeed = 0.6f;
     [SerializeField] private float inhalerCooldown = 30f;
 
+    [SerializeField] bool _canPlayerMove = false;
+    [SerializeField] CinemachineVirtualCamera _standingPosition;
+    [SerializeField] CinemachineVirtualCamera _crouchPosition;
+    [Tooltip("Disables the initial stuck on first quest. So you can run around and test stuff")]
+    [SerializeField] bool _devMode;
+
     // Input
     private Vector2 _inputAxis;
     private bool _shiftDown;
@@ -54,6 +61,9 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
+        
+        if(_devMode)
+            StandUp();
     }
 
     private void Start()
@@ -66,8 +76,25 @@ public class PlayerController : MonoBehaviour
         _currentStamina = stamina;
     }
 
+    public void Crouch()
+    {
+        _canPlayerMove = false;
+        _standingPosition.Priority = 0;
+        _crouchPosition.Priority = 10;
+    }
+    public void StandUp()
+    {
+        _canPlayerMove = true;
+        _standingPosition.Priority = 10;
+        _crouchPosition.Priority = 0;
+    }
+
     private void Update()
     {
+        if (!_canPlayerMove)
+            return;
+        
+
         // Gather Input
         _inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         _shiftDown = Input.GetKey(KeyCode.LeftShift);
