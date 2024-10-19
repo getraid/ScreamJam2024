@@ -229,4 +229,22 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("SafeZone"))
+        {
+            MusicManager.Instance.IsInSafeZone = true;
+            MusicManager.Instance.StopMusic();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("SafeZone"))
+        {
+            MusicManager.Instance.IsInSafeZone = false;
+            MusicManager.Instance.StartMusic();
+            
+        }
+    }
 }

@@ -103,8 +103,6 @@ public class PlayerLightScript : MonoBehaviour
  
         if (other.gameObject.CompareTag("SafeZone"))
         {
-            Debug.Log("leave"+other.gameObject.tag);
-            
             ToggleLight(true);
         }
     }
