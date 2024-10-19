@@ -9,7 +9,7 @@ Shader "Custom/LightThroughFogShaderWithBloom"
         _BloomThreshold ("Bloom Threshold", Range(0,100)) = 1.2 // Threshold for bloom effect
         _BloomTimeDivider ("Bloom Time Multiplier", Range(0,100)) = 1 // higher is faster
         _BloomClampMin ("Bloom Clamp Min", Range(0,1)) = 0
-        _BloomClampMax ("Bloom Clamp Min", Range(0,1)) = 1
+        _BloomClampMax ("Bloom Clamp Max", Range(0,1)) = 1
     }
     SubShader
     {
@@ -53,6 +53,7 @@ Shader "Custom/LightThroughFogShaderWithBloom"
             float _BloomTimeDivider;
             float _BloomClampMin;
             float _BloomClampMax;
+            float _TimeOffset;
 
             v2f vert(appdata v)
             {
@@ -71,7 +72,7 @@ Shader "Custom/LightThroughFogShaderWithBloom"
                 fixed4 emission = _EmissionColor * _EmissionStrength;
 
                 // _BloomThreshold = abs(sin(_Time.w / _BloomTimeDivider ));
-                _BloomThreshold = abs(sin(_Time.y * _BloomTimeDivider ));
+                _BloomThreshold = abs(sin((_Time.y+_TimeOffset) * _BloomTimeDivider ));
                 
                 
                  _BloomThreshold = clamp(_BloomThreshold, _BloomClampMin, _BloomClampMax);
