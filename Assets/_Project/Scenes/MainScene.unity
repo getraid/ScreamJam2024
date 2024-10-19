@@ -444,6 +444,19 @@ Transform:
   - {fileID: 475178499}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &154127433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 154127431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b76324d4f68bb418124a5a2cbc6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentActivityToTrack: []
 --- !u!4 &163718665 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2133896564168153131, guid: 94c5a1bcb040249f7addad1e2807ec52, type: 3}
@@ -856,11 +869,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
---- !u!4 &466005894 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2133896564168153131, guid: 94c5a1bcb040249f7addad1e2807ec52, type: 3}
-  m_PrefabInstance: {fileID: 1443769155}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &475178498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2036,7 +2044,6 @@ Transform:
   - {fileID: 61614228}
   - {fileID: 1504670226}
   - {fileID: 1206492175}
-  - {fileID: 466005894}
   - {fileID: 1073121522}
   - {fileID: 1948887586}
   - {fileID: 163718665}
@@ -2691,6 +2698,18 @@ MonoBehaviour:
   <QuestCompleted>k__BackingField:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 154127431}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1897941734}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
@@ -2750,22 +2769,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4c9881f2a0e97c4d9806d1a7b2d2fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1458543895 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5297915196709981402, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
-  m_PrefabInstance: {fileID: 5564513181557127230}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1458874993
 GameObject:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 1, y: 5, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1206492175}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1458874999}
+  - component: {fileID: 1458874995}
+  - component: {fileID: 1458874997}
+  - component: {fileID: 1458874996}
+  - component: {fileID: 1458874998}
+  m_Layer: 0
+  m_Name: 
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!136 &1458874995
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2874,6 +2897,21 @@ MonoBehaviour:
   _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 0}
   _voiceLineToActivate: {fileID: 0}
+--- !u!4 &1458874999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458874993}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1470813630
 GameObject:
   m_ObjectHideFlags: 0
@@ -3924,6 +3962,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 154127431}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   _disableOnQuestCompletion: 1
   _questItemToPickUp: {fileID: 0}
   _voiceLineToActivate: {fileID: 0}
@@ -3949,6 +3999,7 @@ MonoBehaviour:
       m_Calls: []
   _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 0}
+  _voiceLineToActivate: {fileID: 0}
 --- !u!4 &1948887586 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2133896564168153131, guid: 94c5a1bcb040249f7addad1e2807ec52, type: 3}
@@ -4354,6 +4405,7 @@ MonoBehaviour:
       m_Calls: []
   _disableOnQuestCompletion: 0
   _questItemToPickUp: {fileID: 0}
+  _voiceLineToActivate: {fileID: 0}
 --- !u!4 &341401164647642340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297915196709981402, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
@@ -4577,6 +4629,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1458874999}
   - {fileID: 2046031584}
   - {fileID: 1470813631}
   - {fileID: 384986545}
