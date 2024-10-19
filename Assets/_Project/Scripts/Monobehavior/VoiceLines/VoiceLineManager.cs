@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -29,6 +30,9 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
 
     public void PlayVoiceLine(VoiceLineDataSO voiceLineData)
     {
+        if (_runningCoroutine != null)
+            StopCoroutine(_runningCoroutine);
+
         _runningCoroutine=StartCoroutine(ShowVoiceLineDatas());
 
         IEnumerator ShowVoiceLineDatas()
@@ -46,11 +50,12 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
                 _voiceLineAnimator.SetBool("SubtitleShown", false);
 
                 yield return new WaitForSeconds(_lengthOfVoiceLineDataAnimation);
-            } 
+            }
+            _runningCoroutine = null;
         }
     }
 
-    public void ReloadFromSafe(int saveIndex)
+    public void ReloadFromSafe(DateTime saveDateStamp)
     {
         if(_runningCoroutine!=null)
             StopCoroutine(_runningCoroutine);
@@ -59,7 +64,7 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
         _voiceLineAnimator.SetBool("SubtitleShown", false);
     }
 
-    public void SaveData()
+    public void SaveData(DateTime saveDateStamp)
     {
         //
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ public class InventoryManager : MonoBehaviour,ISaveable
 
     public static InventoryManager Instance { get; private set; }
 
-    List<List<QuestItemSO>> _saveData=new List<List<QuestItemSO>>();
+    Dictionary<DateTime,List<QuestItemSO>> _saveData=new Dictionary<DateTime, List<QuestItemSO>>();
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -47,17 +48,17 @@ public class InventoryManager : MonoBehaviour,ISaveable
         return false;
     }
 
-    public void ReloadFromSafe(int saveIndex)
+    public void ReloadFromSafe(DateTime saveDateStamp)
     {
-        List<QuestItemSO> previousItemsOnSave = _saveData[saveIndex];
+        List<QuestItemSO> previousItemsOnSave = _saveData[saveDateStamp];
 
         List<QuestItemSO> toDelete = _collectedQuestItems.Keys.Where(x => !previousItemsOnSave.Contains(x)).ToList();
 
         toDelete.ForEach(x => RemoveQuestItemSO(x));
     }
 
-    public void SaveData()
+    public void SaveData(DateTime saveDateStamp)
     {
-        _saveData.Add(new List<QuestItemSO>(_collectedQuestItems.Keys ));
+        _saveData.Add(saveDateStamp, new List<QuestItemSO>(_collectedQuestItems.Keys ));
     }
 }

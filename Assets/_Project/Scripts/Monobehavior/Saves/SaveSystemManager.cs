@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 public class SaveSystemManager : MonoBehaviour
 {
-    int _lastSavedIndex = 0;
+    List<DateTime> _savedDateStamps=new List<DateTime>();
     bool _savedBefore = false;
     private void Update()
     {
@@ -25,10 +26,13 @@ public class SaveSystemManager : MonoBehaviour
     void Save()
     {
         List<ISaveable> allSaveable= FindObjectsOfType<MonoBehaviour>(true).OfType<ISaveable>().ToList();
-        allSaveable.ForEach(x => x.SaveData());
+
+        DateTime timeOfSave=DateTime.Now;
+        _savedDateStamps.Add(timeOfSave);
+        allSaveable.ForEach(x => x.SaveData(timeOfSave));
 
         _savedBefore = true;
-        Debug.Log("Game saved!");
+        Debug.Log($"Game saved in {timeOfSave:dd.MM.yyyy HH:mm:ss}!");
     }
     void ReloadLastSave()
     {
@@ -37,11 +41,12 @@ public class SaveSystemManager : MonoBehaviour
             Debug.LogError("Nothing has been saved yet, cannot reload last save! Save with F1");
             return;
         }
-        List<ISaveable> allSaveable = FindObjectsOfType<MonoBehaviour>(true).OfType<ISaveable>().ToList();
-        allSaveable.ForEach(x => x.ReloadFromSafe(_lastSavedIndex));
-        _lastSavedIndex = Mathf.Max(0, _lastSavedIndex - 1);
+        DateTime lastSave = _savedDateStamps.Last();
 
-        Debug.Log($"Game save reloaded! {_lastSavedIndex}");
+        List<ISaveable> allSaveable = FindObjectsOfType<MonoBehaviour>(true).OfType<ISaveable>().ToList();
+        allSaveable.ForEach(x => x.ReloadFromSafe(lastSave));
+
+        Debug.Log($"Game save reloaded! From {lastSave:dd.MM.yyyy HH:mm:ss}");
 
     }
 }

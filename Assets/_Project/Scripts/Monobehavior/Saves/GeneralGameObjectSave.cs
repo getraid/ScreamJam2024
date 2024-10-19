@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,22 +17,28 @@ public class GeneralGameObjectSave : MonoBehaviour, ISaveable
     }
     [SerializeField] List<MonoBehaviour> _componentActivityToTrack;
 
-    List<GeneralGameObjectData> _savedData=new List<GeneralGameObjectData>();
-    public void ReloadFromSafe(int saveIndex)
+    Dictionary<DateTime,GeneralGameObjectData> _savedData= new Dictionary<DateTime, GeneralGameObjectData>();
+    public void ReloadFromSafe(DateTime saveDateStamp)
     {
-        GeneralGameObjectData dataToLoad = _savedData[saveIndex];
-
-        gameObject.transform.position = dataToLoad.Position;
-        gameObject.transform.rotation = dataToLoad.Rotation;
-        gameObject.SetActive(dataToLoad.ActiveItself);
-
-        for(int i=0;i<_componentActivityToTrack.Count;i++)
+        if(_savedData.ContainsKey(saveDateStamp))
         {
-            _componentActivityToTrack[i].enabled = dataToLoad.ComponentActivity[i];
+            GeneralGameObjectData dataToLoad = _savedData[saveDateStamp];
+
+            gameObject.transform.position = dataToLoad.Position;
+            gameObject.transform.rotation = dataToLoad.Rotation;
+            gameObject.SetActive(dataToLoad.ActiveItself);
+
+            for (int i = 0; i < _componentActivityToTrack.Count; i++)
+            {
+                _componentActivityToTrack[i].enabled = dataToLoad.ComponentActivity[i];
+            }
         }
+        else
+            Destroy(gameObject);
+        
     }
 
-    public void SaveData()
+    public void SaveData(DateTime saveDateStamp)
     {
         GeneralGameObjectData saveData;
         saveData.Position=gameObject.transform.position;
@@ -40,6 +47,6 @@ public class GeneralGameObjectSave : MonoBehaviour, ISaveable
 
         saveData.ComponentActivity = _componentActivityToTrack.Select(x=>x.enabled).ToList();
 
-        _savedData.Add(saveData);
+        _savedData.Add(saveDateStamp, saveData);
     }
 }

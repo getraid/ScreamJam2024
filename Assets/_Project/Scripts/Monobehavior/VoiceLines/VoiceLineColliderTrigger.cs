@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,15 +9,18 @@ public class VoiceLineColliderTrigger : MonoBehaviour,ISaveable
 
     bool _hasBeenTriggered = false;
 
-    List<bool> _hasBeenTriggeredSave=new List<bool>();
-    public void ReloadFromSafe(int saveIndex)
+    Dictionary<DateTime,bool> _hasBeenTriggeredSave=new Dictionary<DateTime, bool>();
+    public void ReloadFromSafe(DateTime saveDateStamp)
     {
-        _hasBeenTriggered = _hasBeenTriggeredSave[saveIndex];
+        if(_hasBeenTriggeredSave.ContainsKey(saveDateStamp))
+            _hasBeenTriggered = _hasBeenTriggeredSave[saveDateStamp];
+        else
+            Destroy(gameObject);
     }
 
-    public void SaveData()
+    public void SaveData(DateTime saveDateStamp)
     {
-        _hasBeenTriggeredSave.Add(_hasBeenTriggered);
+        _hasBeenTriggeredSave.Add(saveDateStamp, _hasBeenTriggered);
     }
 
     private void OnTriggerEnter(Collider other)

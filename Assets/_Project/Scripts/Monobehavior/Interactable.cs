@@ -11,7 +11,7 @@ public class Interactable : MonoBehaviour, IQuest,ISaveable
     [field: SerializeField] public UnityEvent QuestActivated { get; set; }
     [field: SerializeField] public UnityEvent QuestCompleted { get; set; }
     [SerializeField] bool _disableOnQuestCompletion;
-    List<(bool Enabled,bool GameObjectActive)> _saveActivationValues = new List<(bool, bool)>();
+    Dictionary<DateTime,(bool Enabled,bool GameObjectActive)> _saveActivationValues = new Dictionary<DateTime, (bool Enabled, bool GameObjectActive)>();
 
     public Action<QuestSO> TryCompleteQuest { get; set; }
 
@@ -36,14 +36,19 @@ public class Interactable : MonoBehaviour, IQuest,ISaveable
             VoiceLineManager.Instance.PlayVoiceLine(_voiceLineToActivate);
     }
 
-    public void ReloadFromSafe(int saveIndex)
+    public void ReloadFromSafe(DateTime saveDateStamp)
     {
-        enabled = _saveActivationValues[saveIndex].Enabled;
-        gameObject.SetActive(_saveActivationValues[saveIndex].GameObjectActive);
+        if(_saveActivationValues.ContainsKey(saveDateStamp))
+        {
+            enabled = _saveActivationValues[saveDateStamp].Enabled;
+            gameObject.SetActive(_saveActivationValues[saveDateStamp].GameObjectActive);
+        }
+        else
+            Destroy(gameObject);
     }
 
-    public void SaveData()
+    public void SaveData(DateTime saveDateStamp)
     {
-        _saveActivationValues.Add(new(enabled,gameObject.activeSelf));
+        _saveActivationValues.Add(saveDateStamp, new(enabled,gameObject.activeSelf));
     }
 }

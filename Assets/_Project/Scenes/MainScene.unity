@@ -3632,7 +3632,7 @@ MonoBehaviour:
   <QuestCompleted>k__BackingField:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1520355934}
+      - m_Target: {fileID: 664488614}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6

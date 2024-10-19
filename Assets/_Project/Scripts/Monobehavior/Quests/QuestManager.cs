@@ -17,7 +17,7 @@ public class QuestManager : MonoBehaviour,ISaveable
     List<(IQuest SceneQuest, QuestSO QuestData,TMP_Text QuestUIText)> _allChronologicalQuests = new List<(IQuest, QuestSO,TMP_Text)>();
     int _lastCompletedQuest = 0;
     
-    List<int> _questSaveData=new List<int>();
+    Dictionary<DateTime,int> _questSaveData= new Dictionary<DateTime, int>();
     void Start()
     {
         List<IQuest> allGameQuests = FindObjectsOfType<MonoBehaviour>(true).OfType<IQuest>().ToList();
@@ -69,11 +69,11 @@ public class QuestManager : MonoBehaviour,ISaveable
         //TODO
     }
 
-    public void ReloadFromSafe(int saveIndex)
+    public void ReloadFromSafe(DateTime saveDateStamp)
     {
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.TryCompleteQuest -= OnQuestCompletion;
 
-        _lastCompletedQuest = _questSaveData[saveIndex];
+        _lastCompletedQuest = _questSaveData[saveDateStamp];
 
         for(int i=_lastCompletedQuest+1;i<_chronologicalQuests.Count;i++)                 //On the quest list returning to the previous task
             _allChronologicalQuests[i].QuestUIText.enabled = false;
@@ -87,8 +87,8 @@ public class QuestManager : MonoBehaviour,ISaveable
 
     }
 
-    public void SaveData()
+    public void SaveData(DateTime saveDateStamp)
     {
-        _questSaveData.Add(_lastCompletedQuest);
+        _questSaveData.Add(saveDateStamp, _lastCompletedQuest);
     }
 }
