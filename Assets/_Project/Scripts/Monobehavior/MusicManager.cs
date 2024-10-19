@@ -40,12 +40,14 @@ public class MusicManager : MonoBehaviour
 
     private Dictionary<string, AudioClip> audioFilesDict { get; set; }
     public static MusicManager Instance { get; private set; }
+    
 
     private AudioSource activeSource;
     private AudioSource inactiveSource;
     private bool isStopping = false;
     private Coroutine musicLoopCoroutine;
     private bool isLevelChanging = false;
+    private AudioClip currentClip = null; // Store the currently playing clip
 
     void Start()
     {
@@ -73,7 +75,6 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    // Start Music: This method now starts the initial StartAudioSequence
     public void StartMusic()
     {
         if (IsInSafeZone)
@@ -87,8 +88,8 @@ public class MusicManager : MonoBehaviour
             StopCoroutine(musicLoopCoroutine);
         }
 
-        // Start by playing the start sequence
-        musicLoopCoroutine = StartCoroutine(PlayStartSequenceThenMusic());
+        // Start the music sequence with the start audio if specified
+        musicLoopCoroutine = StartCoroutine(PlayRandomMusicFromGroup(CurrentAudioGroupIndex, useStart: true));
     }
 
     // Play Start Sequence, then continue with the random song -> end song loop
@@ -114,15 +115,17 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+
+   
     private IEnumerator PlayCurrentLoopThenEndSequence()
     {
+        // Wait for the current loop to finish
         yield return new WaitWhile(() => activeSource.isPlaying);
 
+        // If there is an end audio sequence, crossfade to it
         if (EndAudioSequence != null)
         {
-            activeSource.clip = EndAudioSequence;
-            activeSource.Play();
-            yield return new WaitForSeconds(EndAudioSequence.length);
+            yield return StartCoroutine(PlayClipWithCrossfade(currentClip, EndAudioSequence, crossfadeBuffer: 2.0f, fadeDuration: 2.0f));
         }
 
         isStopping = false;
@@ -156,22 +159,35 @@ public class MusicManager : MonoBehaviour
         musicLoopCoroutine = StartCoroutine(PlayRandomMusicFromGroup(CurrentAudioGroupIndex));
     }
 
-    private IEnumerator PlayRandomMusicFromGroup(int groupIndex)
+    private IEnumerator PlayRandomMusicFromGroup(int groupIndex, bool useStart = false)
     {
         List<AudioClip> audioClips = GetAudioClipsFromGroup(groupIndex);
-        AudioClip currentClip = null; // Store the currently playing clip
+
+        // If the start audio should be used, set it as the current clip
+        if (useStart && StartAudioSequence != null)
+        {
+            currentClip = StartAudioSequence;
+        }
 
         // Start playing the random song sequence
         while (!IsInSafeZone && !isStopping && !isLevelChanging)
         {
             if (audioClips.Count > 0)
             {
-                // Select a new random song
+                // Select a new random song if the current clip is not the start sequence
                 AudioClip newClip;
-                do
+                if (currentClip == null || currentClip == StartAudioSequence)
                 {
                     newClip = audioClips[UnityEngine.Random.Range(0, audioClips.Count)];
-                } while (newClip == currentClip); // Ensure we don't play the same clip consecutively
+                }
+                else
+                {
+                    // Avoid playing the same clip consecutively
+                    do
+                    {
+                        newClip = audioClips[UnityEngine.Random.Range(0, audioClips.Count)];
+                    } while (newClip == currentClip);
+                }
 
                 // Crossfade from the current clip to the new clip
                 yield return StartCoroutine(PlayClipWithCrossfade(currentClip, newClip, crossfadeBuffer: 2.0f, fadeDuration: 2.0f));
@@ -188,7 +204,6 @@ public class MusicManager : MonoBehaviour
     }
 
 
-// Crossfade between the old clip and the new clip
     private IEnumerator PlayClipWithCrossfade(AudioClip oldClip, AudioClip newClip, float crossfadeBuffer = 2.0f, float fadeDuration = 2.0f)
     {
         // If there is an old clip, set it to the active source
@@ -247,7 +262,6 @@ public class MusicManager : MonoBehaviour
         activeSource = inactiveSource;
         inactiveSource = temp;
     }
-
     public List<AudioClip> GetAudioClipsFromGroup(int groupIndex)
     {
         List<AudioTrackNames> currentList =
