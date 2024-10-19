@@ -50,11 +50,14 @@ public class InventoryManager : MonoBehaviour,ISaveable
 
     public void ReloadFromSafe(DateTime saveDateStamp)
     {
+        foreach (var item in _collectedQuestItems)
+            Destroy(item.Value.gameObject);
+
+        _collectedQuestItems.Clear();
+
         List<QuestItemSO> previousItemsOnSave = _saveData[saveDateStamp];
 
-        List<QuestItemSO> toDelete = _collectedQuestItems.Keys.Where(x => !previousItemsOnSave.Contains(x)).ToList();
-
-        toDelete.ForEach(x => RemoveQuestItemSO(x));
+        previousItemsOnSave.ForEach(x => AddQuestItemSO(x));
     }
 
     public void SaveData(DateTime saveDateStamp)
