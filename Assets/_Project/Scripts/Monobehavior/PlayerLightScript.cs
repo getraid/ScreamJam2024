@@ -28,13 +28,16 @@ public class PlayerLightScript : MonoBehaviour
         this.setEnabled = setEnabled;
     }
     
+    public void HardSetLight(float value)
+    {
+        PlayerLight.intensity = value;
+    }
+    
     // Update is called once per frame
     void Update()
     {
         if (toggled)
         {
-            Debug.Log("tog_" +toggled);
-            Debug.Log("en_"+setEnabled);
             toggled = false;
             timer = 0f;
         }
@@ -78,6 +81,32 @@ public class PlayerLightScript : MonoBehaviour
     float EaseOutExpo(float number) 
     {
         return number == 1 ? 1 : 1 - Mathf.Pow(2, -10 * number);
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("OutOfBounds"))
+        {
+            // disable the player light and toggle on afterwards.
+            HardSetLight(0f);
+            ToggleLight(true);
+        }
+        
+        if (other.gameObject.CompareTag("SafeZone"))
+        {
+            ToggleLight(false);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+ 
+        if (other.gameObject.CompareTag("SafeZone"))
+        {
+            Debug.Log("leave"+other.gameObject.tag);
+            
+            ToggleLight(true);
+        }
     }
     
     

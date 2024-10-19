@@ -50,12 +50,10 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController _controller;
     private Camera _camera;
-    private PlayerLightScript _lightScript;
 
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
-        _lightScript = GetComponent<PlayerLightScript>();
     }
 
     private void Start()
@@ -203,22 +201,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("SafeZone"))
-        {
-            _lightScript?.ToggleLight(false);
-        }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
- 
-        if (other.gameObject.CompareTag("SafeZone"))
-        {
-            Debug.Log("leave"+other.gameObject.tag);
-            
-            _lightScript?.ToggleLight(true);
-        }
-    }
 }
