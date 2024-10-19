@@ -159,24 +159,25 @@ public class MusicManager : MonoBehaviour
     private IEnumerator PlayRandomMusicFromGroup(int groupIndex)
     {
         List<AudioClip> audioClips = GetAudioClipsFromGroup(groupIndex);
-        
-        AudioClip prevClip = null;
-        
-        // Start playing the random song sequence with end crossfade
+        AudioClip currentClip = null; // Store the currently playing clip
+
+        // Start playing the random song sequence
         while (!IsInSafeZone && !isStopping && !isLevelChanging)
         {
             if (audioClips.Count > 0)
             {
-                // Play random song
-                AudioClip newClip = audioClips[UnityEngine.Random.Range(0, audioClips.Count)];
-                
-                yield return StartCoroutine(PlayClipWithCrossfade(newClip, prevClip));
-                prevClip = newClip;
+                // Select a new random song
+                AudioClip newClip;
+                do
+                {
+                    newClip = audioClips[UnityEngine.Random.Range(0, audioClips.Count)];
+                } while (newClip == currentClip); // Ensure we don't play the same clip consecutively
 
-                // After the random song, crossfade to the end audio sequence
-                // yield return StartCoroutine(PlayClipWithCrossfade(EndAudioSequence));
+                // Crossfade from the current clip to the new clip
+                yield return StartCoroutine(PlayClipWithCrossfade(currentClip, newClip, crossfadeBuffer: 2.0f, fadeDuration: 2.0f));
 
-                // Continue to loop back to random song
+                // Update the current clip to the new clip
+                currentClip = newClip;
             }
             else
             {
@@ -185,82 +186,61 @@ public class MusicManager : MonoBehaviour
             }
         }
     }
-    
-    // Play the current clip and initiate the crossfade 2 seconds before it ends
-    private IEnumerator PlayClipWithCrossfade(AudioClip clip, AudioClip next = null, float crossfadeBuffer = 5.0f, float fadeDuration = 5.0f)
-    {
-        inactiveSource.clip = clip;
-        inactiveSource.Play();
-        
-        // Wait until there are only `crossfadeBuffer` seconds left before starting the crossfade
-        yield return new WaitForSeconds(clip.length - crossfadeBuffer);
 
-        if (next != null)
+
+// Crossfade between the old clip and the new clip
+    private IEnumerator PlayClipWithCrossfade(AudioClip oldClip, AudioClip newClip, float crossfadeBuffer = 2.0f, float fadeDuration = 2.0f)
+    {
+        // If there is an old clip, set it to the active source
+        if (oldClip != null)
         {
-            activeSource.volume = 0f;
-            activeSource.clip = next;
-            activeSource.Play();    
+            activeSource.clip = oldClip;
+            activeSource.volume = 1f;
+            activeSource.Play();
         }
 
-        // Now perform the crossfade over the `fadeDuration`
-        float timer = 0f;
+        // Set the new clip to the inactive source but don't start it yet
+        inactiveSource.clip = newClip;
+        inactiveSource.volume = 0f;
 
-        while (timer < fadeDuration)
+        // If there is an old clip, wait until `crossfadeBuffer` seconds are left before starting the new clip and crossfading
+        if (oldClip != null)
         {
-            timer += Time.deltaTime;
-            float progress = timer / fadeDuration;
-
-            // Fade out the active source and fade in the inactive source
-            inactiveSource.volume = 1 - progress;
-            activeSource.volume = progress;
-            if (progress >= 0.99f)
+            float remainingTime = activeSource.clip.length - activeSource.time;
+            if (remainingTime > crossfadeBuffer)
             {
-                inactiveSource.Stop();
-                inactiveSource.volume = 0f;
+                yield return new WaitForSeconds(remainingTime - crossfadeBuffer);
             }
-                
 
-            yield return null;
+            // Start the new clip exactly at the crossfadeBuffer time
+            inactiveSource.Play();
+        }
+        else
+        {
+            // If there's no old clip, just start playing the new clip immediately
+            inactiveSource.Play();
         }
 
-        // Ensure the old source stops and reset volumes
-        // activeSource.Stop();
-        // activeSource.volume = 1f;
-
-        // Swap the active and inactive sources
-        AudioSource temp = activeSource;
-        activeSource = inactiveSource;
-        inactiveSource = temp;
-    }
-    
-
-    [Obsolete("Crossfade is fired too quickly and sounds funky use PlayClipWithCrossfade")]
-    private IEnumerator CrossfadeToNextClip(AudioClip nextClip, float fadeDuration = 1.0f)
-    {
-        // Assign the new clip to the inactive source
-        inactiveSource.clip = nextClip;
-        inactiveSource.Play();
-
+        // Now perform the crossfade over the specified duration
         float timer = 0f;
-
-        // Perform the crossfade (fade out active source, fade in inactive source)
         while (timer < fadeDuration)
         {
             timer += Time.deltaTime;
             float progress = timer / fadeDuration;
 
-            // Smoothly reduce the volume of the active source (fade out)
-            activeSource.volume = 1 - progress;
-
-            // Smoothly increase the volume of the inactive source (fade in)
+            // Fade out the active source (old clip) and fade in the inactive source (new clip)
+            if (oldClip != null) activeSource.volume = 1 - progress;
             inactiveSource.volume = progress;
 
             yield return null;
         }
 
-        // Ensure that the crossfade completes
-        activeSource.Stop();  // Stop the old clip
-        activeSource.volume = 1f;  // Reset volume for the next crossfade
+        // Ensure the old clip (active source) is stopped
+        if (oldClip != null)
+        {
+            activeSource.Stop();
+            activeSource.volume = 1f; // Reset volume for the next time
+        }
 
         // Swap the active and inactive sources
         AudioSource temp = activeSource;
