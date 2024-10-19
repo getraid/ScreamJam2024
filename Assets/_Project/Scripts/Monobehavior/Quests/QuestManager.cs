@@ -104,4 +104,14 @@ public class QuestManager : MonoBehaviour,ISaveable
     {
         _questSaveData.Add(saveDateStamp, _lastCompletedQuest);
     }
+
+    private void Update()
+    {
+#if UNITY_EDITOR
+        if(Input.GetKeyDown(KeyCode.F3))
+        {
+            OnQuestCompletion(_allChronologicalQuests[_lastCompletedQuest].QuestData.Quest);
+        }
+#endif
+    }
 }

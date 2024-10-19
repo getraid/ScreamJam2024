@@ -34,11 +34,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float inhalerSpeed = 0.6f;
     [SerializeField] private float inhalerCooldown = 30f;
 
-    [SerializeField] bool _canPlayerMove = false;
     [SerializeField] CinemachineVirtualCamera _standingPosition;
     [SerializeField] CinemachineVirtualCamera _crouchPosition;
     [Tooltip("Disables the initial stuck on first quest. So you can run around and test stuff")]
     [SerializeField] bool _devMode;
+    bool _canPlayerMove = false;
 
     // Input
     private Vector2 _inputAxis;
@@ -91,12 +91,27 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Cursor.lockState == CursorLockMode.Locked)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+
         if (!_canPlayerMove)
             return;
+
         
 
-        // Gather Input
-        _inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            // Gather Input
+            _inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         _shiftDown = Input.GetKey(KeyCode.LeftShift);
         _spacebarDown = Input.GetKey(KeyCode.Space);
         _qPressed = Input.GetKeyDown(KeyCode.Q);
