@@ -8,7 +8,7 @@ Shader "Custom/LightThroughFogShaderWithBloom"
         _EmissionStrength ("Emission Strength", Range(0,100)) = 1 // Emission intensity
         _BloomThreshold ("Bloom Threshold", Range(0,100)) = 1.2 // Threshold for bloom effect
         _BloomTimeDivider ("Bloom Time Multiplier", Range(0,100)) = 1 // higher is faster
-        _BloomClampMin ("Bloom Clamp Min", Range(0,1)) = 1
+        _BloomClampMin ("Bloom Clamp Min", Range(0,1)) = 0
         _BloomClampMax ("Bloom Clamp Min", Range(0,1)) = 1
     }
     SubShader
