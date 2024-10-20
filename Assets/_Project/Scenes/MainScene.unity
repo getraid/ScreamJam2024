@@ -4804,6 +4804,7 @@ MonoBehaviour:
     DelayBeforeShownInQuickTasks: 0
   - Quest: {fileID: 11400000, guid: e816161c32bd0c14bacccab9f97f58e5, type: 2}
     DelayBeforeShownInQuickTasks: 0
+  _devCompleteQuestsFromStart: 0
 --- !u!1 &1515273164
 GameObject:
   m_ObjectHideFlags: 0
@@ -7353,7 +7354,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4977194800873541026, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
       propertyPath: m_Name
-      value: AudioManager
+      value: MusicManager
       objectReference: {fileID: 0}
     - target: {fileID: 7438538602011042270, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
       propertyPath: m_LocalPosition.x
