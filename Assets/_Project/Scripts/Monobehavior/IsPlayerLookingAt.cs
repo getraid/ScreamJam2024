@@ -12,9 +12,11 @@ public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
     [field:SerializeField] public QuestItemSO QuestItemNeeded { get; set; }
     [field: SerializeField] public UnityEvent QuestActivated { get; set; }
     [field: SerializeField] public UnityEvent QuestCompleted { get; set; }
+    [SerializeField] bool _mustBeReacheable = true;
     [SerializeField] VoiceLineDataSO _voiceLineToActivate;
     [SerializeField] bool _activateWalkieTalkieDuringVoiceLine = false;
     [SerializeField] UnityEvent _OnVoiceLineCompleted;
+
     public Action<QuestSO> TryCompleteQuest { get; set; }
 
     bool _hasVoiceLinePlayed = false;
@@ -28,6 +30,12 @@ public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
     // Update is called once per frame
     void Update()
     {
+        if(_mustBeReacheable)
+        {
+            if (Vector3.Distance(_playerTransform.transform.position, transform.position) > 5.0f)
+                return;
+        }
+
         Vector3 playerObjDir = (transform.position - _playerTransform.position).normalized;
 
         float dirDot = Vector3.Dot(Camera.main.transform.forward, playerObjDir);
