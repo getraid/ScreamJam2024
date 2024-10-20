@@ -13,7 +13,6 @@ public class QuestManager : MonoBehaviour,ISaveable
     [SerializeField] List<ChronologicalQuests> _chronologicalQuests;
 
     [Tooltip("Only works in editor and not build. This initially completes the set amount of quests from the start for dev purposes")]
-    [SerializeField] int _devCompleteQuestsFromStart;
 
     [Serializable]
     public struct ChronologicalQuests
@@ -51,11 +50,7 @@ public class QuestManager : MonoBehaviour,ISaveable
 
         StartCoroutine(EnableWithDelay(_allChronologicalQuests[_lastCompletedQuest].QuestUIText, _allChronologicalQuests[_lastCompletedQuest].QuestData.DelayBeforeShownInQuickTasks));
 
-#if UNITY_EDITOR
-        for(int i=0;i<_devCompleteQuestsFromStart;i++)
-            OnQuestCompletion(_allChronologicalQuests[_lastCompletedQuest].QuestData.Quest);
 
-#endif
     }
 
     IEnumerator EnableWithDelay(TMP_Text text, float delay)
@@ -63,11 +58,11 @@ public class QuestManager : MonoBehaviour,ISaveable
         yield return new WaitForSeconds(delay);
         text.enabled = true;
     }
-
-    private void OnQuestCompletion(QuestSO sO)
+    private void OnQuestCompletion(QuestSO sO) => OnQuestCompletion(sO, false);
+    private void OnQuestCompletion(QuestSO sO,bool forceCompletionWithoutQuestItem)
     {
         QuestItemSO questItemNeeded = _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestItemNeeded;
-        if (questItemNeeded != null && (!InventoryManager.Instance.RemoveQuestItemSO(questItemNeeded)))             //If player doesnt have right quest item for quest, do not complete the quest
+        if (!forceCompletionWithoutQuestItem && questItemNeeded != null && (!InventoryManager.Instance.RemoveQuestItemSO(questItemNeeded)))             //If player doesnt have right quest item for quest, do not complete the quest
             return;
 
         _allChronologicalQuests[_lastCompletedQuest].QuestUIText.color = Color.green;
@@ -119,7 +114,15 @@ public class QuestManager : MonoBehaviour,ISaveable
 #if UNITY_EDITOR
         if(Input.GetKeyDown(KeyCode.F3))
         {
-            OnQuestCompletion(_allChronologicalQuests[_lastCompletedQuest].QuestData.Quest);
+            QuestItemSO questItemAdded = _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestItemToPickupOnCompletion;
+            QuestItemSO questItemNeeded = _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestItemNeeded;
+
+            if (questItemAdded != null)
+                InventoryManager.Instance.AddQuestItemSO(questItemAdded);
+            if (questItemNeeded != null)
+                InventoryManager.Instance.RemoveQuestItemSO(questItemNeeded);
+
+            OnQuestCompletion(_allChronologicalQuests[_lastCompletedQuest].QuestData.Quest,true);
         }
 #endif
     }

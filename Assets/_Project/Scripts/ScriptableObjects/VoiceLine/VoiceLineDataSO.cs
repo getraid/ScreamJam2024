@@ -7,7 +7,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/VoiceLineData", order = 1)]
 public class VoiceLineDataSO : ScriptableObject
 {
-    [field: SerializeField] public bool ActivateWalkieTalkieDuringVoiceLine { get; set; }
     [field:SerializeField] public List<VoiceLineData> VoiceLines { get; set; }
 
 }
@@ -19,6 +18,7 @@ public class VoiceLineData
     public string Text;
     public AudioClip Audio;
     public float TimeDelay;
+    public bool TalkToWalkieTalkie;
 }
 
 

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd2e65695ff6434dafdb05eb817e352, type: 3}
   m_Name: GoBackToFireplace
   m_EditorClassIdentifier: 
-  <ActivateWalkieTalkieDuringVoiceLine>k__BackingField: 1
   <VoiceLines>k__BackingField:
   - Text: Hey, you found it, congratulations my man. Go back the fireplace, we'll
       meet ya there.
     Audio: {fileID: 8300000, guid: bc2078c496a9bdd42bc5d7b6743a9962, type: 3}
     TimeDelay: 1
+    TalkToWalkieTalkie: 1

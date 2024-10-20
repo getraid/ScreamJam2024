@@ -10,12 +10,17 @@ public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
 
     [field:SerializeField] public QuestSO QuestData { get; set; }
     [field:SerializeField] public QuestItemSO QuestItemNeeded { get; set; }
+    [field: SerializeField] public QuestItemSO QuestItemToPickupOnCompletion { get; set; }
     [field: SerializeField] public UnityEvent QuestActivated { get; set; }
     [field: SerializeField] public UnityEvent QuestCompleted { get; set; }
     [SerializeField] bool _mustBeReacheable = true;
     [SerializeField] VoiceLineDataSO _voiceLineToActivate;
     [SerializeField] UnityEvent _OnVoiceLineCompleted;
+    [SerializeField] UnityEvent _onPlayerIsLookingAt;
     [SerializeField] bool _disableOnQuestCompletion;
+
+    [Range(0.5f, 1f)]
+    [SerializeField] float _lookingUpTresholdNeeded = 0.95f;
 
 
     public Action<QuestSO> TryCompleteQuest { get; set; }
@@ -44,11 +49,18 @@ public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
 
         float dirDot = Vector3.Dot(Camera.main.transform.forward, playerObjDir);
 
-        if (dirDot > 0.95f)
+        if (dirDot > _lookingUpTresholdNeeded)
         {
             TryCompleteQuest?.Invoke(QuestData);
 
-            if (!_hasVoiceLinePlayed)
+            _onPlayerIsLookingAt?.Invoke();
+
+            if (QuestItemToPickupOnCompletion != null)
+            {
+                InventoryManager.Instance.AddQuestItemSO(QuestItemToPickupOnCompletion);
+            }
+
+            if (!_hasVoiceLinePlayed && _voiceLineToActivate!=null)
             {
                 _hasVoiceLinePlayed = true;
                 VoiceLineManager.Instance.PlayVoiceLine(_voiceLineToActivate, _OnVoiceLineCompleted);
