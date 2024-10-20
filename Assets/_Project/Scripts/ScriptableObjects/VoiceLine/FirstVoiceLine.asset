@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd2e65695ff6434dafdb05eb817e352, type: 3}
   m_Name: FirstVoiceLine
   m_EditorClassIdentifier: 
+  <ActivateWalkieTalkieDuringVoiceLine>k__BackingField: 1
   <VoiceLines>k__BackingField:
   - Text: '"Heeeeellloooo? Earth to Jake! You still alive, man? Or did Bigfoot get
       you?"'
@@ -23,7 +24,13 @@ MonoBehaviour:
   - Text: Listen, we may or may not have hid those around here somewhere
     Audio: {fileID: 8300000, guid: 9a69571360b4ca94fbb8016132cba330, type: 3}
     TimeDelay: 0
+  - Text: Why did you?
+    Audio: {fileID: 8300000, guid: 62b092c1114526144a136ac0cd2c8f85, type: 3}
+    TimeDelay: 0
   - Text: Why?.... we just felt like it. If you are able to find it, a biiiig surprise
       is waiting for ya
     Audio: {fileID: 8300000, guid: 1aa6189b5acedde42afb4c9e3b485766, type: 3}
+    TimeDelay: 1
+  - Text: Ok i will look for it
+    Audio: {fileID: 8300000, guid: cd73c1457f43a7c45ab3bfbb43ab7aae, type: 3}
     TimeDelay: 0

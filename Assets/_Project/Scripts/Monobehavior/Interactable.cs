@@ -17,7 +17,6 @@ public class Interactable : MonoBehaviour, IQuest,ISaveable
 
     [SerializeField] QuestItemSO _questItemToPickUp;
     [SerializeField] VoiceLineDataSO _voiceLineToActivate;
-    [SerializeField] bool _activateWalkieTalkieDuringVoiceLine = false;
     [SerializeField] UnityEvent _onVoiceLineCompleted;
 
     private void Start()
@@ -35,7 +34,7 @@ public class Interactable : MonoBehaviour, IQuest,ISaveable
             InventoryManager.Instance.AddQuestItemSO(_questItemToPickUp);
         }
         if(_voiceLineToActivate != null)
-            VoiceLineManager.Instance.PlayVoiceLine(_voiceLineToActivate, _activateWalkieTalkieDuringVoiceLine, _onVoiceLineCompleted);
+            VoiceLineManager.Instance.PlayVoiceLine(_voiceLineToActivate, _onVoiceLineCompleted);
     }
 
     public void ReloadFromSafe(DateTime saveDateStamp)
