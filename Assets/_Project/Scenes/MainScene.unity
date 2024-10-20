@@ -442,6 +442,119 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Damping: 0
+--- !u!1 &47621014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 47621015}
+  - component: {fileID: 47621019}
+  - component: {fileID: 47621017}
+  - component: {fileID: 47621016}
+  m_Layer: 0
+  m_Name: BringFirewood
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &47621015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47621014}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1732029839}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &47621016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47621014}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b831d93231f064d835996a5f56163b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <QuestData>k__BackingField: {fileID: 11400000, guid: 37876810095170443a69d3998e384f37, type: 2}
+  <QuestItemNeeded>k__BackingField: {fileID: 11400000, guid: 53594556c46e89d47b48313e42a9de20, type: 2}
+  <QuestItemToPickupOnCompletion>k__BackingField: {fileID: 0}
+  <QuestActivated>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 47621016}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  <QuestCompleted>k__BackingField:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1732029842}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: TurnFresh
+          m_BoolArgument: 0
+        m_CallState: 2
+  _disableOnQuestCompletion: 1
+  _voiceLineToActivate: {fileID: 0}
+  _onVoiceLineCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!135 &47621017
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47621014}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &47621019
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 47621014}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &49572520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -597,7 +710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faba86871c5bb9847bfcf979625a81be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _actionDelay: 2
+  _actionDelay: 1
   _actionToDo:
     m_PersistentCalls:
       m_Calls:
@@ -625,6 +738,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _voiceLineToPlay: {fileID: 11400000, guid: f5c9dcfcc6ac0c740bedad49f2da3d73, type: 2}
+  _onVoiceLineFinished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &53214127
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,6 +2545,11 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7676564476103741516, guid: cd702bb3e82716d458057b7e41bcf795, type: 3}
+--- !u!1 &559275989 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4368185795764204440, guid: a1bd554d306124339ac8082d0135277c, type: 3}
+  m_PrefabInstance: {fileID: 954854799}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &567454655
 GameObject:
   m_ObjectHideFlags: 0
@@ -4708,8 +4830,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5041779550989485703, guid: a1bd554d306124339ac8082d0135277c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 47621015}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4368185795764204440, guid: a1bd554d306124339ac8082d0135277c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1732029842}
     - targetCorrespondingSourceObject: {fileID: 751328348998358493, guid: a1bd554d306124339ac8082d0135277c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
@@ -6166,6 +6294,8 @@ MonoBehaviour:
     DelayBeforeShownInQuickTasks: 0
   - Quest: {fileID: 11400000, guid: bb649ae2a8300df4786d2969d218177b, type: 2}
     DelayBeforeShownInQuickTasks: 5
+  - Quest: {fileID: 11400000, guid: 37876810095170443a69d3998e384f37, type: 2}
+    DelayBeforeShownInQuickTasks: 0
 --- !u!1 &1515273164
 GameObject:
   m_ObjectHideFlags: 0
@@ -7100,12 +7230,33 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3246016757097708178, guid: a1bd554d306124339ac8082d0135277c, type: 3}
   m_PrefabInstance: {fileID: 954854799}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 559275989}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4988a7b4a7fd30d42bce3c5a831e368e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1732029842
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559275989}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 04f9537b3aa617243bfbb0aa89d926b2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1763050646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7611,6 +7762,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1732029842}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: TurnDying
           m_BoolArgument: 0
         m_CallState: 2
   _disableOnQuestCompletion: 0

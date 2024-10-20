@@ -15,6 +15,6 @@ MonoBehaviour:
   <VoiceLines>k__BackingField:
   - Text: Hey, you found it, congratulations my man. Go back the fireplace, we'll
       meet ya there.
-    Audio: {fileID: 8300000, guid: bc2078c496a9bdd42bc5d7b6743a9962, type: 3}
+    Audio: {fileID: 8300000, guid: 8e60e81bb8e474b0b901b16789a3a4cf, type: 3}
     TimeDelay: 1
     TalkToWalkieTalkie: 1

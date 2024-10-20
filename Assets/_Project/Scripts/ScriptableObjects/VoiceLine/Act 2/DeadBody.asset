@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd2e65695ff6434dafdb05eb817e352, type: 3}
+  m_Name: DeadBody
+  m_EditorClassIdentifier: 
+  <VoiceLines>k__BackingField:
+  - Text: 
+    Audio: {fileID: 8300000, guid: 75d00c64a22804797b13c7351929a745, type: 3}
+    TimeDelay: 0
+    TalkToWalkieTalkie: 0
+  - Text: Guys I just saw a dead body. IM NOT FUCKING JOKING!
+    Audio: {fileID: 8300000, guid: b48e51c0a3332b34abede60e2694d79d, type: 3}
+    TimeDelay: 0
+    TalkToWalkieTalkie: 1
+  - Text: Yeah right and I'm your grandmother
+    Audio: {fileID: 8300000, guid: 8f26e85c1788a479aba10f13705da56c, type: 3}
+    TimeDelay: 1
+    TalkToWalkieTalkie: 1
+  - Text: Stop imagining things and get a move on coward
+    Audio: {fileID: 8300000, guid: b008b6c3de1ef4233aea6993d307bba2, type: 3}
+    TimeDelay: 0
+    TalkToWalkieTalkie: 1
