@@ -15,15 +15,15 @@ MonoBehaviour:
   <VoiceLines>k__BackingField:
   - Text: '"Heeeeellloooo? Earth to Jake! You still alive, man? Or did Bigfoot get
       you?"'
-    Audio: {fileID: 8300000, guid: 847c37ae15b8842468268be195aa7c7f, type: 3}
+    Audio: {fileID: 8300000, guid: 9fceef8919d6049b797e963d6a290cc5, type: 3}
     TimeDelay: 1
     TalkToWalkieTalkie: 1
   - Text: Hey, uhh do you remember the documents for the  initiation of our frat
-    Audio: {fileID: 8300000, guid: bfdee2aa52e76d9458333f15114ee07c, type: 3}
+    Audio: {fileID: 8300000, guid: ba1aed8fcd4304070bef559ec75f5468, type: 3}
     TimeDelay: 0
     TalkToWalkieTalkie: 1
   - Text: Listen, we may or may not have hid those around here somewhere
-    Audio: {fileID: 8300000, guid: 9a69571360b4ca94fbb8016132cba330, type: 3}
+    Audio: {fileID: 8300000, guid: 40e9efd65038d4d9397444359f1fce64, type: 3}
     TimeDelay: 0
     TalkToWalkieTalkie: 1
   - Text: Why did you?
@@ -32,7 +32,7 @@ MonoBehaviour:
     TalkToWalkieTalkie: 1
   - Text: Why?.... we just felt like it. If you are able to find it, a biiiig surprise
       is waiting for ya
-    Audio: {fileID: 8300000, guid: 1aa6189b5acedde42afb4c9e3b485766, type: 3}
+    Audio: {fileID: 8300000, guid: c3d28518def7740f1bf642be150f32a8, type: 3}
     TimeDelay: 1
     TalkToWalkieTalkie: 1
   - Text: Ok i will look for it

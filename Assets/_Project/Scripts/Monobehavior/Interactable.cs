@@ -23,7 +23,10 @@ public class Interactable : MonoBehaviour, IQuest,ISaveable
     private void Start()
     {
         if (_disableOnQuestCompletion)
-            QuestCompleted.AddListener(() => { enabled = false; });
+            QuestCompleted.AddListener(() => 
+            { 
+                enabled = false; 
+            });
     }
     public void Interact()
     {

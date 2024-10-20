@@ -8,6 +8,8 @@ public class DelayAction : MonoBehaviour,ISaveable
 {
     [SerializeField] float _actionDelay;
     [SerializeField] UnityEvent _actionToDo;
+    [SerializeField] VoiceLineDataSO _voiceLineToPlay;
+    [SerializeField] UnityEvent _onVoiceLineFinished;
 
     Dictionary<DateTime, bool> _saveData = new Dictionary<DateTime, bool>();
     bool _hasDoneAction = false;
@@ -23,6 +25,9 @@ public class DelayAction : MonoBehaviour,ISaveable
             IEnumerator Do()
             {
                 yield return new WaitForSeconds(_actionDelay);
+
+                if (_voiceLineToPlay != null)
+                    VoiceLineManager.Instance.PlayVoiceLine(_voiceLineToPlay, _onVoiceLineFinished);
 
                 _actionToDo?.Invoke();
             }
