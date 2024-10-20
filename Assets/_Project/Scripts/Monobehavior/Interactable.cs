@@ -8,6 +8,8 @@ public class Interactable : MonoBehaviour, IQuest,ISaveable
 {
     [field: SerializeField] public QuestSO QuestData { get; set; }
     [field: SerializeField] public QuestItemSO QuestItemNeeded { get; set; }
+    [field: SerializeField] public QuestItemSO QuestItemToPickupOnCompletion { get; set; }
+
     [field: SerializeField] public UnityEvent QuestActivated { get; set; }
     [field: SerializeField] public UnityEvent QuestCompleted { get; set; }
     [SerializeField] bool _disableOnQuestCompletion;
@@ -15,7 +17,6 @@ public class Interactable : MonoBehaviour, IQuest,ISaveable
 
     public Action<QuestSO> TryCompleteQuest { get; set; }
 
-    [SerializeField] QuestItemSO _questItemToPickUp;
     [SerializeField] VoiceLineDataSO _voiceLineToActivate;
     [SerializeField] UnityEvent _onVoiceLineCompleted;
 
@@ -29,9 +30,9 @@ public class Interactable : MonoBehaviour, IQuest,ISaveable
         Debug.Log("Interacted with " + gameObject.name);
         TryCompleteQuest?.Invoke(QuestData);
 
-        if (_questItemToPickUp != null)
+        if (QuestItemToPickupOnCompletion != null)
         {
-            InventoryManager.Instance.AddQuestItemSO(_questItemToPickUp);
+            InventoryManager.Instance.AddQuestItemSO(QuestItemToPickupOnCompletion);
         }
         if(_voiceLineToActivate != null)
             VoiceLineManager.Instance.PlayVoiceLine(_voiceLineToActivate, _onVoiceLineCompleted);

@@ -14,7 +14,7 @@ public class WalkieTalkiActivation : MonoBehaviour
     float _timeOfLerp = 1f;
     float _activeLerpTime = 0;
     bool _doesUseAnimation = false;
-
+    bool _isActive = false;
 
     void Start()
     {
@@ -27,6 +27,9 @@ public class WalkieTalkiActivation : MonoBehaviour
 
     public void Activate()
     {
+        if (_isActive)
+            return;
+
         _activeLeds.ForEach(x=>x.gameObject.SetActive(true));
         _inactiveLeds.ForEach(x => x.gameObject.SetActive(false));
 
@@ -36,6 +39,7 @@ public class WalkieTalkiActivation : MonoBehaviour
             _walkieTalkieMain.parent = Camera.main.transform;
             StartCoroutine(LerpIntoActivePosition(_walkieTalkieRestingTransform, _walkieTalkieActiveTransform));
         }
+        _isActive = true;
     }
 
     public void StartUsingWalkieTalkieAnimation() => _doesUseAnimation = true;
@@ -71,6 +75,9 @@ public class WalkieTalkiActivation : MonoBehaviour
     }
     public void Deactivate()
     {
+        if (!_isActive)
+            return;
+
         _activeLeds.ForEach(x => x.gameObject.SetActive(false));
         _inactiveLeds.ForEach(x => x.gameObject.SetActive(true));
 
@@ -79,5 +86,7 @@ public class WalkieTalkiActivation : MonoBehaviour
             _walkieTalkieMain.parent = _walkieTalkieRestingTransform.parent;
             StartCoroutine(LerpIntoActivePosition(_walkieTalkieActiveTransform, _walkieTalkieRestingTransform));
         }
+        _isActive = false;
+
     }
 }

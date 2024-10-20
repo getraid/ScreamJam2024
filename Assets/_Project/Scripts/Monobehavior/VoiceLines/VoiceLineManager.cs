@@ -39,12 +39,13 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
 
         IEnumerator ShowVoiceLineDatas()
         {
-            if(voiceLineData.ActivateWalkieTalkieDuringVoiceLine)
-                _walkieTalkieActivation.Activate();
+            
 
             for (int i = 0; i < voiceLineData.VoiceLines.Count; i++)
             {
                 yield return new WaitForSeconds(voiceLineData.VoiceLines[i].TimeDelay);
+
+                WalkieTalkieActivation(voiceLineData.VoiceLines[i].TalkToWalkieTalkie);
 
                 _voiceLineAnimator.SetBool("SubtitleShown", true);
                 _voiceLineText.text = voiceLineData.VoiceLines[i].Text;
@@ -55,12 +56,23 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
                 _voiceLineAnimator.SetBool("SubtitleShown", false);
 
                 yield return new WaitForSeconds(_lengthOfVoiceLineDataAnimation);
+
+                WalkieTalkieActivation(voiceLineData.VoiceLines[i].TalkToWalkieTalkie);
             }
             _runningCoroutine = null;
-            if (voiceLineData.ActivateWalkieTalkieDuringVoiceLine)
-                _walkieTalkieActivation.Deactivate();
+
 
             callBackOnVoiceLineCompleted?.Invoke();
+
+            _walkieTalkieActivation.Deactivate();
+        }
+
+        void WalkieTalkieActivation(bool val)
+        {
+            if (val)
+                _walkieTalkieActivation.Activate();
+            else
+                _walkieTalkieActivation.Deactivate();
         }
     }
 
