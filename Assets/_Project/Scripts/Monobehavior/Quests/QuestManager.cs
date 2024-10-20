@@ -13,6 +13,9 @@ public class QuestManager : MonoBehaviour,ISaveable
     [SerializeField] Transform _questUIParent;
     [SerializeField] List<ChronologicalQuests> _chronologicalQuests;
 
+    [Tooltip("Only works in editor and not build. This initially completes the set amount of quests from the start for dev purposes")]
+    [SerializeField] int _devCompleteQuestsFromStart;
+
     [Serializable]
     public struct ChronologicalQuests
     {
@@ -26,6 +29,7 @@ public class QuestManager : MonoBehaviour,ISaveable
     Dictionary<DateTime,int> _questSaveData= new Dictionary<DateTime, int>();
     void Start()
     {
+
         List<IQuest> allGameQuests = FindObjectsOfType<MonoBehaviour>(true).OfType<IQuest>().ToList();
 
         for(int i=0;i< _chronologicalQuests.Count;i++)
@@ -47,6 +51,12 @@ public class QuestManager : MonoBehaviour,ISaveable
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestActivated?.Invoke();
 
         StartCoroutine(EnableWithDelay(_allChronologicalQuests[_lastCompletedQuest].QuestUIText, _allChronologicalQuests[_lastCompletedQuest].QuestData.DelayBeforeShownInQuickTasks));
+
+#if UNITY_EDITOR
+        for(int i=0;i<_devCompleteQuestsFromStart;i++)
+            OnQuestCompletion(_allChronologicalQuests[_lastCompletedQuest].QuestData.Quest);
+
+#endif
     }
 
     IEnumerator EnableWithDelay(TMP_Text text, float delay)
