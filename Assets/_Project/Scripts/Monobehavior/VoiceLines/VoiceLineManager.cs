@@ -30,7 +30,7 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
         }
     }
 
-    public void PlayVoiceLine(VoiceLineDataSO voiceLineData,bool activateWalkieTalkie,UnityEvent callBackOnVoiceLineCompleted)
+    public void PlayVoiceLine(VoiceLineDataSO voiceLineData,UnityEvent callBackOnVoiceLineCompleted)
     {
         if (_runningCoroutine != null)
             StopCoroutine(_runningCoroutine);
@@ -39,7 +39,7 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
 
         IEnumerator ShowVoiceLineDatas()
         {
-            if(activateWalkieTalkie)
+            if(voiceLineData.ActivateWalkieTalkieDuringVoiceLine)
                 _walkieTalkieActivation.Activate();
 
             for (int i = 0; i < voiceLineData.VoiceLines.Count; i++)
@@ -57,7 +57,7 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
                 yield return new WaitForSeconds(_lengthOfVoiceLineDataAnimation);
             }
             _runningCoroutine = null;
-            if (activateWalkieTalkie)
+            if (voiceLineData.ActivateWalkieTalkieDuringVoiceLine)
                 _walkieTalkieActivation.Deactivate();
 
             callBackOnVoiceLineCompleted?.Invoke();

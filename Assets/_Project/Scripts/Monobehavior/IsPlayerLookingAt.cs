@@ -14,8 +14,9 @@ public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
     [field: SerializeField] public UnityEvent QuestCompleted { get; set; }
     [SerializeField] bool _mustBeReacheable = true;
     [SerializeField] VoiceLineDataSO _voiceLineToActivate;
-    [SerializeField] bool _activateWalkieTalkieDuringVoiceLine = false;
     [SerializeField] UnityEvent _OnVoiceLineCompleted;
+    [SerializeField] bool _disableOnQuestCompletion;
+
 
     public Action<QuestSO> TryCompleteQuest { get; set; }
 
@@ -25,6 +26,9 @@ public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
     private void Start()
     {
         _playerTransform = FindObjectOfType<PlayerController>().transform;
+
+        if (_disableOnQuestCompletion)
+            QuestCompleted.AddListener(() => { enabled = false; });
     }
 
     // Update is called once per frame
@@ -47,7 +51,7 @@ public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
             if (!_hasVoiceLinePlayed)
             {
                 _hasVoiceLinePlayed = true;
-                VoiceLineManager.Instance.PlayVoiceLine(_voiceLineToActivate, _activateWalkieTalkieDuringVoiceLine, _OnVoiceLineCompleted);
+                VoiceLineManager.Instance.PlayVoiceLine(_voiceLineToActivate, _OnVoiceLineCompleted);
             }
         }
     }
