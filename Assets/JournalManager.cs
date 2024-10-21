@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
@@ -11,9 +12,11 @@ public class JournalManager : MonoBehaviour
     [field: SerializeField] public SkinnedMeshRenderer JournalObj { get; set; }
     [field: SerializeField] public GameObject JournalUI { get; set; }
     [field: SerializeField] public RectTransform PlayerIcon { get; set; }
-    
     [field: SerializeField] public Transform ActualPlayerPos { get; set; }
-    
+
+    [field: SerializeField] public List<Image> GoalImages { get; set; } = new List<Image>();
+    [field: SerializeField] public Image CrossOverlay { get; set; }
+    [field: SerializeField] public List<int> GoalOrderIndex { get; set; } = new List<int>();
 
     private static readonly int HasOpened = Animator.StringToHash("HasOpened");
     private static readonly int IsReady = Animator.StringToHash("IsReady");
@@ -30,11 +33,37 @@ public class JournalManager : MonoBehaviour
     private Vector2 uiMin = new Vector2(-0.334f, 0.227f); // Corresponding to worldMin
     private Vector2 uiMax = new Vector2(0.259f, -0.285f); // Corresponding to worldMax
 
+    private int currentGoalIndex = -1;
+    
+    public static JournalManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         JournalObj.enabled = false; // Make sure the journal is initially hidden
         JournalUI.SetActive(false);
         MainCamera.m_CameraActivatedEvent.AddListener(OnCameraSwitched); // Listen for camera changes
+        CrossOverlay.gameObject.SetActive(false); // Initially hide the cross overlay
+
+        // Hide all goal images initially
+        foreach (var goal in GoalImages)
+        {
+            goal.gameObject.SetActive(false);
+        }
     }
 
     public void ToggleJournal()
@@ -131,7 +160,7 @@ public class JournalManager : MonoBehaviour
 
     private void UpdatePlayerIconPosition()
     {
-        // Assuming you have a way to get the player's world position
+        // Get the player's world position
         Vector3 playerWorldPos = GetPlayerWorldPosition();
 
         // Normalize the player's position within the world boundaries
@@ -149,5 +178,44 @@ public class JournalManager : MonoBehaviour
     private Vector3 GetPlayerWorldPosition()
     {
         return ActualPlayerPos.position; 
+    }
+
+    // Function to unlock the next goal based on the GoalOrderIndex list
+    public void NextGoal()
+    {
+        // Increment the current goal index
+        currentGoalIndex++;
+
+        // Make sure the current index is within the GoalOrderIndex range
+        if (currentGoalIndex >= 0 && currentGoalIndex < GoalOrderIndex.Count)
+        {
+            int goalIndex = GoalOrderIndex[currentGoalIndex];
+
+            // Ensure the goal index is within the bounds of the GoalImages list
+            if (goalIndex >= 0 && goalIndex < GoalImages.Count)
+            {
+                // Enable the goal image
+                GoalImages[goalIndex].gameObject.SetActive(true);
+
+                // Move the cross overlay to this goal
+                MoveCrossOverlayToGoal(goalIndex);
+            }
+            else
+            {
+                Debug.LogWarning("The specified goal index is out of range.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No more goals in the GoalOrderIndex list.");
+        }
+    }
+
+    // Function to move the cross overlay to a specified goal
+    private void MoveCrossOverlayToGoal(int goalIndex)
+    {
+        // Move the cross overlay to the specified goal's position
+        CrossOverlay.rectTransform.position = GoalImages[goalIndex].rectTransform.position;
+        CrossOverlay.gameObject.SetActive(true);
     }
 }

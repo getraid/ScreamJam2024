@@ -65,6 +65,10 @@ public class PlayerController : MonoBehaviour,ISaveable
     private CharacterController _controller;
     private Camera _camera;
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
+    
+    // hack to get asthma working after firewood event
+    // @Sitron if you can mange to put in your EventMgr, that would be great.
+    [SerializeField] public GameObject GnomesEnabled;
 
     Dictionary<DateTime, PlayerSaveData> _saveData = new Dictionary<DateTime, PlayerSaveData>();
     public struct PlayerSaveData
@@ -131,6 +135,9 @@ public class PlayerController : MonoBehaviour,ISaveable
         if (!_canPlayerMove)
             return;
 
+        if (GnomesEnabled.activeSelf)
+            hasAsthma = true;
+
         // Gather Input
         _inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         _shiftDown = Input.GetKey(KeyCode.LeftShift);
@@ -165,8 +172,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         // Fatigue / Speed
         if (_isFatigued)
         {
-            bool useAltVersion = UnityEngine.Random.Range(0, 2) == 0;
-            SFXManager.Instance.PlaySFX(useAltVersion ? SFXManager.SFXType.HeavyBreathing_1 : SFXManager.SFXType.HeavyBreathing_2,1);
+            SFXManager.Instance.PlaySFX(SFXManager.SFXType.HeavyBreathing_1,1);
             
             _currentStamina += Time.deltaTime * stamina / fatigueTime;
             move_speed *= fatigueSpeed;
@@ -260,6 +266,7 @@ public class PlayerController : MonoBehaviour,ISaveable
             if (hasAsthma)
             {
                 _currentStamina -= jumpStaminaCost;
+                SFXManager.Instance.PlaySFX(SFXManager.SFXType.HeavyBreathing_2,1f);
             }
 
             _velocity.y += Mathf.Sqrt(jumpHeight * -3f * gravity);

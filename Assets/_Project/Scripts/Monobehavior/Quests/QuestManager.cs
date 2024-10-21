@@ -66,6 +66,8 @@ public class QuestManager : MonoBehaviour,ISaveable
     private void OnQuestCompletion(QuestSO sO,bool forceCompletionWithoutQuestItem)
     {
         QuestItemSO questItemNeeded = _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestItemNeeded;
+        JournalManager.Instance.NextGoal();
+        
         if (!forceCompletionWithoutQuestItem && questItemNeeded != null && (!InventoryManager.Instance.RemoveQuestItemSO(questItemNeeded)))             //If player doesnt have right quest item for quest, do not complete the quest
             return;
 
@@ -86,7 +88,8 @@ public class QuestManager : MonoBehaviour,ISaveable
 
         StartCoroutine(EnableWithDelay(_allChronologicalQuests[_lastCompletedQuest].QuestUIText, _allChronologicalQuests[_lastCompletedQuest].QuestData.DelayBeforeShownInQuickTasks));
         StartCoroutine(EnableWithDelay(_allChronologicalQuests[_lastCompletedQuest].JournalUIText, _allChronologicalQuests[_lastCompletedQuest].QuestData.DelayBeforeShownInQuickTasks));
-
+        
+        
     }
 
 
