@@ -8,6 +8,7 @@ using UnityEngine.Events;
 
 public class QuestManager : MonoBehaviour,ISaveable
 {
+    [SerializeField] Transform _journalQuestParent;
     [SerializeField] TMP_Text _uiQuestPrefab;
     [SerializeField] Transform _questUIParent;
     [SerializeField] List<ChronologicalQuests> _chronologicalQuests;
@@ -21,7 +22,7 @@ public class QuestManager : MonoBehaviour,ISaveable
         public float DelayBeforeShownInQuickTasks;
     }
 
-    List<(IQuest SceneQuest, ChronologicalQuests QuestData,TMP_Text QuestUIText)> _allChronologicalQuests = new List<(IQuest, ChronologicalQuests, TMP_Text)>();
+    List<(IQuest SceneQuest, ChronologicalQuests QuestData,TMP_Text QuestUIText,TMP_Text JournalUIText)> _allChronologicalQuests = new List<(IQuest, ChronologicalQuests, TMP_Text, TMP_Text)>();
     int _lastCompletedQuest = 0;
     
     Dictionary<DateTime,int> _questSaveData= new Dictionary<DateTime, int>();
@@ -40,17 +41,20 @@ public class QuestManager : MonoBehaviour,ISaveable
                 Debug.LogError($"The quest is not inside the scene, but is in QuestManager [{_chronologicalQuests[i].Quest.name} ]!!!");
             else
             {
-                TMP_Text tmpText = Instantiate(_uiQuestPrefab, _questUIParent);
-                tmpText.text = _chronologicalQuests[i].Quest.QuestText;
-                _allChronologicalQuests.Add(new(sceneQuests.First(), _chronologicalQuests[i], tmpText));
+                TMP_Text questSceeen = Instantiate(_uiQuestPrefab, _questUIParent);
+                questSceeen.text = _chronologicalQuests[i].Quest.QuestText;
+
+                TMP_Text questJournal = Instantiate(_uiQuestPrefab, _journalQuestParent);
+                questJournal.text = _chronologicalQuests[i].Quest.QuestText;
+
+                _allChronologicalQuests.Add(new(sceneQuests.First(), _chronologicalQuests[i], questSceeen, questJournal));
             }
         }
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.TryCompleteQuest += OnQuestCompletion;
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestActivated?.Invoke();
 
         StartCoroutine(EnableWithDelay(_allChronologicalQuests[_lastCompletedQuest].QuestUIText, _allChronologicalQuests[_lastCompletedQuest].QuestData.DelayBeforeShownInQuickTasks));
-
-
+        StartCoroutine(EnableWithDelay(_allChronologicalQuests[_lastCompletedQuest].JournalUIText, _allChronologicalQuests[_lastCompletedQuest].QuestData.DelayBeforeShownInQuickTasks));
     }
 
     IEnumerator EnableWithDelay(TMP_Text text, float delay)
@@ -67,6 +71,10 @@ public class QuestManager : MonoBehaviour,ISaveable
 
         _allChronologicalQuests[_lastCompletedQuest].QuestUIText.color = Color.green;
         _allChronologicalQuests[_lastCompletedQuest].QuestUIText.text= _allChronologicalQuests[_lastCompletedQuest].QuestUIText.text.Insert(0,"<s>");   //Temporary strikethrough
+
+        _allChronologicalQuests[_lastCompletedQuest].JournalUIText.color = Color.green;
+        _allChronologicalQuests[_lastCompletedQuest].JournalUIText.text = _allChronologicalQuests[_lastCompletedQuest].JournalUIText.text.Insert(0, "<s>");   //Temporary strikethrough
+
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestCompleted?.Invoke();
 
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.TryCompleteQuest -= OnQuestCompletion;
@@ -77,14 +85,10 @@ public class QuestManager : MonoBehaviour,ISaveable
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestActivated?.Invoke();
 
         StartCoroutine(EnableWithDelay(_allChronologicalQuests[_lastCompletedQuest].QuestUIText, _allChronologicalQuests[_lastCompletedQuest].QuestData.DelayBeforeShownInQuickTasks));
+        StartCoroutine(EnableWithDelay(_allChronologicalQuests[_lastCompletedQuest].JournalUIText, _allChronologicalQuests[_lastCompletedQuest].QuestData.DelayBeforeShownInQuickTasks));
 
-        PlayQuestCompleteSound();
     }
 
-    void PlayQuestCompleteSound()
-    {
-        //TODO
-    }
 
     public void ReloadFromSafe(DateTime saveDateStamp)
     {

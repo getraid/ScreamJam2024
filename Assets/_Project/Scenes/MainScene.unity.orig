@@ -1257,23 +1257,7 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
---- !u!1 &104854344 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4909270861958196397, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
-  m_PrefabInstance: {fileID: 429800416}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &104854347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104854344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6729938189415eb4d8685e80b310240b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+<<<<<<< HEAD
 --- !u!1 &129728575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,11 +1296,20 @@ RectTransform:
   m_SizeDelta: {x: 2, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &129728577
+=======
+--- !u!1 &104854344 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4909270861958196397, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+  m_PrefabInstance: {fileID: 429800416}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &104854347
+>>>>>>> 45e86347550bf2d939bd8edbf8ade8792eda9e33
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 129728575}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1445,6 +1438,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+=======
+  m_GameObject: {fileID: 104854344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6729938189415eb4d8685e80b310240b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+>>>>>>> 45e86347550bf2d939bd8edbf8ade8792eda9e33
 --- !u!1 &134805636
 GameObject:
   m_ObjectHideFlags: 0
@@ -7556,7 +7557,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fe09adb38c307a448c03e0486a296d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _journalQuestParent: {fileID: 202578642}
   _uiQuestPrefab: {fileID: 2235509413736438524, guid: b6f8b9b9d65c6f74fa455ee10e4f386d, type: 3}
   _questUIParent: {fileID: 68994682}
   _chronologicalQuests:
