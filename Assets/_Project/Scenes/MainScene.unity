@@ -2083,7 +2083,7 @@ GameObject:
   - component: {fileID: 202578642}
   - component: {fileID: 202578644}
   - component: {fileID: 202578643}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3017,9 +3017,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8513424388201257645, guid: 87845dda09245d242acebca8f3f52890, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -7917291961305824890, guid: 87845dda09245d242acebca8f3f52890, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -7235015103121818086, guid: 87845dda09245d242acebca8f3f52890, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -5731229141766309534, guid: 87845dda09245d242acebca8f3f52890, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -3957782524123411102, guid: 87845dda09245d242acebca8f3f52890, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -344004081357383697, guid: 87845dda09245d242acebca8f3f52890, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8140499575222096, guid: 87845dda09245d242acebca8f3f52890, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 87845dda09245d242acebca8f3f52890, type: 3}
       propertyPath: m_Name
       value: Low_Poly_Walkie_Talkie
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 87845dda09245d242acebca8f3f52890, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3851,6 +3883,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2046031584}
     m_Modifications:
+    - target: {fileID: 10661485756491414, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 703233302473530044, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 249.79
@@ -3893,23 +3929,103 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1128167794191929149, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472550282783808763, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771284728169332100, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2112365568999600969, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_margin.w
       value: 0.9659373
       objectReference: {fileID: 0}
+    - target: {fileID: 2208083127935459440, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2276128868709477297, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2442761686385597227, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3584144943421285188, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3902400389641569498, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909270861958196397, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4909270861958196397, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5231636532407786686, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_Name
       value: Header
+      objectReference: {fileID: 0}
+    - target: {fileID: 5231636532407786686, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5329047061648787222, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 5513146342284614469, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805593036553756610, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6216153359808071064, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6368768849113048054, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6384919422693047886, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6694605297342671413, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7073582085702248273, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7264231739989770593, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8532471691737746663, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8532471691737746663, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 9095993030534509277, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 3127
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5941,7 +6057,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 664488615}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Walkie-Talkie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11828,7 +11944,7 @@ GameObject:
   - component: {fileID: 1520355936}
   - component: {fileID: 1520355939}
   - component: {fileID: 1520355940}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: WalkieTalkie - Interact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17580,6 +17696,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 664488615}
     m_Modifications:
+    - target: {fileID: 433710707852973589, guid: adaad167aa433854496bba8fcb66db98, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 531079527170180666, guid: adaad167aa433854496bba8fcb66db98, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1070878310035400134, guid: adaad167aa433854496bba8fcb66db98, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1218735895969739832, guid: adaad167aa433854496bba8fcb66db98, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890713401346339528, guid: adaad167aa433854496bba8fcb66db98, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3058144990779887154, guid: adaad167aa433854496bba8fcb66db98, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 4323471326906608990, guid: adaad167aa433854496bba8fcb66db98, type: 3}
       propertyPath: _walkieTalkieMain
       value: 
@@ -17592,9 +17732,37 @@ PrefabInstance:
       propertyPath: _walkieTalkieRestingTransform
       value: 
       objectReference: {fileID: 1805068421}
+    - target: {fileID: 5241459900605938115, guid: adaad167aa433854496bba8fcb66db98, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5836443242651118871, guid: adaad167aa433854496bba8fcb66db98, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168484533783586511, guid: adaad167aa433854496bba8fcb66db98, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7456202713397113446, guid: adaad167aa433854496bba8fcb66db98, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490958227400319435, guid: adaad167aa433854496bba8fcb66db98, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7663639106356747897, guid: adaad167aa433854496bba8fcb66db98, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8378885637252372179, guid: adaad167aa433854496bba8fcb66db98, type: 3}
       propertyPath: m_Name
       value: WalkieTalkieActivity
+      objectReference: {fileID: 0}
+    - target: {fileID: 8378885637252372179, guid: adaad167aa433854496bba8fcb66db98, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8622588128677142426, guid: adaad167aa433854496bba8fcb66db98, type: 3}
       propertyPath: m_LocalPosition.x
