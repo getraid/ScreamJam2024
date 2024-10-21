@@ -1005,13 +1005,13 @@ GameObject:
   - component: {fileID: 53214130}
   - component: {fileID: 53214129}
   - component: {fileID: 53214128}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Monster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!136 &53214128
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1093,13 +1093,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53214127}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 248.3, y: 0.92, z: 251.43}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.962, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1763050647}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1135206295}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &68994681
 GameObject:
@@ -1659,6 +1659,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6729938189415eb4d8685e80b310240b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Animator>k__BackingField: {fileID: 104854348}
+--- !u!95 &104854348 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1128167794191929149, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+  m_PrefabInstance: {fileID: 429800416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &129728575
 GameObject:
   m_ObjectHideFlags: 0
@@ -3929,7 +3935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1128167794191929149, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1472550282783808763, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_Layer
@@ -9542,6 +9548,68 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1135206294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1135206295}
+  - component: {fileID: 1135206296}
+  m_Layer: 0
+  m_Name: Monster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1135206295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135206294}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 248.3, y: 0, z: 251.43}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 53214131}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1135206296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1135206294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0728c1186eba68c438a9a3612ff47360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterRenderer: {fileID: 53214129}
+  monsterMask:
+    serializedVersion: 2
+    m_Bits: 2048
+  terrainMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  currentState: 0
+  monsterHeight: 2
+  roamSpeed: 3.05
+  roamRadius: 15
+  roamRadiusMax: 25
+  teleportThreshold: 30
+  roamIdleDistance: 30
+  chaseSpeed: 7
+  raycastDistance: 50
+  isVisible: 0
 --- !u!1001 &1156788891
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13731,6 +13799,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Label
       objectReference: {fileID: 0}
+    - target: {fileID: 3267802322513022529, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 7769660374299446005, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
       propertyPath: m_text
       value: Monster
@@ -13738,7 +13810,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3267802322513022529, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
 --- !u!224 &1763050647 stripped
 RectTransform:
@@ -16895,6 +16970,10 @@ PrefabInstance:
       value: Terrain
       objectReference: {fileID: 0}
     - target: {fileID: 7652819389552808949, guid: 7f176c3c3eb3c41f4aac5a49e133ee20, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7652819389552808949, guid: 7f176c3c3eb3c41f4aac5a49e133ee20, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -18048,7 +18127,7 @@ SceneRoots:
   - {fileID: 2046031584}
   - {fileID: 1470813631}
   - {fileID: 384986545}
-  - {fileID: 53214131}
+  - {fileID: 1135206295}
   - {fileID: 154127432}
   - {fileID: 1887924357}
   - {fileID: 1873132381}
