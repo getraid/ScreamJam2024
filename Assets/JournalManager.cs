@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class JournalManager : MonoBehaviour
 {
@@ -9,17 +10,25 @@ public class JournalManager : MonoBehaviour
     [field: SerializeField] public CinemachineBrain MainCamera { get; set; }
     [field: SerializeField] public SkinnedMeshRenderer JournalObj { get; set; }
     [field: SerializeField] public GameObject JournalUI { get; set; }
+    [field: SerializeField] public RectTransform PlayerIcon { get; set; }
+    
+    [field: SerializeField] public Transform ActualPlayerPos { get; set; }
+    
 
-    
-    
     private static readonly int HasOpened = Animator.StringToHash("HasOpened");
     private static readonly int IsReady = Animator.StringToHash("IsReady");
-    
-    
 
     private bool isClosed = true;
     private bool isReady = false;
     private bool isClosingAnimationPlaying = false;
+
+    // World map boundaries
+    private Vector3 worldMin = new Vector3(0, 0, 0); // Bottom-left corner in world space
+    private Vector3 worldMax = new Vector3(504, 0, 498); // Top-right corner in world space
+
+    // Map UI boundaries (relative to anchors)
+    private Vector2 uiMin = new Vector2(-0.334f, 0.227f); // Corresponding to worldMin
+    private Vector2 uiMax = new Vector2(0.259f, -0.285f); // Corresponding to worldMax
 
     void Start()
     {
@@ -103,6 +112,9 @@ public class JournalManager : MonoBehaviour
             ToggleJournal();
         }
 
+        // Update the player icon position on the map
+        UpdatePlayerIconPosition();
+
         // Check if the closing animation is playing and if it has finished
         if (isClosingAnimationPlaying && isClosed)
         {
@@ -115,5 +127,27 @@ public class JournalManager : MonoBehaviour
                 isClosingAnimationPlaying = false; // Reset the flag
             }
         }
+    }
+
+    private void UpdatePlayerIconPosition()
+    {
+        // Assuming you have a way to get the player's world position
+        Vector3 playerWorldPos = GetPlayerWorldPosition();
+
+        // Normalize the player's position within the world boundaries
+        float normalizedX = Mathf.InverseLerp(worldMin.x, worldMax.x, playerWorldPos.x);
+        float normalizedY = Mathf.InverseLerp(worldMin.z, worldMax.z, playerWorldPos.z);
+
+        // Interpolate to find the position within the UI boundaries
+        float uiPosX = Mathf.Lerp(uiMin.x, uiMax.x, normalizedX);
+        float uiPosY = Mathf.Lerp(uiMin.y, uiMax.y, normalizedY);
+
+        // Update the player icon's position on the map
+        PlayerIcon.anchoredPosition = new Vector2(uiPosX, -uiPosY);
+    }
+
+    private Vector3 GetPlayerWorldPosition()
+    {
+        return ActualPlayerPos.position; 
     }
 }
