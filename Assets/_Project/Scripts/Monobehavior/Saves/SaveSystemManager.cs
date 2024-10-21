@@ -8,6 +8,9 @@ public class SaveSystemManager : MonoBehaviour
 {
     List<DateTime> _savedDateStamps=new List<DateTime>();
     bool _savedBefore = false;
+
+    public static SaveSystemManager Instance { get; private set; }
+
     private void Update()
     {
 #if UNITY_EDITOR
@@ -21,6 +24,18 @@ public class SaveSystemManager : MonoBehaviour
         }
         
 #endif
+    }
+
+    private void Start()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
     void Save()
