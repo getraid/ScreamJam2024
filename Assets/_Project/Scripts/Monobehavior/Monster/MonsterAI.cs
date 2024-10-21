@@ -7,6 +7,7 @@ public enum MonsterState
 {
     Idle,
     Roam,
+    Chase,
 }
 
 public class MonsterAI : MonoBehaviour
@@ -24,6 +25,8 @@ public class MonsterAI : MonoBehaviour
     [SerializeField] private float roamRadiusMax = 25f;
     [SerializeField] private float teleportThreshold = 30f;
     [SerializeField] private float roamIdleDistance = 30f;
+
+    [SerializeField] private float chaseSpeed = 7f;
 
     [SerializeField] private float raycastDistance = 50f;
 
@@ -54,6 +57,9 @@ public class MonsterAI : MonoBehaviour
             case MonsterState.Roam:
                 Roam();
                 break;
+            case MonsterState.Chase:
+                Chase();
+                break;
         }
     }
 
@@ -61,9 +67,6 @@ public class MonsterAI : MonoBehaviour
     {
         transform.position = Vector3.zero;
     }
-
-    public float desiredAngle = 0f;
-    public float desiredDistance = 0f;
 
     private void Roam()
     {
@@ -83,9 +86,6 @@ public class MonsterAI : MonoBehaviour
         float desired_angle = CalculateAngleBehindPlayer(_player.forward);
         float desired_distance = CalculatedDesiredDistanceFromPlayer(player_position, _player.forward, transform.position);
 
-        desiredAngle = desired_angle;
-        desiredDistance = desired_distance;
-
         float distance = Vector3.Distance(transform.position, player_position);
 
         // Teleport behind the player.
@@ -95,9 +95,10 @@ public class MonsterAI : MonoBehaviour
             return;
         }
 
-        // Check the Roam Idle Distance
-        if (distance > roamIdleDistance)
+        // If visible, then the monster is spotted by the player.
+        if (isVisible)
         {
+            Spotted(player_position);
             return;
         }
 
@@ -126,6 +127,33 @@ public class MonsterAI : MonoBehaviour
         next_position.y = GetRaycastYPosition(next_position);
 
         // Move the monster towards the desired position
+        transform.position = next_position;
+    }
+
+    private void Chase()
+    {
+        // Run towards the player.
+        Vector3 move_direction = (_player.position - transform.position).normalized;
+        Vector3 next_position = transform.position + move_direction * chaseSpeed * Time.deltaTime;
+        next_position.y = GetRaycastYPosition(next_position);
+        transform.position = next_position;
+    }
+
+    // When spotted by the player, the monster will stand still.
+    // If the player approached, it will move away quickly.
+    private void Spotted(Vector3 playerPosition)
+    {
+        float distance = Vector3.Distance(transform.position, playerPosition);
+        if (distance > roamIdleDistance)
+        {
+            return;
+        }
+        
+        // Move away from the player.
+        Vector3 move_direction = (transform.position - playerPosition).normalized;
+        Vector3 next_position = transform.position + move_direction * roamSpeed * 2f * Time.deltaTime;
+        next_position.y = GetRaycastYPosition(next_position);
+
         transform.position = next_position;
     }
 

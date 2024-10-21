@@ -12,10 +12,18 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] Volume volume;
     [SerializeField] InhalerUI inhalerUI;
+    [SerializeField] private Transform fatigueTransform;
+
+    [SerializeField] CinemachineVirtualCamera _standingVM;
+    [SerializeField] CinemachineVirtualCamera _crouchVM;
+    [SerializeField] CinemachineVirtualCamera _fatigueVM;
 
     [Header("Settings")]
     [SerializeField] private float moveSpeed = 2.5f;
     [SerializeField] private float addedRunSpeed = 1.5f;
+    [SerializeField] private Vector2 sprintAmplitudeRange;
+    [SerializeField] private Vector2 sprintFrequencyRange;
+    [SerializeField] private Vector2 sprintFOVRange;
     [SerializeField] private float jumpHeight = 1f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private float maxVerticalDelta = 1f; // Prevents skipping when moving down slopes
@@ -28,14 +36,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float fatigueTime = 3f;
     [SerializeField] private float fatigueSpeed = 0.3f;
 
+    [SerializeField] private bool hasAsthma = true;
     [SerializeField] private bool hasInhaler = true;
     [SerializeField] private float inhalerActivationThreshold = 0.3f;
     [SerializeField] private float inhalerStaminaRecoveryTime = 1f;
     [SerializeField] private float inhalerSpeed = 0.6f;
     [SerializeField] private float inhalerCooldown = 30f;
-
-    [SerializeField] CinemachineVirtualCamera _standingPosition;
-    [SerializeField] CinemachineVirtualCamera _crouchPosition;
+    
     [Tooltip("Disables the initial stuck on first quest. So you can run around and test stuff")]
     [SerializeField] bool _devMode;
     bool _canPlayerMove = false;
@@ -57,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController _controller;
     private Camera _camera;
+    private CinemachineBasicMultiChannelPerlin _cameraNoise;
 
     private void Awake()
     {
@@ -74,19 +82,21 @@ public class PlayerController : MonoBehaviour
         _camera = Camera.main;
 
         _currentStamina = stamina;
+
+        _cameraNoise = _standingVM.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
     public void Crouch()
     {
         _canPlayerMove = false;
-        _standingPosition.Priority = 0;
-        _crouchPosition.Priority = 10;
+        _standingVM.Priority = 0;
+        _crouchVM.Priority = 10;
     }
     public void StandUp()
     {
         _canPlayerMove = true;
-        _standingPosition.Priority = 10;
-        _crouchPosition.Priority = 0;
+        _standingVM.Priority = 10;
+        _crouchVM.Priority = 0;
     }
 
     private void Update()
@@ -108,10 +118,8 @@ public class PlayerController : MonoBehaviour
         if (!_canPlayerMove)
             return;
 
-        
-
-            // Gather Input
-            _inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        // Gather Input
+        _inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         _shiftDown = Input.GetKey(KeyCode.LeftShift);
         _spacebarDown = Input.GetKey(KeyCode.Space);
         _qPressed = Input.GetKeyDown(KeyCode.Q);
@@ -144,6 +152,9 @@ public class PlayerController : MonoBehaviour
             _currentInhalerCooldown = inhalerCooldown;
         }
 
+        // Fatigue Camera Priority
+        _fatigueVM.Priority = (_isFatigued) ? 100 : 0;
+
         // Fatigue / Speed
         if (_isFatigued)
         {
@@ -167,7 +178,11 @@ public class PlayerController : MonoBehaviour
         }
         else if (_shiftDown)
         {
-            _currentStamina -= Time.deltaTime;
+            if (hasAsthma)
+            {
+                _currentStamina -= Time.deltaTime;
+            }
+
             move_speed += addedRunSpeed;
             _currentStopTime = 0f;
         }
@@ -180,6 +195,9 @@ public class PlayerController : MonoBehaviour
                 _currentStamina += Time.deltaTime * stamina / staminaRecoveryTime;
             }
         }
+
+        // Modify the Noise based on the Move Speed
+        AdjustNoiseValues(move_speed);
 
         Vector3 move_delta = move_speed * Time.deltaTime * move;
 
@@ -223,7 +241,11 @@ public class PlayerController : MonoBehaviour
         // Jump/Gravity
         if (!_isFatigued && _spacebarDown && _isGrounded)
         {
-            _currentStamina -= jumpStaminaCost;
+            if (hasAsthma)
+            {
+                _currentStamina -= jumpStaminaCost;
+            }
+
             _velocity.y += Mathf.Sqrt(jumpHeight * -3f * gravity);
         }
 
@@ -246,6 +268,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void AdjustNoiseValues(float move_speed)
+    {
+        float max_speed = moveSpeed + addedRunSpeed;
+        float speed_percentage = move_speed / max_speed;
+
+        float current_amplitude = _cameraNoise.m_AmplitudeGain;
+        float current_frequency = _cameraNoise.m_FrequencyGain;
+        
+        float target_amplitude = Mathf.Lerp(sprintAmplitudeRange.x, sprintAmplitudeRange.y, speed_percentage);
+        float target_frequency = Mathf.Lerp(sprintFrequencyRange.x, sprintFrequencyRange.y, speed_percentage);
+        
+        _cameraNoise.m_AmplitudeGain = Mathf.Lerp(current_amplitude, target_amplitude, Time.deltaTime);
+        _cameraNoise.m_FrequencyGain = Mathf.Lerp(current_frequency, target_frequency, Time.deltaTime);
+
+        // Modify the Standing VM POV
+        // Only increase FOV when running
+        if (move_speed <= moveSpeed)
+            speed_percentage = 0f;
+        else
+            speed_percentage = (move_speed - moveSpeed) / (max_speed - moveSpeed);
+
+        speed_percentage = Mathf.Clamp01(speed_percentage);
+        float current_fov = _standingVM.m_Lens.FieldOfView;
+        float target_fov = Mathf.Lerp(sprintFOVRange.x, sprintFOVRange.y, speed_percentage);
+        _standingVM.m_Lens.FieldOfView = Mathf.Lerp(current_fov, target_fov, Time.deltaTime);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
