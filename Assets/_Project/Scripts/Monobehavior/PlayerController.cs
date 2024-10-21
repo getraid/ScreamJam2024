@@ -159,7 +159,7 @@ public class PlayerController : MonoBehaviour
         if (_isFatigued)
         {
             bool useAltVersion = UnityEngine.Random.Range(0, 2) == 0;
-            SFXManager.Instance.PlaySFX(useAltVersion ? SFXManager.SFXType.HeavyBreathing_1 : SFXManager.SFXType.HeavyBreathing_2, transform.position);
+            SFXManager.Instance.PlaySFX(useAltVersion ? SFXManager.SFXType.HeavyBreathing_1 : SFXManager.SFXType.HeavyBreathing_2,1);
             
             _currentStamina += Time.deltaTime * stamina / fatigueTime;
             move_speed *= fatigueSpeed;

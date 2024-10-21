@@ -18,7 +18,7 @@ MonoBehaviour:
     Audio: {fileID: 8300000, guid: 9fceef8919d6049b797e963d6a290cc5, type: 3}
     TimeDelay: 1
     TalkToWalkieTalkie: 1
-  - Text: Hey, uhh do you remember the documents for the  initiation of our frat
+  - Text: Hey, uhh do you remember the documents for the initiation of our frat
     Audio: {fileID: 8300000, guid: ba1aed8fcd4304070bef559ec75f5468, type: 3}
     TimeDelay: 0
     TalkToWalkieTalkie: 1

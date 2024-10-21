@@ -19,6 +19,7 @@ public class Interactable : MonoBehaviour, IQuest,ISaveable
 
     [SerializeField] VoiceLineDataSO _voiceLineToActivate;
     [SerializeField] UnityEvent _onVoiceLineCompleted;
+    [SerializeField] SFXManager.SFXType _typeOfSFXToPlayOnGrab = SFXManager.SFXType.None;
 
     private void Start()
     {
@@ -31,6 +32,8 @@ public class Interactable : MonoBehaviour, IQuest,ISaveable
     public void Interact()
     {
         Debug.Log("Interacted with " + gameObject.name);
+
+        SFXManager.Instance.PlaySFX(_typeOfSFXToPlayOnGrab, transform.position, 0.5f, true, true);
         TryCompleteQuest?.Invoke(QuestData);
 
         if (QuestItemToPickupOnCompletion != null)

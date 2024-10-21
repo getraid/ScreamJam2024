@@ -74,6 +74,10 @@ public class MusicManager : MonoBehaviour
             }
         }
     }
+    public void ChangeMusicGroup(int groupNumber)
+    {
+        CurrentAudioGroupIndex = groupNumber;
+    }
 
     public void StartMusic()
     {

@@ -18,6 +18,7 @@ public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
     [SerializeField] UnityEvent _OnVoiceLineCompleted;
     [SerializeField] UnityEvent _onPlayerIsLookingAt;
     [SerializeField] bool _disableOnQuestCompletion;
+    [SerializeField] SFXManager.SFXType _typoOfSFXToPlay;
 
     [Range(0.5f, 1f)]
     [SerializeField] float _lookingUpTresholdNeeded = 0.95f;
@@ -27,6 +28,7 @@ public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
 
     bool _hasVoiceLinePlayed = false;
     Dictionary<DateTime, bool> _saveData = new Dictionary<DateTime, bool>();
+    bool _hasPlayedSFX = false;
 
     private void Start()
     {
@@ -51,6 +53,11 @@ public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
 
         if (dirDot > _lookingUpTresholdNeeded)
         {
+            if (!_hasPlayedSFX)
+            {
+                SFXManager.Instance.PlaySFX(_typoOfSFXToPlay, 0.5f, true);
+                _hasPlayedSFX = true;
+            }
             TryCompleteQuest?.Invoke(QuestData);
 
             _onPlayerIsLookingAt?.Invoke();

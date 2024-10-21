@@ -7,9 +7,16 @@ public class SFXManager : MonoBehaviour
 
     public enum SFXType
     {
+        None,
       HeavyBreathing_1,
       HeavyBreathing_2,
       Inhaler,
+      ChurchBell,
+      PaperGrab,
+      Beep,
+      WalkieTalkie,
+      WoodGrab,
+      Suspense
     }
 
    [System.Serializable]
@@ -74,8 +81,15 @@ public class SFXManager : MonoBehaviour
         }
     }
 
-    public void PlaySFX(SFXType type, Vector3 position, bool playOnce = true, bool use3DAudio = false)
+    public void PlaySFX(SFXType type,float volume, bool playOnce = true)
     {
+        PlaySFX(type,Vector3.zero, volume, playOnce, false);
+    }
+    public void PlaySFX(SFXType type, Vector3 position,float volume, bool playOnce = true, bool use3DAudio = false)
+    {
+        if (type == SFXType.None)
+            return;
+
         // If playOnce is true and the sound effect is already playing, do not play it again
         if (playOnce && currentlyPlaying.Contains(type))
         {
@@ -94,6 +108,7 @@ public class SFXManager : MonoBehaviour
         {
             availableSource.transform.position = position;
             availableSource.clip = clip;
+            availableSource.volume = volume;
             availableSource.spatialBlend = use3DAudio ? 1f : 0f; // Set to 3D if use3DAudio is true, otherwise 2D
             availableSource.Play();
 
