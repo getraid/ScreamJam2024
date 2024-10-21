@@ -15,6 +15,9 @@ public class QuestColliderTrigger :MonoBehaviour, IQuest,ISaveable
     [SerializeField] VoiceLineDataSO _voiceLineToActivate;
     [SerializeField] UnityEvent _onVoiceLineCompleted;
     [SerializeField] bool _disableOnQuestCompletion;
+    [SerializeField] UnityEvent _areaEntered;
+    [SerializeField] SFXManager.SFXType _clipPlayOnAreaEntered;
+    [SerializeField] Transform _clipLocation;
 
     public Action<QuestSO> TryCompleteQuest { get; set; }
 
@@ -40,8 +43,15 @@ public class QuestColliderTrigger :MonoBehaviour, IQuest,ISaveable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (enabled)
+        if (enabled && other.CompareTag("Player"))
         {
+            _areaEntered?.Invoke();
+            if(_clipLocation != null)
+                SFXManager.Instance.PlaySFX(_clipPlayOnAreaEntered, _clipLocation.position, 1,true,true);
+            else
+                SFXManager.Instance.PlaySFX(_clipPlayOnAreaEntered, 1, true);
+
+
             TryCompleteQuest?.Invoke(QuestData);
 
             if (QuestItemToPickupOnCompletion != null)

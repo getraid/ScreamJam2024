@@ -15,7 +15,7 @@ public class InhalerUI : MonoBehaviour
     private Image _radial;
 
     private float _fillPercentage;
-    
+
     public bool IsAvailable => _fillPercentage >= 1f;
 
     private void Awake()
@@ -25,6 +25,7 @@ public class InhalerUI : MonoBehaviour
 
     private void Update()
     {
+
         if (IsAvailable)
         {
             SetImageAlpha(_radial, activeAlpha);

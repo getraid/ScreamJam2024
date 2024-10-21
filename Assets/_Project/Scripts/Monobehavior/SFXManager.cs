@@ -16,7 +16,8 @@ public class SFXManager : MonoBehaviour
       Beep,
       WalkieTalkie,
       WoodGrab,
-      Suspense
+      Suspense,
+      GlassBreak
     }
 
    [System.Serializable]

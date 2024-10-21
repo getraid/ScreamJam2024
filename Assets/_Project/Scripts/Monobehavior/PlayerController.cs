@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour,ISaveable
 {
     [Header("References")]
     [SerializeField] Volume volume;
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float fatigueSpeed = 0.3f;
 
     [SerializeField] private bool hasAsthma = true;
-    [SerializeField] private bool hasInhaler = true;
+    [SerializeField] private bool hasInhaler = false;
     [SerializeField] private float inhalerActivationThreshold = 0.3f;
     [SerializeField] private float inhalerStaminaRecoveryTime = 1f;
     [SerializeField] private float inhalerSpeed = 0.6f;
@@ -66,6 +66,15 @@ public class PlayerController : MonoBehaviour
     private Camera _camera;
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
 
+    Dictionary<DateTime, PlayerSaveData> _saveData = new Dictionary<DateTime, PlayerSaveData>();
+    public struct PlayerSaveData
+    {
+        public bool HasInhaler;
+        public Vector3 Position;
+        public Quaternion Rotation;
+        public bool CanPlayerMove;
+        public float Stamina;
+    }
     private void Awake()
     {
         _controller = GetComponent<CharacterController>();
@@ -98,6 +107,10 @@ public class PlayerController : MonoBehaviour
         _standingVM.Priority = 10;
         _crouchVM.Priority = 0;
     }
+    public void PickupInhaler()
+    {
+        hasInhaler = true;
+    }
 
     private void Update()
     {
@@ -122,7 +135,6 @@ public class PlayerController : MonoBehaviour
         _inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         _shiftDown = Input.GetKey(KeyCode.LeftShift);
         _spacebarDown = Input.GetKey(KeyCode.Space);
-        _qPressed = Input.GetKeyDown(KeyCode.Q);
 
         // Check Grounded
         _isGrounded = _controller.isGrounded;
@@ -145,12 +157,7 @@ public class PlayerController : MonoBehaviour
         // Check for Movement
         float move_speed = (_inputAxis.magnitude >= 0.1f) ? moveSpeed : 0f;
 
-        // Check for Inhaler
-        if (_qPressed && hasInhaler && _currentInhalerCooldown <= inhalerActivationThreshold && _currentStamina < stamina)
-        {
-            _isInhaling = true;
-            _currentInhalerCooldown = inhalerCooldown;
-        }
+        
 
         // Fatigue Camera Priority
         _fatigueVM.Priority = (_isFatigued) ? 100 : 0;
@@ -164,9 +171,18 @@ public class PlayerController : MonoBehaviour
             _currentStamina += Time.deltaTime * stamina / fatigueTime;
             move_speed *= fatigueSpeed;
             _currentStopTime = 0f;
+
+            // Check for Inhaler
+            if (hasInhaler && _currentInhalerCooldown <= inhalerActivationThreshold && _currentStamina < stamina)
+            {
+                _isInhaling = true;
+                _currentInhalerCooldown = inhalerCooldown;
+            }
         }
         else if (_isInhaling)
         {
+            SFXManager.Instance.PlaySFX(SFXManager.SFXType.Inhaler, 1,true);
+
             _currentStamina += Time.deltaTime * stamina / inhalerStaminaRecoveryTime;
             move_speed *= inhalerSpeed;
             _currentStopTime = 0f;
@@ -312,5 +328,30 @@ public class PlayerController : MonoBehaviour
             MusicManager.Instance.StartMusic();
             
         }
+    }
+
+    public void ReloadFromSafe(DateTime saveDateStamp)
+    {
+        PlayerSaveData data = _saveData[saveDateStamp];
+
+        _controller.enabled = false;
+        _currentStamina = data.Stamina;
+        transform.position = data.Position;
+        transform.rotation = data.Rotation;
+        _canPlayerMove = data.CanPlayerMove;
+        hasInhaler = data.HasInhaler;
+        _controller.enabled = true;
+    }
+
+    public void SaveData(DateTime saveDateStamp)
+    {
+        PlayerSaveData data;
+        data.Stamina = _currentStamina;
+        data.Position = transform.position;
+        data.Rotation=transform.rotation;
+        data.CanPlayerMove = _canPlayerMove;
+        data.HasInhaler = hasInhaler;
+
+        _saveData.Add(saveDateStamp, data);
     }
 }

@@ -27,7 +27,7 @@ public class VoiceLineColliderTrigger : MonoBehaviour,ISaveable
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!_hasBeenTriggered)
+        if(!_hasBeenTriggered && other.CompareTag("Player"))
         {
             _hasBeenTriggered = true;
             VoiceLineManager.Instance.PlayVoiceLine(_voiceLineData, _onVoiceLineCompleted);
