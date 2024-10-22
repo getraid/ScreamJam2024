@@ -1,8 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Cinemachine;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class JournalManager : MonoBehaviour
@@ -13,7 +18,9 @@ public class JournalManager : MonoBehaviour
     [field: SerializeField] public GameObject JournalUI { get; set; }
     [field: SerializeField] public RectTransform PlayerIcon { get; set; }
     [field: SerializeField] public Transform ActualPlayerPos { get; set; }
-
+    
+    [field: SerializeField] public PlayerController PlayerController { get; set; }
+    
     [field: SerializeField] public List<Image> GoalImages { get; set; } = new List<Image>();
     [field: SerializeField] public Image CrossOverlay { get; set; }
     [field: SerializeField] public List<int> GoalOrderIndex { get; set; } = new List<int>();
@@ -22,6 +29,8 @@ public class JournalManager : MonoBehaviour
     private static readonly int IsReady = Animator.StringToHash("IsReady");
 
     private bool isClosed = true;
+    public bool HasJournalOpened => !isClosed;
+    
     private bool isReady = false;
     private bool isClosingAnimationPlaying = false;
 
@@ -36,7 +45,92 @@ public class JournalManager : MonoBehaviour
     private int currentGoalIndex = -1;
     
     public static JournalManager Instance;
+    
+    // UI Navigation
+    [Serializable]
+    public enum NavigationEntry
+    {
+        Tasks = 0,
+        Credits = 1,
+        Settings =2,
+        Exit =3
+    }
+    
+    // selected setting index
+    [field: SerializeField] public NavigationEntry SelectedSetting { get; set; } = NavigationEntry.Tasks;
+    [field: SerializeField] public Image SelectedSettingsHighlight { get; set; }
+    
+        
+    // change based on selected setting
+    [field: SerializeField] public TMP_Text NavigationHeader { get; set; } 
+    
+    
+    // Tasks Button + UI
+    [field: SerializeField] public Image TasksButton { get; set; } 
+    [field: SerializeField] public GameObject TasksUI { get; set; } 
+    
+    
+    // Credits Button
+    [field: SerializeField] public Image CreditsButton { get; set; } 
+    [field: SerializeField] public GameObject CreditsUI { get; set; } 
 
+    
+    // Settings Button
+    [field: SerializeField] public Image SettingButton { get; set; } 
+    [field: SerializeField] public GameObject SettingsUI { get; set; } 
+    
+     [field: SerializeField] public Slider BrightnessSlider { get; set; } // Reference to the slider
+     [field: SerializeField] public Volume PostProcessingVolume  { get; set; }
+     
+     [field: SerializeField] public Slider VolumeSlider {get;set;} // Reference to the volume slider
+     [field: SerializeField] public AudioMixer AudioMixer {get;set;}
+     
+     private float currentBrightness = 0.5f; // Default brightness value
+     private ColorAdjustments colorAdjustments;
+    
+    // Exit Button
+    [field: SerializeField] public Image ExitButton { get; set; } 
+
+
+    public void ChangeUI(int indx)
+    {
+        NavigationEntry index = (NavigationEntry)indx;
+        
+        if (index == NavigationEntry.Exit)
+        {
+            Application.Quit();
+            return;
+        }
+        
+        // Disable all UI first
+        SettingsUI.SetActive(false);
+        CreditsUI.SetActive(false);
+        TasksUI.SetActive(false);
+
+        if (index == NavigationEntry.Tasks)
+        {
+            // Enable UI
+            TasksUI.SetActive(true);
+            NavigationHeader.text = "Tasks";
+            // Set Highlighter cursor
+            SelectedSettingsHighlight.rectTransform.position = TasksButton.rectTransform.position;
+        }
+        else if (index == NavigationEntry.Credits)
+        {
+            CreditsUI.SetActive(true);
+            NavigationHeader.text = "Credits";
+            SelectedSettingsHighlight.rectTransform.position = CreditsButton.rectTransform.position;
+        }
+        else if (index == NavigationEntry.Settings)
+        {
+            SettingsUI.SetActive(true);
+            NavigationHeader.text = "Settings";
+            SelectedSettingsHighlight.rectTransform.position = SettingButton.rectTransform.position;
+        }
+
+    }
+    
+    
     private void Awake()
     {
         if (Instance == null)
@@ -48,16 +142,58 @@ public class JournalManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        
+        
+        
+         // Get the Color Adjustments effect from the Volume
+        if (PostProcessingVolume.profile.TryGet(out colorAdjustments))
+        {
+            this.colorAdjustments = colorAdjustments;
+            
+            // Set the slider's value to the current post exposure
+            BrightnessSlider.value = colorAdjustments.postExposure.value+0.5f;
+            
+            // Add listener for slider value changes
+            BrightnessSlider.onValueChanged.AddListener(SetBrightness);
+        }
+        
+        float currentVolume;
+        // AudioMixer.outputAudioMixerGroup.audioMixer.GetFloat("Master",out currentVolume);
+        // AudioMixer.GetFloat("Master", out currentVolume);
+
+        // Convert dB to linear scale
+        // VolumeSlider.value = Mathf.Pow(10, currentVolume / 20);
+        VolumeSlider.value = 1f;
+        VolumeSlider.onValueChanged.AddListener(SetVolume);
+        
 
         DontDestroyOnLoad(gameObject);
     }
+    
+      public void SetVolume(float volume)
+      {
+          float log_value = (volume <= 0f) ? -120f : Mathf.Log10(volume) * 20;
 
+          AudioMixer.SetFloat("MainVolume", log_value);
+          
+       
+      }
+      
+      public void SetBrightness(float brightness)
+        {
+            if (colorAdjustments != null)
+            {
+                var newbrightness = (Mathf.Clamp01(brightness) -0.5f) * 2f;
+                colorAdjustments.postExposure.value = newbrightness;
+            }
+        }
+    
     void Start()
     {
         JournalObj.enabled = false; // Make sure the journal is initially hidden
         JournalUI.SetActive(false);
         MainCamera.m_CameraActivatedEvent.AddListener(OnCameraSwitched); // Listen for camera changes
-        CrossOverlay.gameObject.SetActive(false); // Initially hide the cross overlay
+        CrossOverlay?.gameObject.SetActive(false); // Initially hide the cross overlay
 
         // Hide all goal images initially
         foreach (var goal in GoalImages)
@@ -87,6 +223,14 @@ public class JournalManager : MonoBehaviour
 
     private void OpenJournal()
     {
+        ResetNavigation();
+        
+        // disable mouse
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        
+        // PlayerController._canPlayerMove = false;
+        
         isReady = true;
         isClosed = false;
         StartAnimation(isClosed); // Pass false to indicate the journal is opening
@@ -97,6 +241,13 @@ public class JournalManager : MonoBehaviour
 
     private void CloseJournal()
     {
+        // reenabel mosue
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        
+        // TODO: Enable current player look dir?
+        // PlayerController._canPlayerMove = true;
+        
         isReady = true;
         isClosed = true;
         StartAnimation(isClosed); // Pass true to indicate the journal is closing
@@ -131,7 +282,7 @@ public class JournalManager : MonoBehaviour
 
     private void ResetNavigation()
     {
-        // Implement your reset navigation logic here
+        ChangeUI(0);
     }
 
     void Update()
@@ -197,6 +348,9 @@ public class JournalManager : MonoBehaviour
                 // Enable the goal image
                 GoalImages[goalIndex].gameObject.SetActive(true);
 
+                
+                //TODO: Maybe the overlay should only be displayed after a certain while, if the player doesn't know what to do
+                
                 // Move the cross overlay to this goal
                 MoveCrossOverlayToGoal(goalIndex);
             }
@@ -214,6 +368,8 @@ public class JournalManager : MonoBehaviour
     // Function to move the cross overlay to a specified goal
     private void MoveCrossOverlayToGoal(int goalIndex)
     {
+        if (CrossOverlay == null) return;
+        
         // Move the cross overlay to the specified goal's position
         CrossOverlay.rectTransform.position = GoalImages[goalIndex].rectTransform.position;
         CrossOverlay.gameObject.SetActive(true);

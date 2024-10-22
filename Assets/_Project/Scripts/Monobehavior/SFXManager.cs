@@ -1,9 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 public class SFXManager : MonoBehaviour
 {
     public static SFXManager Instance;
+
+    public AudioMixerGroup DefaultMixerSFX;
+    
 
     public enum SFXType
     {
@@ -79,6 +83,7 @@ public class SFXManager : MonoBehaviour
             audioSourceObject.transform.parent = transform;
 
             AudioSource audioSource = audioSourceObject.AddComponent<AudioSource>();
+            audioSource.outputAudioMixerGroup = DefaultMixerSFX;
             audioSource.playOnAwake = false;
             audioSource.spatialBlend = 0f; // Default to 2D audio
             audioSourcePool.Add(audioSource);
