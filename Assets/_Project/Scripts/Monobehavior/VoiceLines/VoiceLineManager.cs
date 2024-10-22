@@ -13,6 +13,7 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
     [SerializeField] AnimationClip _subtitleAnimationClip;
     [SerializeField] WalkieTalkiActivation _walkieTalkieActivation;
 
+    public VoiceLineDataSO CurrentVoiceLinePlaying { get; set; }
     float _lengthOfVoiceLineDataAnimation;
     Coroutine _runningCoroutine;
     public static VoiceLineManager Instance { get; private set; }
@@ -35,7 +36,8 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
         if (_runningCoroutine != null)
             StopCoroutine(_runningCoroutine);
 
-        _runningCoroutine=StartCoroutine(ShowVoiceLineDatas());
+        CurrentVoiceLinePlaying = voiceLineData;
+        _runningCoroutine =StartCoroutine(ShowVoiceLineDatas());
 
         IEnumerator ShowVoiceLineDatas()
         {
@@ -72,6 +74,7 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
             callBackOnVoiceLineCompleted?.Invoke();
 
             _walkieTalkieActivation.Deactivate();
+            CurrentVoiceLinePlaying = null;
         }
 
         void WalkieTalkieActivation(bool val)

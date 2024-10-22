@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkieTalkiActivation : MonoBehaviour
+public class WalkieTalkiActivation : MonoBehaviour,ISaveable
 {
     [SerializeField] Transform _walkieTalkieMain;
     [SerializeField] List<MeshRenderer> _activeLeds;
@@ -25,9 +26,9 @@ public class WalkieTalkiActivation : MonoBehaviour
 
     }
 
-    public void Activate()
+    public void Activate(bool forceActivation=false)
     {
-        if (_isActive)
+        if (_isActive && !forceActivation)
             return;
 
         _activeLeds.ForEach(x=>x.gameObject.SetActive(true));
@@ -56,6 +57,7 @@ public class WalkieTalkiActivation : MonoBehaviour
 
     IEnumerator LerpIntoActivePosition(Transform startTransform, Transform endTransform)
     {
+        _activeLerpTime = 0;
         while (true)
         {
             _activeLerpTime += Time.deltaTime;
@@ -73,9 +75,9 @@ public class WalkieTalkiActivation : MonoBehaviour
             yield return null;
         }
     }
-    public void Deactivate()
+    public void Deactivate(bool forceDeactivation=false)
     {
-        if (!_isActive)
+        if (!_isActive && !forceDeactivation)
             return;
 
         _activeLeds.ForEach(x => x.gameObject.SetActive(false));
@@ -88,5 +90,26 @@ public class WalkieTalkiActivation : MonoBehaviour
         }
         _isActive = false;
 
+    }
+    public struct WalkieTalkieData
+    {
+        public Transform Parent;
+        public Transform WalkieTalkiePosition;
+        public Quaternion WalkieTalkieRotation;
+    }
+    Dictionary<DateTime, bool> _saveData = new Dictionary<DateTime, bool>();
+    public void ReloadFromSafe(DateTime saveDateStamp)
+    {
+        bool wasActive = _saveData[saveDateStamp];
+
+        if (!_isActive && wasActive)
+            Activate(true);
+        else if(_isActive&&!wasActive)
+            Deactivate(true);
+    }
+
+    public void SaveData(DateTime saveDateStamp)
+    {
+        _saveData.Add(saveDateStamp, _isActive);
     }
 }

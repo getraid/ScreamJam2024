@@ -463,6 +463,11 @@ public class PlayerController : MonoBehaviour,ISaveable
         CanPlayerMove = allowMove;
     }
 
+    public void SetAsthma()
+    {
+        hasAsthma = true;
+    }
+
     private void CameraPrioritiesOnGameLoad()
     {
         _standingVM.Priority = 0;

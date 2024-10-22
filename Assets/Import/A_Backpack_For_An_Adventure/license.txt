@@ -1,0 +1,11 @@
+Model Information:
+* title:	A Backpack For An Adventure
+* source:	https://sketchfab.com/3d-models/a-backpack-for-an-adventure-2ad86321197a49feb54b7726743d7fd0
+* author:	Thomas Lean (https://sketchfab.com/thomaslean)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "A Backpack For An Adventure" (https://sketchfab.com/3d-models/a-backpack-for-an-adventure-2ad86321197a49feb54b7726743d7fd0) by Thomas Lean (https://sketchfab.com/thomaslean) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
