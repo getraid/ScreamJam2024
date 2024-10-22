@@ -21,6 +21,7 @@ public class JournalManager : MonoBehaviour
     
     [field: SerializeField] public PlayerController PlayerController { get; set; }
     
+    [field: SerializeField] public Image TabImage { get; set; }
     [field: SerializeField] public List<Image> GoalImages { get; set; } = new List<Image>();
     [field: SerializeField] public Image CrossOverlay { get; set; }
     [field: SerializeField] public List<int> GoalOrderIndex { get; set; } = new List<int>();
@@ -129,6 +130,10 @@ public class JournalManager : MonoBehaviour
         }
 
     }
+    
+    // disabled icon -> for reload to save to true
+    // method for enabling the saving as diskette
+    
     
     
     private void Awake()
@@ -294,6 +299,8 @@ public class JournalManager : MonoBehaviour
 
         // Update the player icon position on the map
         UpdatePlayerIconPosition();
+
+        TabImage.enabled = HasValidCam;
 
         // Check if the closing animation is playing and if it has finished
         if (isClosingAnimationPlaying && isClosed)
