@@ -10,6 +10,7 @@ public class QuestManager : MonoBehaviour,ISaveable
 {
     [SerializeField] Transform _journalQuestParent;
     [SerializeField] TMP_Text _uiQuestPrefab;
+    [SerializeField] TMP_Text _uiQuestJournalPrefab;
     [SerializeField] Transform _questUIParent;
     [SerializeField] List<ChronologicalQuests> _chronologicalQuests;
 
@@ -44,7 +45,8 @@ public class QuestManager : MonoBehaviour,ISaveable
                 TMP_Text questSceeen = Instantiate(_uiQuestPrefab, _questUIParent);
                 questSceeen.text = _chronologicalQuests[i].Quest.QuestText;
 
-                TMP_Text questJournal = Instantiate(_uiQuestPrefab, _journalQuestParent);
+                TMP_Text questJournal = Instantiate(_uiQuestJournalPrefab, _journalQuestParent);
+                questJournal.fontSize = 0.03f;
                 questJournal.text = _chronologicalQuests[i].Quest.QuestText;
 
                 _allChronologicalQuests.Add(new(sceneQuests.First(), _chronologicalQuests[i], questSceeen, questJournal));

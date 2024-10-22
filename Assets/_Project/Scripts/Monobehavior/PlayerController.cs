@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour,ISaveable
 
         _cameraNoise = _standingVM.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
-        ResetCameraPriorities();
+        CameraPrioritiesOnGameLoad();
         StartCoroutine(AliveTransition(false));
     }
 
@@ -465,6 +465,13 @@ public class PlayerController : MonoBehaviour,ISaveable
         _canPlayerMove = allowMove;
     }
 
+    private void CameraPrioritiesOnGameLoad()
+    {
+        _standingVM.Priority = 0;
+        _crouchVM.Priority = 10;
+        _fatigueVM.Priority = 0;
+        _deadVM.Priority = 0;
+    }
     private void ResetCameraPriorities()
     {
         _standingVM.Priority = 10;

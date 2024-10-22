@@ -3989,6 +3989,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2046031584}
     m_Modifications:
+    - target: {fileID: 171141094775450576, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0.80205
+      objectReference: {fileID: 0}
+    - target: {fileID: 171141094775450576, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0.9791
+      objectReference: {fileID: 0}
+    - target: {fileID: 171141094775450576, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0000043117
+      objectReference: {fileID: 0}
+    - target: {fileID: 171141094775450576, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.018823
+      objectReference: {fileID: 0}
+    - target: {fileID: 171141094775450576, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.0104
+      objectReference: {fileID: 0}
     - target: {fileID: 703233302473530044, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 249.79
@@ -4041,6 +4061,18 @@ PrefabInstance:
       propertyPath: <ActualPlayerPos>k__BackingField
       value: 
       objectReference: {fileID: 938537792325541224}
+    - target: {fileID: 7659061311042802780, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_ChildControlWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7659061311042802780, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_ChildControlHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7659061311042802780, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: m_ChildForceExpandHeight
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6171,7 +6203,7 @@ Transform:
   m_GameObject: {fileID: 664488614}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.90906906, z: -0, w: -0.4166455}
-  m_LocalPosition: {x: 251.764, y: -0.13600004, z: 247.51}
+  m_LocalPosition: {x: 251.764, y: -0.399, z: 247.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9085,6 +9117,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 7308204627938944081, guid: a1bd554d306124339ac8082d0135277c, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 7632871968255023796, guid: a1bd554d306124339ac8082d0135277c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -11984,12 +12020,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _journalQuestParent: {fileID: 202578642}
   _uiQuestPrefab: {fileID: 2235509413736438524, guid: b6f8b9b9d65c6f74fa455ee10e4f386d, type: 3}
+  _uiQuestJournalPrefab: {fileID: 2235509413736438524, guid: 861524db963f63b4bb0eede2893d67a3, type: 3}
   _questUIParent: {fileID: 68994682}
   _chronologicalQuests:
   - Quest: {fileID: 11400000, guid: dcf64d063dcee814dad2053ead2f1a55, type: 2}
     DelayBeforeShownInQuickTasks: 0
   - Quest: {fileID: 11400000, guid: 49178c98886e6c34da0ecb8cb7a173d2, type: 2}
-    DelayBeforeShownInQuickTasks: 40
+    DelayBeforeShownInQuickTasks: 37
   - Quest: {fileID: 11400000, guid: 8b1a51871e7c6e147bd417605dbe1ae2, type: 2}
     DelayBeforeShownInQuickTasks: 2
   - Quest: {fileID: 11400000, guid: e816161c32bd0c14bacccab9f97f58e5, type: 2}
@@ -12626,7 +12663,7 @@ MonoBehaviour:
       m_Calls: []
   _disableOnQuestCompletion: 1
   _typoOfSFXToPlay: 0
-  _lookingUpTresholdNeeded: 0.95
+  _lookingUpTresholdNeeded: 0.98
 --- !u!1 &1532168432
 GameObject:
   m_ObjectHideFlags: 0
