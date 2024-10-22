@@ -4064,7 +4064,7 @@ PrefabInstance:
       objectReference: {fileID: 925722167}
     - target: {fileID: 1591657404359637383, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_Priority
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1591657404359637383, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_Lens.NearClipPlane
@@ -15023,7 +15023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1591657404359637383, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_Lens.FieldOfView
-      value: 65.46976
+      value: 61.19643
       objectReference: {fileID: 0}
     - target: {fileID: 3387502028253269034, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15067,11 +15067,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7117516474440541361, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_AmplitudeGain
-      value: 1.391498
+      value: 1.081621
       objectReference: {fileID: 0}
     - target: {fileID: 7117516474440541361, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_FrequencyGain
-      value: 0.8285218
+      value: 0.4101881
       objectReference: {fileID: 0}
     - target: {fileID: 8268391417536595939, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_Name

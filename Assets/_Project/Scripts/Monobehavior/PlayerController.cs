@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour,ISaveable
 
         _cameraNoise = _standingVM.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
+        ResetCameraPriorities();
         StartCoroutine(AliveTransition(false));
     }
 
