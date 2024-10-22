@@ -52,7 +52,8 @@ public class PlayerController : MonoBehaviour,ISaveable
     [SerializeField] bool _devMode;
     [SerializeField] AudioSource _steps;
     [SerializeField] int _pitchStepDivide = 5;
-    public bool _canPlayerMove = false;
+
+    public bool CanPlayerMove { get; set; }
 
     // Input
     private Vector2 _inputAxis;
@@ -72,10 +73,7 @@ public class PlayerController : MonoBehaviour,ISaveable
     private CharacterController _controller;
     private Camera _camera;
     private CinemachineBasicMultiChannelPerlin _cameraNoise;
-    
-    // hack to get asthma working after firewood event
-    // @Sitron if you can mange to put in your EventMgr, that would be great.
-    [SerializeField] public GameObject GnomesEnabled;
+   
 
     Dictionary<DateTime, PlayerSaveData> _saveData = new Dictionary<DateTime, PlayerSaveData>();
     public struct PlayerSaveData
@@ -111,13 +109,13 @@ public class PlayerController : MonoBehaviour,ISaveable
 
     public void Crouch()
     {
-        _canPlayerMove = false;
+        CanPlayerMove = false;
         _standingVM.Priority = 0;
         _crouchVM.Priority = 10;
     }
     public void StandUp()
     {
-        _canPlayerMove = true;
+        CanPlayerMove = true;
         _standingVM.Priority = 10;
         _crouchVM.Priority = 0;
     }
@@ -142,11 +140,8 @@ public class PlayerController : MonoBehaviour,ISaveable
             }
         }
 
-        if (!_canPlayerMove)
+        if (!CanPlayerMove)
             return;
-
-        if (GnomesEnabled.activeSelf)
-            hasAsthma = true;
 
         // Gather Input
         _inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
@@ -175,7 +170,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         move.y = 0f;
 
         // Set Rotation to Camera Forward while staying upright
-        if (_canPlayerMove)
+        if (CanPlayerMove)
         {
             transform.forward = new Vector3(_camera.transform.forward.x, 0f, _camera.transform.forward.z);
         }
@@ -229,10 +224,6 @@ public class PlayerController : MonoBehaviour,ISaveable
 
             if (move_speed > 0)
             {
-                 if(hasAsthma)
-                    // Don't know if too annoying, need to test -rapid
-                    // also maybe need to record new sfx with like air from nose only
-                    SFXManager.Instance.PlaySFX(SFXManager.SFXType.HeavyBreathing_2,1f);
                 move_speed += addedRunSpeed;
             }
             
@@ -294,7 +285,6 @@ public class PlayerController : MonoBehaviour,ISaveable
             if (hasAsthma)
             {
                 _currentStamina -= jumpStaminaCost;
-                
             }
 
             _velocity.y += Mathf.Sqrt(jumpHeight * -3f * gravity);
@@ -379,7 +369,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         _currentStamina = data.Stamina;
         transform.position = data.Position;
         transform.rotation = data.Rotation;
-        _canPlayerMove = data.CanPlayerMove;
+        CanPlayerMove = data.CanPlayerMove;
         hasInhaler = data.HasInhaler;
         _controller.enabled = true;
     }
@@ -390,7 +380,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         data.Stamina = _currentStamina;
         data.Position = transform.position;
         data.Rotation=transform.rotation;
-        data.CanPlayerMove = _canPlayerMove;
+        data.CanPlayerMove = CanPlayerMove;
         data.HasInhaler = hasInhaler;
 
         _saveData.Add(saveDateStamp, data);
@@ -400,7 +390,7 @@ public class PlayerController : MonoBehaviour,ISaveable
     {
 
 
-        _canPlayerMove = false;
+        CanPlayerMove = false;
         _deadVM.Priority = 100;
 
         // Start Coroutine to Reload Scene
@@ -470,7 +460,7 @@ public class PlayerController : MonoBehaviour,ISaveable
             yield return null;
         }
 
-        _canPlayerMove = allowMove;
+        CanPlayerMove = allowMove;
     }
 
     private void CameraPrioritiesOnGameLoad()
