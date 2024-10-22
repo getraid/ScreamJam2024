@@ -577,7 +577,7 @@ Transform:
   m_GameObject: {fileID: 32070631}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 205.45, y: 1.06, z: 417.54}
+  m_LocalPosition: {x: 198.71, y: 1.06, z: 410.17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -821,19 +821,10 @@ MonoBehaviour:
           m_StringArgument: TurnFresh
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1164144015}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: TurnFresh
-          m_BoolArgument: 1
-        m_CallState: 2
   _disableOnQuestCompletion: 1
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
   _voiceLineToActivate: {fileID: 11400000, guid: a35563e9ed9987d499ecb2db484382bb, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
@@ -1008,18 +999,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 673540198}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
   _disableOnQuestCompletion: 0
   _typoOfSFXToPlay: 9
@@ -2520,11 +2499,26 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 250338714}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _voiceLineToActivate: {fileID: 11400000, guid: 49ad47102971f4d419a6deb996d3a0ec, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _typeOfSFXToPlayOnGrab: 0
+  _typeOfSFXToPlayOnGrab: 8
 --- !u!65 &250338715
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2933,11 +2927,26 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 290707005}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _voiceLineToActivate: {fileID: 11400000, guid: 49ad47102971f4d419a6deb996d3a0ec, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _typeOfSFXToPlayOnGrab: 0
+  _typeOfSFXToPlayOnGrab: 8
 --- !u!65 &290707006
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4744,11 +4753,26 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 496224694}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _voiceLineToActivate: {fileID: 11400000, guid: 49ad47102971f4d419a6deb996d3a0ec, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _typeOfSFXToPlayOnGrab: 0
+  _typeOfSFXToPlayOnGrab: 8
 --- !u!65 &496224695
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5377,11 +5401,26 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 600399058}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _voiceLineToActivate: {fileID: 11400000, guid: 49ad47102971f4d419a6deb996d3a0ec, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _typeOfSFXToPlayOnGrab: 0
+  _typeOfSFXToPlayOnGrab: 8
 --- !u!65 &600399059
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5509,7 +5548,7 @@ MonoBehaviour:
   <QuestCompleted>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  _voiceLineToActivate: {fileID: 0}
+  _voiceLineToActivate: {fileID: 11400000, guid: ee4ac6cea9d9a15408ee65b929676899, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
       m_Calls: []
@@ -5847,6 +5886,154 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619552762}
   m_CullTransparentMesh: 1
+--- !u!1 &623618148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 623618149}
+  - component: {fileID: 623618153}
+  - component: {fileID: 623618152}
+  - component: {fileID: 623618151}
+  - component: {fileID: 623618150}
+  m_Layer: 0
+  m_Name: Gnome
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &623618149
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623618148}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 984741385}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &623618150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623618148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b831d93231f064d835996a5f56163b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <QuestData>k__BackingField: {fileID: 0}
+  <QuestItemNeeded>k__BackingField: {fileID: 0}
+  <QuestItemToPickupOnCompletion>k__BackingField: {fileID: 0}
+  <QuestActivated>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  <QuestCompleted>k__BackingField:
+    m_PersistentCalls:
+      m_Calls: []
+  _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 623618150}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _voiceLineToActivate: {fileID: 11400000, guid: 49ad47102971f4d419a6deb996d3a0ec, type: 2}
+  _onVoiceLineCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+  _typeOfSFXToPlayOnGrab: 8
+--- !u!65 &623618151
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623618148}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &623618152
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623618148}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &623618153
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623618148}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &638861909
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6412,6 +6599,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 49572526}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
         m_CallState: 2
   _clipPlayOnAreaEntered: 0
   _clipLocation: {fileID: 0}
@@ -7043,11 +7242,26 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 756325315}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _voiceLineToActivate: {fileID: 11400000, guid: 49ad47102971f4d419a6deb996d3a0ec, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _typeOfSFXToPlayOnGrab: 0
+  _typeOfSFXToPlayOnGrab: 8
 --- !u!65 &756325316
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8097,6 +8311,8 @@ MonoBehaviour:
     <Clip>k__BackingField: {fileID: 8300000, guid: 446456f3cd573944cb258459785527dc, type: 3}
   - <Type>k__BackingField: 10
     <Clip>k__BackingField: {fileID: 8300000, guid: ec65257cc7e62c24b884aca7d1c515c5, type: 3}
+  - <Type>k__BackingField: 11
+    <Clip>k__BackingField: {fileID: 8300000, guid: 5ece8b8ccc1c71846b78e1da6196a26b, type: 3}
   <PoolSize>k__BackingField: 10
 --- !u!1 &839822852
 GameObject:
@@ -9334,6 +9550,39 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &984741384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 984741385}
+  m_Layer: 0
+  m_Name: GnomeTemp (9)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &984741385
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984741384}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 201.6, y: 1.06, z: 410.13}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 623618149}
+  - {fileID: 1242315336}
+  m_Father: {fileID: 1164144016}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &987966160 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6923223506901112990, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
@@ -9396,11 +9645,26 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1012204266}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _voiceLineToActivate: {fileID: 11400000, guid: 49ad47102971f4d419a6deb996d3a0ec, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _typeOfSFXToPlayOnGrab: 0
+  _typeOfSFXToPlayOnGrab: 8
 --- !u!65 &1012204267
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10127,6 +10391,7 @@ Transform:
   - {fileID: 1800800200}
   - {fileID: 2023040798}
   - {fileID: 585498805}
+  - {fileID: 984741385}
   - {fileID: 1870664766}
   - {fileID: 1296355460}
   - {fileID: 1772333579}
@@ -10611,6 +10876,116 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1238108408}
   m_CullTransparentMesh: 1
+--- !u!1001 &1242315335
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 984741385}
+    m_Modifications:
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3267802322513022529, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_Name
+      value: Label
+      objectReference: {fileID: 0}
+    - target: {fileID: 7769660374299446005, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_text
+      value: Gnome
+      objectReference: {fileID: 0}
+    - target: {fileID: 7769660374299446005, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+      propertyPath: m_fontSize
+      value: 4.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+--- !u!224 &1242315336 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
+  m_PrefabInstance: {fileID: 1242315335}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1244620184
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11725,6 +12100,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
   _voiceLineToActivate: {fileID: 0}
   _onVoiceLineCompleted:
     m_PersistentCalls:
@@ -12037,6 +12415,8 @@ MonoBehaviour:
     DelayBeforeShownInQuickTasks: 0
   - Quest: {fileID: 11400000, guid: 081da20ee73c89542aec9a638f96efb4, type: 2}
     DelayBeforeShownInQuickTasks: 3
+  - Quest: {fileID: 11400000, guid: 8d972fc4a435c9240ad9eb564d1932d0, type: 2}
+    DelayBeforeShownInQuickTasks: 25
   - Quest: {fileID: 11400000, guid: 377fdc983dea92240b3550264421b672, type: 2}
     DelayBeforeShownInQuickTasks: 0
 --- !u!1001 &1491001967
@@ -12615,6 +12995,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _disableOnQuestCompletion: 1
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
   _voiceLineToActivate: {fileID: 11400000, guid: 1f3d47d07aad4a749aefb97858d466bc, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
@@ -12893,7 +13276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b831d93231f064d835996a5f56163b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <QuestData>k__BackingField: {fileID: 0}
+  <QuestData>k__BackingField: {fileID: 11400000, guid: 081da20ee73c89542aec9a638f96efb4, type: 2}
   <QuestItemNeeded>k__BackingField: {fileID: 0}
   <QuestItemToPickupOnCompletion>k__BackingField: {fileID: 0}
   <QuestActivated>k__BackingField:
@@ -12901,13 +13284,40 @@ MonoBehaviour:
       m_Calls: []
   <QuestCompleted>k__BackingField:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1543352534}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1164144015}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   _disableOnQuestCompletion: 1
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
   _voiceLineToActivate: {fileID: 11400000, guid: e00f700bbe03abb4c88677899149ceea, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _typeOfSFXToPlayOnGrab: 0
+  _typeOfSFXToPlayOnGrab: 11
 --- !u!65 &1543352535
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13026,7 +13436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b831d93231f064d835996a5f56163b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <QuestData>k__BackingField: {fileID: 11400000, guid: 081da20ee73c89542aec9a638f96efb4, type: 2}
+  <QuestData>k__BackingField: {fileID: 11400000, guid: 8d972fc4a435c9240ad9eb564d1932d0, type: 2}
   <QuestItemNeeded>k__BackingField: {fileID: 0}
   <QuestItemToPickupOnCompletion>k__BackingField: {fileID: 0}
   <QuestActivated>k__BackingField:
@@ -13108,11 +13518,26 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _disableOnQuestCompletion: 1
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1558673672}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _voiceLineToActivate: {fileID: 11400000, guid: db971f12591e4cd42ae9c7cca45b1875, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _typeOfSFXToPlayOnGrab: 0
+  _typeOfSFXToPlayOnGrab: 8
 --- !u!65 &1558673673
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13911,11 +14336,26 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1674035849}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _voiceLineToActivate: {fileID: 11400000, guid: 49ad47102971f4d419a6deb996d3a0ec, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _typeOfSFXToPlayOnGrab: 0
+  _typeOfSFXToPlayOnGrab: 8
 --- !u!65 &1674035850
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14804,11 +15244,26 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1826471549}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _voiceLineToActivate: {fileID: 11400000, guid: 49ad47102971f4d419a6deb996d3a0ec, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
       m_Calls: []
-  _typeOfSFXToPlayOnGrab: 0
+  _typeOfSFXToPlayOnGrab: 8
 --- !u!65 &1826471550
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15413,6 +15868,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
   _voiceLineToActivate: {fileID: 11400000, guid: e2277ae5ff4876647bf32edd161320d0, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
@@ -15567,7 +16025,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 673540198}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
   _voiceLineToActivate: {fileID: 0}
   _onVoiceLineCompleted:
     m_PersistentCalls:
@@ -16109,6 +16582,9 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   _disableOnQuestCompletion: 1
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
   _voiceLineToActivate: {fileID: 0}
   _onVoiceLineCompleted:
     m_PersistentCalls:
@@ -16136,6 +16612,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
   _voiceLineToActivate: {fileID: 0}
   _onVoiceLineCompleted:
     m_PersistentCalls:
@@ -17255,7 +17734,7 @@ Transform:
   m_GameObject: {fileID: 2023040797}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 198.57, y: 1.06, z: 410.13}
+  m_LocalPosition: {x: 205.38, y: 1.06, z: 417.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17999,6 +18478,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _disableOnQuestCompletion: 0
+  _onInteracted:
+    m_PersistentCalls:
+      m_Calls: []
   _voiceLineToActivate: {fileID: 0}
   _onVoiceLineCompleted:
     m_PersistentCalls:

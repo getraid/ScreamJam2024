@@ -12,9 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd2e65695ff6434dafdb05eb817e352, type: 3}
   m_Name: LookingForInhaler
   m_EditorClassIdentifier: 
+  <PlayOneRandom>k__BackingField: 0
   <VoiceLines>k__BackingField:
   - Text: Hey are you looking for your lil' air vape per chance? Nobody gnomes where
       it's at
     Audio: {fileID: 8300000, guid: bd3055317522f4d14b56c87e5d12cdf9, type: 3}
-    TimeDelay: 2
+    TimeDelay: 1
     TalkToWalkieTalkie: 1
+  - Text: Did he really say gnomes?
+    Audio: {fileID: 8300000, guid: 94774c9f88c82ff409c2ceaa55f8c66c, type: 3}
+    TimeDelay: 1
+    TalkToWalkieTalkie: 0
+  - Text: Wait a minute, if i recall correctly, there was a dump
+    Audio: {fileID: 8300000, guid: 4ab1f1d047d099b4397463646f83efaf, type: 3}
+    TimeDelay: 1
+    TalkToWalkieTalkie: 0
+  - Text: Opposite of the abandoned camp, maybe i should check that out
+    Audio: {fileID: 8300000, guid: a12ed82153bd5ac42b40fc8dcffd5a85, type: 3}
+    TimeDelay: 0
+    TalkToWalkieTalkie: 0

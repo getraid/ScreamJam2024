@@ -12,8 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd2e65695ff6434dafdb05eb817e352, type: 3}
   m_Name: NotThisGnome
   m_EditorClassIdentifier: 
+  <PlayOneRandom>k__BackingField: 1
   <VoiceLines>k__BackingField:
-  - Text: No not this gnome
-    Audio: {fileID: 8300000, guid: a5a5af5bce4a6274bbb1a8c20349610b, type: 3}
+  - Text: Nope, nothing there
+    Audio: {fileID: 8300000, guid: d22fc4b6f081c5c488640a21e8cef8a7, type: 3}
+    TimeDelay: 0
+    TalkToWalkieTalkie: 0
+  - Text: Ahh!
+    Audio: {fileID: 8300000, guid: c8721191c29175a4fb19a246c2b7bebf, type: 3}
+    TimeDelay: 0
+    TalkToWalkieTalkie: 0
+  - Text: Hmm..
+    Audio: {fileID: 8300000, guid: dd1b427a7e25a4947aeb95e35c4dc781, type: 3}
     TimeDelay: 0
     TalkToWalkieTalkie: 0

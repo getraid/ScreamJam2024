@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd2e65695ff6434dafdb05eb817e352, type: 3}
+  m_Name: YouAlmostKilledMe
+  m_EditorClassIdentifier: 
+  <PlayOneRandom>k__BackingField: 0
+  <VoiceLines>k__BackingField:
+  - Text: Hey! I have finished everything you wanted from me
+    Audio: {fileID: 8300000, guid: 7da4e20f2e2a7564fafa4133dcbf0ed6, type: 3}
+    TimeDelay: 0
+    TalkToWalkieTalkie: 1
+  - Text: What else do you want?! You almost killed me by stealing my inhaler!
+    Audio: {fileID: 8300000, guid: 4bde6a89b9e533a42b4a097f1b6ffa3c, type: 3}
+    TimeDelay: 0
+    TalkToWalkieTalkie: 1
+  - Text: This is enough!
+    Audio: {fileID: 8300000, guid: e00ab3e5e144a6e49bc95d386d47d5d4, type: 3}
+    TimeDelay: 0
+    TalkToWalkieTalkie: 1
+  - Text: 'Relaaaax dude! '
+    Audio: {fileID: 8300000, guid: b0bfe215e0fde3740996bf71dad4f8e4, type: 3}
+    TimeDelay: 0
+    TalkToWalkieTalkie: 1
+  - Text: I promise this is your final task, the key is at the campsite
+    Audio: {fileID: 8300000, guid: 3d709c37b30f6e649b79c46cf2d8e0cc, type: 3}
+    TimeDelay: 0
+    TalkToWalkieTalkie: 1
+  - Text: '[Dude what? I didnt say which one]'
+    Audio: {fileID: 8300000, guid: 3ce86c8d036c7624494a8c5f18f3ef1e, type: 3}
+    TimeDelay: 0
+    TalkToWalkieTalkie: 1

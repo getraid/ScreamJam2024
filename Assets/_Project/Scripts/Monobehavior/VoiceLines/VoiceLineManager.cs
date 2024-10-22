@@ -39,26 +39,33 @@ public class VoiceLineManager : MonoBehaviour,ISaveable
 
         IEnumerator ShowVoiceLineDatas()
         {
-            
+            List<VoiceLineData> dataToPlay;
 
-            for (int i = 0; i < voiceLineData.VoiceLines.Count; i++)
+            if (voiceLineData.PlayOneRandom)
+                dataToPlay = new List<VoiceLineData>() { voiceLineData.VoiceLines[UnityEngine.Random.Range(0, voiceLineData.VoiceLines.Count - 1)] };
+            else
+                dataToPlay = voiceLineData.VoiceLines;
+
+
+            for (int i = 0; i < dataToPlay.Count; i++)
             {
-                yield return new WaitForSeconds(voiceLineData.VoiceLines[i].TimeDelay);
+                yield return new WaitForSeconds(dataToPlay[i].TimeDelay);
 
-                WalkieTalkieActivation(voiceLineData.VoiceLines[i].TalkToWalkieTalkie);
+                WalkieTalkieActivation(dataToPlay[i].TalkToWalkieTalkie);
 
                 _voiceLineAnimator.SetBool("SubtitleShown", true);
-                _voiceLineText.text = voiceLineData.VoiceLines[i].Text;
-                _voiceLineAudio.clip = voiceLineData.VoiceLines[i].Audio;
+                _voiceLineText.text = dataToPlay[i].Text;
+                _voiceLineAudio.clip = dataToPlay[i].Audio;
                 _voiceLineAudio.Play();
 
-                yield return new WaitForSeconds(voiceLineData.VoiceLines[i].Audio.length);
+                yield return new WaitForSeconds(dataToPlay[i].Audio.length);
                 _voiceLineAnimator.SetBool("SubtitleShown", false);
 
                 yield return new WaitForSeconds(_lengthOfVoiceLineDataAnimation);
 
-                WalkieTalkieActivation(voiceLineData.VoiceLines[i].TalkToWalkieTalkie);
+                WalkieTalkieActivation(dataToPlay[i].TalkToWalkieTalkie);
             }
+            
             _runningCoroutine = null;
 
 
