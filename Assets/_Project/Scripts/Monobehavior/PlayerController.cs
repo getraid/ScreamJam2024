@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour,ISaveable
     
     [Tooltip("Disables the initial stuck on first quest. So you can run around and test stuff")]
     [SerializeField] bool _devMode;
-    bool _canPlayerMove = false;
+    public bool _canPlayerMove = false;
 
     // Input
     private Vector2 _inputAxis;
@@ -227,6 +227,10 @@ public class PlayerController : MonoBehaviour,ISaveable
 
             if (move_speed > 0)
             {
+                 if(hasAsthma)
+                    // Don't know if too annoying, need to test -rapid
+                    // also maybe need to record new sfx with like air from nose only
+                    SFXManager.Instance.PlaySFX(SFXManager.SFXType.HeavyBreathing_2,1f);
                 move_speed += addedRunSpeed;
             }
             
@@ -288,7 +292,7 @@ public class PlayerController : MonoBehaviour,ISaveable
             if (hasAsthma)
             {
                 _currentStamina -= jumpStaminaCost;
-                SFXManager.Instance.PlaySFX(SFXManager.SFXType.HeavyBreathing_2,1f);
+                
             }
 
             _velocity.y += Mathf.Sqrt(jumpHeight * -3f * gravity);

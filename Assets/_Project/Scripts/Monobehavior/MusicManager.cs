@@ -120,7 +120,18 @@ public class MusicManager : MonoBehaviour
     }
 
 
-   
+    public void HardStopMusic()
+    {
+        if (musicLoopCoroutine != null )
+        {
+            isStopping = true;
+            activeSource.volume = 0f;
+            inactiveSource.volume = 0f;
+            activeSource.Stop();
+            inactiveSource.Stop();
+        }
+    }
+
     private IEnumerator PlayCurrentLoopThenEndSequence()
     {
         // Wait for the current loop to finish
