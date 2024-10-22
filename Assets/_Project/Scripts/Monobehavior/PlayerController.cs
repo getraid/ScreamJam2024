@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour,ISaveable
     
     [Tooltip("Disables the initial stuck on first quest. So you can run around and test stuff")]
     [SerializeField] bool _devMode;
+    [SerializeField] AudioSource _steps;
+    [SerializeField] int _pitchStepDivide = 5;
     public bool _canPlayerMove = false;
 
     // Input
@@ -300,6 +302,8 @@ public class PlayerController : MonoBehaviour,ISaveable
 
         _velocity.y += gravity * Time.deltaTime;
         _controller.Move(_velocity * Time.deltaTime);
+
+        _steps.pitch = move_speed/ _pitchStepDivide;
 
         // Clamp Stamina
         _currentStamina = Mathf.Clamp(_currentStamina, 0f, stamina);

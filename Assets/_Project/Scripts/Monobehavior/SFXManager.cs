@@ -22,7 +22,9 @@ public class SFXManager : MonoBehaviour
       WoodGrab,
       Suspense,
       GlassBreak,
-      ZipperBag
+      ZipperBag,
+      RustyGate,
+      Keys
     }
 
    [System.Serializable]
