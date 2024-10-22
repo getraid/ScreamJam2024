@@ -52,7 +52,8 @@ public class PlayerController : MonoBehaviour,ISaveable
     [SerializeField] bool _devMode;
     [SerializeField] AudioSource _steps;
     [SerializeField] int _pitchStepDivide = 5;
-    bool _canPlayerMove = false;
+
+    public bool CanPlayerMove { get; set; }
 
     // Input
     private Vector2 _inputAxis;
@@ -108,13 +109,13 @@ public class PlayerController : MonoBehaviour,ISaveable
 
     public void Crouch()
     {
-        _canPlayerMove = false;
+        CanPlayerMove = false;
         _standingVM.Priority = 0;
         _crouchVM.Priority = 10;
     }
     public void StandUp()
     {
-        _canPlayerMove = true;
+        CanPlayerMove = true;
         _standingVM.Priority = 10;
         _crouchVM.Priority = 0;
     }
@@ -139,7 +140,7 @@ public class PlayerController : MonoBehaviour,ISaveable
             }
         }
 
-        if (!_canPlayerMove)
+        if (!CanPlayerMove)
             return;
 
         // Gather Input
@@ -169,7 +170,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         move.y = 0f;
 
         // Set Rotation to Camera Forward while staying upright
-        if (_canPlayerMove)
+        if (CanPlayerMove)
         {
             transform.forward = new Vector3(_camera.transform.forward.x, 0f, _camera.transform.forward.z);
         }
@@ -368,7 +369,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         _currentStamina = data.Stamina;
         transform.position = data.Position;
         transform.rotation = data.Rotation;
-        _canPlayerMove = data.CanPlayerMove;
+        CanPlayerMove = data.CanPlayerMove;
         hasInhaler = data.HasInhaler;
         _controller.enabled = true;
     }
@@ -379,7 +380,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         data.Stamina = _currentStamina;
         data.Position = transform.position;
         data.Rotation=transform.rotation;
-        data.CanPlayerMove = _canPlayerMove;
+        data.CanPlayerMove = CanPlayerMove;
         data.HasInhaler = hasInhaler;
 
         _saveData.Add(saveDateStamp, data);
@@ -389,7 +390,7 @@ public class PlayerController : MonoBehaviour,ISaveable
     {
 
 
-        _canPlayerMove = false;
+        CanPlayerMove = false;
         _deadVM.Priority = 100;
 
         // Start Coroutine to Reload Scene
@@ -459,7 +460,7 @@ public class PlayerController : MonoBehaviour,ISaveable
             yield return null;
         }
 
-        _canPlayerMove = allowMove;
+        CanPlayerMove = allowMove;
     }
 
     private void CameraPrioritiesOnGameLoad()

@@ -229,7 +229,7 @@ public class JournalManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         
-        // PlayerController._canPlayerMove = false;
+        // PlayerController.CanPlayerMove = false;
         
         isReady = true;
         isClosed = false;
@@ -246,7 +246,7 @@ public class JournalManager : MonoBehaviour
         Cursor.visible = false;
         
         // TODO: Enable current player look dir?
-        // PlayerController._canPlayerMove = true;
+        // PlayerController.CanPlayerMove = true;
         
         isReady = true;
         isClosed = true;
