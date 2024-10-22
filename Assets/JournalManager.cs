@@ -218,4 +218,9 @@ public class JournalManager : MonoBehaviour
         CrossOverlay.rectTransform.position = GoalImages[goalIndex].rectTransform.position;
         CrossOverlay.gameObject.SetActive(true);
     }
+
+    public void ForceCloseJournal()
+    {
+        CloseJournal();
+    }
 }

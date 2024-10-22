@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
@@ -17,6 +18,9 @@ public class PlayerController : MonoBehaviour,ISaveable
     [SerializeField] CinemachineVirtualCamera _standingVM;
     [SerializeField] CinemachineVirtualCamera _crouchVM;
     [SerializeField] CinemachineVirtualCamera _fatigueVM;
+    [SerializeField] CinemachineVirtualCamera _deadVM;
+
+    [SerializeField] private Image blackMask;
 
     [Header("Settings")]
     [SerializeField] private float moveSpeed = 2.5f;
@@ -32,6 +36,7 @@ public class PlayerController : MonoBehaviour,ISaveable
     [SerializeField] private float jumpStaminaCost = 1f;
     [SerializeField] private float staminaStopTimeRequired = 1f;
     [SerializeField] private float staminaRecoveryTime = 1f;
+    [SerializeField] private float maxFallDistance = 10f;
 
     [SerializeField] private float fatigueTime = 3f;
     [SerializeField] private float fatigueSpeed = 0.3f;
@@ -97,6 +102,8 @@ public class PlayerController : MonoBehaviour,ISaveable
         _currentStamina = stamina;
 
         _cameraNoise = _standingVM.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+        StartCoroutine(AliveTransition(false));
     }
 
     public void Crouch()
@@ -147,9 +154,15 @@ public class PlayerController : MonoBehaviour,ISaveable
         _isGrounded = _controller.isGrounded;
 
         // Reset y-velocity if grounded
+        float previous_y_velocity = _velocity.y;
         if (_isGrounded && _velocity.y < 0)
         {
             _velocity.y = 0f;
+        }
+
+        if (previous_y_velocity != _velocity.y && previous_y_velocity <= -maxFallDistance)
+        {
+            KillPlayer();
         }
 
         // Basic Move Direction - Camera Relative
@@ -159,7 +172,10 @@ public class PlayerController : MonoBehaviour,ISaveable
         move.y = 0f;
 
         // Set Rotation to Camera Forward while staying upright
-        transform.forward = new Vector3(_camera.transform.forward.x, 0f, _camera.transform.forward.z);
+        if (_canPlayerMove)
+        {
+            transform.forward = new Vector3(_camera.transform.forward.x, 0f, _camera.transform.forward.z);
+        }
 
         // Check for Movement
         float move_speed = (_inputAxis.magnitude >= 0.1f) ? moveSpeed : 0f;
@@ -200,12 +216,19 @@ public class PlayerController : MonoBehaviour,ISaveable
         }
         else if (_shiftDown)
         {
+            // Toggle Off Journal
+            JournalManager.Instance.ForceCloseJournal();
+
             if (hasAsthma)
             {
                 _currentStamina -= Time.deltaTime;
             }
 
-            move_speed += addedRunSpeed;
+            if (move_speed > 0)
+            {
+                move_speed += addedRunSpeed;
+            }
+            
             _currentStopTime = 0f;
         }
         else
@@ -251,8 +274,6 @@ public class PlayerController : MonoBehaviour,ISaveable
             _isFatigued = false;
         }
 
-        
-
         // Volume - Post Processing
         // Adjust the vignette intensity based on the current stamina
         if(volume != null && volume.profile.TryGet(out Vignette vignette))
@@ -291,8 +312,12 @@ public class PlayerController : MonoBehaviour,ISaveable
         }
     }
 
+    public float passed_noise_move_speed = 0f;
+
     private void AdjustNoiseValues(float move_speed)
     {
+        passed_noise_move_speed = move_speed;
+
         float max_speed = moveSpeed + addedRunSpeed;
         float speed_percentage = move_speed / max_speed;
 
@@ -360,5 +385,90 @@ public class PlayerController : MonoBehaviour,ISaveable
         data.HasInhaler = hasInhaler;
 
         _saveData.Add(saveDateStamp, data);
+    }
+
+    public void KillPlayer()
+    {
+
+
+        _canPlayerMove = false;
+        _deadVM.Priority = 100;
+
+        // Start Coroutine to Reload Scene
+        StartCoroutine(DeathTransition());
+    }
+
+    IEnumerator DeathTransition()
+    {
+        CinemachineBasicMultiChannelPerlin camera_noise = _deadVM.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
+        float amplitude = 10f;
+        float frequency = 10f;
+
+        camera_noise.m_AmplitudeGain = amplitude;
+        camera_noise.m_FrequencyGain = frequency;
+
+        Color mask_color = Color.black;
+
+        float death_time = 3f;
+        float death_time_remaining = death_time;
+        while (death_time_remaining > 0f)
+        {
+            death_time_remaining -= Time.deltaTime;
+            float ratio = 1 - (death_time_remaining / death_time);
+
+            camera_noise.m_AmplitudeGain = Mathf.Lerp(amplitude, 0f, ratio);
+            camera_noise.m_FrequencyGain = Mathf.Lerp(frequency, 0f, ratio);
+
+            if (volume != null && volume.profile.TryGet(out Vignette vignette))
+            {
+                vignette.intensity.value = ratio;
+            }
+
+            mask_color.a = ratio;
+            blackMask.color = mask_color;
+
+            yield return null;
+        }
+
+        SaveSystemManager.Instance.ReloadLastSave();
+        ResetCameraPriorities();
+
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(AliveTransition(true));
+    }
+
+    IEnumerator AliveTransition(bool allowMove)
+    {
+        float alive_time = 3f;
+        float alive_time_remaining = alive_time;
+        Color mask_color = Color.black;
+
+        while (alive_time_remaining > 0f)
+        {
+            alive_time_remaining -= Time.deltaTime;
+            float ratio = alive_time_remaining / alive_time;
+
+            if (volume != null && volume.profile.TryGet(out Vignette vignette))
+            {
+                vignette.intensity.value = ratio;
+            }
+
+            mask_color.a = ratio;
+            blackMask.color = mask_color;
+
+            yield return null;
+        }
+
+        _canPlayerMove = allowMove;
+    }
+
+    private void ResetCameraPriorities()
+    {
+        _standingVM.Priority = 10;
+        _crouchVM.Priority = 0;
+        _fatigueVM.Priority = 0;
+        _deadVM.Priority = 0;
     }
 }

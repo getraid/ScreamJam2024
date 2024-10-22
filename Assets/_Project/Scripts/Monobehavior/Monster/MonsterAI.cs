@@ -6,6 +6,7 @@ using UnityEngine;
 public enum MonsterState
 {
     Idle,
+    Hide,
     Roam,
     Chase,
 }
@@ -15,8 +16,11 @@ public class MonsterAI : MonoBehaviour
     [SerializeField] Renderer monsterRenderer;
     [SerializeField] private LayerMask monsterMask;
     [SerializeField] private LayerMask terrainMask;
+    [SerializeField] private Transform campfire;
 
     [SerializeField] private MonsterState currentState;
+
+    [SerializeField] bool canApproachCampfire = false;
 
     [SerializeField] private float monsterHeight = 2f;
 
@@ -27,6 +31,8 @@ public class MonsterAI : MonoBehaviour
     [SerializeField] private float roamIdleDistance = 30f;
 
     [SerializeField] private float chaseSpeed = 7f;
+    [SerializeField] private float killDistance = 3f;
+    [SerializeField] private Vector2 hideTimeRange = new Vector2(5f, 10f);
 
     [SerializeField] private float raycastDistance = 50f;
 
@@ -35,6 +41,7 @@ public class MonsterAI : MonoBehaviour
 
     private float _roamFlipTimer = 0f;
     private bool _roamClockwise;
+    private float _hideTimer;
 
     private void Start()
     {
@@ -49,10 +56,21 @@ public class MonsterAI : MonoBehaviour
         bool is_visible = IsObjectBeingRendered(monsterRenderer) && IsMonsterInCameraView() && IsRaycastSuccess();
         isVisible = is_visible;
 
+        float player_distance_from_campfire = Vector3.Distance(_player.position, campfire.position);
+        if (player_distance_from_campfire <= 50 && !canApproachCampfire)
+        {
+            currentState = MonsterState.Hide;
+            _hideTimer = Random.Range(hideTimeRange.x, hideTimeRange.y);
+            return;
+        }
+
         switch (currentState)
         {
             case MonsterState.Idle:
                 Idle();
+                break;
+            case MonsterState.Hide:
+                Hide();
                 break;
             case MonsterState.Roam:
                 Roam();
@@ -66,6 +84,28 @@ public class MonsterAI : MonoBehaviour
     private void Idle()
     {
         transform.position = Vector3.zero;
+    }
+
+    private void Hide()
+    {
+        _hideTimer -= Time.deltaTime;
+
+        if (_hideTimer <= 0f && !isVisible)
+        {
+            currentState = MonsterState.Roam;
+        }
+
+        float distance = Vector3.Distance(transform.position, _player.position);
+
+        if (distance > teleportThreshold)
+            return;
+
+        // Move away from player
+        Vector3 move_direction = (transform.position - _player.position).normalized;
+        Vector3 next_position = transform.position + move_direction * roamSpeed * 2f * Time.deltaTime;
+        next_position.y = GetRaycastYPosition(next_position);
+
+        transform.position = next_position;
     }
 
     private void Roam()
@@ -137,12 +177,30 @@ public class MonsterAI : MonoBehaviour
         Vector3 next_position = transform.position + move_direction * chaseSpeed * Time.deltaTime;
         next_position.y = GetRaycastYPosition(next_position);
         transform.position = next_position;
+
+        float distance = Vector3.Distance(transform.position, _player.position);
+        if (distance < killDistance)
+        {
+            currentState = MonsterState.Idle;
+            _player.SendMessage("KillPlayer", SendMessageOptions.DontRequireReceiver);
+        }
     }
+
+    private float _spottedTime = 0f;
 
     // When spotted by the player, the monster will stand still.
     // If the player approached, it will move away quickly.
     private void Spotted(Vector3 playerPosition)
     {
+        _spottedTime += Time.deltaTime;
+
+        if (_spottedTime > 3f)
+        {
+            currentState = MonsterState.Hide;
+            _hideTimer = Random.Range(hideTimeRange.x, hideTimeRange.y);
+            _spottedTime = 0f;
+        }
+
         float distance = Vector3.Distance(transform.position, playerPosition);
         if (distance > roamIdleDistance)
         {

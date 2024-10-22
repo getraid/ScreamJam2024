@@ -38,7 +38,7 @@ public class SaveSystemManager : MonoBehaviour
         }
     }
 
-    void Save()
+    public void Save()
     {
         List<ISaveable> allSaveable= FindObjectsOfType<MonoBehaviour>(true).OfType<ISaveable>().ToList();
 
@@ -49,7 +49,8 @@ public class SaveSystemManager : MonoBehaviour
         _savedBefore = true;
         Debug.Log($"Game saved in {timeOfSave:dd.MM.yyyy HH:mm:ss}!");
     }
-    void ReloadLastSave()
+
+    public void ReloadLastSave()
     {
         if(!_savedBefore)
         {
