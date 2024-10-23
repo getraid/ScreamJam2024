@@ -42,6 +42,7 @@ public class SaveSystemManager : MonoBehaviour
     {
         StartCoroutine(SaveWithSlightDelay());
 
+        JournalManager.Instance.EnableCheckpointLoad();
         IEnumerator SaveWithSlightDelay()
         {
             yield return new WaitForSeconds(1);         //Slight delay so we correctly estimate if the voice line is playing or not

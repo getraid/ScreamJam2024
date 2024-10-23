@@ -224,10 +224,18 @@ public class MusicManager : MonoBehaviour
         // If there is an old clip, set it to the active source
         if (oldClip != null)
         {
+            AudioClip activeCur = activeSource.clip;
+            AudioClip activeOld = oldClip;
+
             activeSource.clip = oldClip;
             activeSource.volume = 1f;
-            activeSource.Play();
+
+            if (!activeSource.isPlaying || (activeCur!=activeOld))
+                activeSource.Play();
         }
+
+        AudioClip inactiveCur = inactiveSource.clip;
+        AudioClip inactiveOld = newClip;
 
         // Set the new clip to the inactive source but don't start it yet
         inactiveSource.clip = newClip;
@@ -243,12 +251,15 @@ public class MusicManager : MonoBehaviour
             }
 
             // Start the new clip exactly at the crossfadeBuffer time
-            inactiveSource.Play();
+
+            if(!inactiveSource.isPlaying || (inactiveCur!=inactiveOld))
+                inactiveSource.Play();
         }
         else
         {
             // If there's no old clip, just start playing the new clip immediately
-            inactiveSource.Play();
+            if (!inactiveSource.isPlaying || (inactiveCur != inactiveOld))
+                inactiveSource.Play();
         }
 
         // Now perform the crossfade over the specified duration

@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour,ISaveable
     public struct PlayerSaveData
     {
         public bool HasInhaler;
+        public bool hasAshtma;
         public Vector3 Position;
         public Quaternion Rotation;
         public bool CanPlayerMove;
@@ -176,6 +177,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         _inputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         _shiftDown = Input.GetKey(KeyCode.LeftShift);
         _spacebarDown = Input.GetKey(KeyCode.Space);
+        _qPressed = Input.GetKey(KeyCode.Q);
 
         // Check Grounded
         _isGrounded = _controller.isGrounded;
@@ -209,6 +211,13 @@ public class PlayerController : MonoBehaviour,ISaveable
 
         // Fatigue Camera Priority
         _fatigueVM.Priority = (_isFatigued) ? 100 : 0;
+
+
+        if (_qPressed && _currentInhalerCooldown <= inhalerActivationThreshold)
+        {
+            _isInhaling = true;
+            _currentInhalerCooldown = inhalerCooldown;
+        }
 
         // Fatigue / Speed
         if (_isFatigued)
@@ -451,6 +460,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         transform.rotation = data.Rotation;
         CanPlayerMove = data.CanPlayerMove;
         hasInhaler = data.HasInhaler;
+        hasAsthma = data.hasAshtma;
         _controller.enabled = true;
     }
 
@@ -462,6 +472,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         data.Rotation=transform.rotation;
         data.CanPlayerMove = CanPlayerMove;
         data.HasInhaler = hasInhaler;
+        data.hasAshtma = hasAsthma;
 
         _saveData.Add(saveDateStamp, data);
     }

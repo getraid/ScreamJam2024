@@ -10,6 +10,7 @@ public class DelayAction : MonoBehaviour,ISaveable
     [SerializeField] UnityEvent _actionToDo;
     [SerializeField] VoiceLineDataSO _voiceLineToPlay;
     [SerializeField] UnityEvent _onVoiceLineFinished;
+    [SerializeField] SFXManager.SFXType _sfxToPlay;
 
     Dictionary<DateTime, bool> _saveData = new Dictionary<DateTime, bool>();
     bool _hasDoneAction = false;
@@ -29,6 +30,7 @@ public class DelayAction : MonoBehaviour,ISaveable
                 if (_voiceLineToPlay != null)
                     VoiceLineManager.Instance.PlayVoiceLine(_voiceLineToPlay, _onVoiceLineFinished);
 
+                SFXManager.Instance.PlaySFX(_sfxToPlay, 1, true);
                 _actionToDo?.Invoke();
             }
             

@@ -24,7 +24,10 @@ public class SFXManager : MonoBehaviour
       GlassBreak,
       ZipperBag,
       RustyGate,
-      Keys
+      Keys,
+      ChickenNoise,
+      GnomeWhisper,
+      Monster
     }
 
    [System.Serializable]

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Baba Yaga's house
+* source:	https://sketchfab.com/3d-models/baba-yagas-house-2563d1cf30ac42078a804ea45fc3acbb
+* author:	katertileva (https://sketchfab.com/katertileva)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Baba Yaga's house" (https://sketchfab.com/3d-models/baba-yagas-house-2563d1cf30ac42078a804ea45fc3acbb) by katertileva (https://sketchfab.com/katertileva) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
