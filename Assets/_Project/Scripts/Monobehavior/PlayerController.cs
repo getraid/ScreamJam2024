@@ -164,9 +164,10 @@ public class PlayerController : MonoBehaviour,ISaveable
         }
         else
         {
+            var localMouse = JournalManager.Instance.SavedMouseSpeed; // 300
             // Change the standing vm aim component max speed to 300
-            _standingVM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = 300;
-            _standingVM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = 300;
+            _standingVM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = localMouse;
+            _standingVM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = localMouse;
         }
 
         if (!CanPlayerMove)
