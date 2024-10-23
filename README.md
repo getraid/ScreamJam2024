@@ -1,4 +1,6 @@
 # The Paperchase - Entry for ScreamJam 2024
+![title_img](https://img.itch.zone/aW1nLzE4Mjg5NjExLnBuZw==/315x250%23c/DFS14x.png)
+
 Blurred vision, the screen fades, seeing a lit fire, a warmth in an otherwise dark exterior of a forest.  
 The air is cold, the silhouette of nature the only thing visible in an otherwise dark environment.  
 The silence broken with crackling and static from a radio at your side, a friend?  
