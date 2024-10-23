@@ -13832,7 +13832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c78d71af970874fd5a9658713abed9eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultMixerSFX: {fileID: 0}
+  DefaultMixerSFX: {fileID: 24300002, guid: 0c336d32dc5454c529433ad678eb93f7, type: 2}
   <SfxClips>k__BackingField:
   - <Type>k__BackingField: 2
     <Clip>k__BackingField: {fileID: 8300000, guid: 8ebe4cda6636949b4a5f3eadca7baa21, type: 3}
