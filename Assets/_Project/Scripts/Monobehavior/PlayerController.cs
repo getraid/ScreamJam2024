@@ -53,6 +53,9 @@ public class PlayerController : MonoBehaviour,ISaveable
     [SerializeField] AudioSource _steps;
     [SerializeField] int _pitchStepDivide = 5;
 
+    [SerializeField] AudioSource extraFootsteps;
+    [SerializeField] private bool allowExtraFootsteps = true;
+
     public bool CanPlayerMove { get; set; }
 
     // Input
@@ -69,6 +72,7 @@ public class PlayerController : MonoBehaviour,ISaveable
     private bool _isFatigued;
     private bool _isInhaling;
     private float _currentInhalerCooldown;
+    private bool _isPlayingExtraFootsteps;
 
     private CharacterController _controller;
     private Camera _camera;
@@ -106,6 +110,9 @@ public class PlayerController : MonoBehaviour,ISaveable
 
         CameraPrioritiesOnGameLoad();
         StartCoroutine(AliveTransition(false));
+        SaveSystemManager.Instance.Save();
+
+        InvokeRepeating("CheckForExtraFootsteps", 5f, 5f);
     }
 
     public void Crouch()
@@ -125,6 +132,15 @@ public class PlayerController : MonoBehaviour,ISaveable
         hasInhaler = true;
     }
 
+    private void CheckForExtraFootsteps()
+    {
+        // Check for Extra footstep sounds
+        if (allowExtraFootsteps && !_isPlayingExtraFootsteps && UnityEngine.Random.value <= 0.05)
+        {
+            StartCoroutine(PlayExtraFootsteps());
+        }
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -139,6 +155,19 @@ public class PlayerController : MonoBehaviour,ISaveable
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }
+        }
+
+        if (JournalManager.Instance.IsJournalOpenAndAvailable)
+        {
+            // Change the standing vm aim component max speed to 0
+            _standingVM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = 0;
+            _standingVM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = 0;
+        }
+        else
+        {
+            // Change the standing vm aim component max speed to 300
+            _standingVM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = 300;
+            _standingVM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = 300;
         }
 
         if (!CanPlayerMove)
@@ -179,8 +208,6 @@ public class PlayerController : MonoBehaviour,ISaveable
 
         // Check for Movement
         float move_speed = (_inputAxis.magnitude >= 0.1f) ? moveSpeed : 0f;
-
-        
 
         // Fatigue Camera Priority
         _fatigueVM.Priority = (_isFatigued) ? 100 : 0;
@@ -302,7 +329,20 @@ public class PlayerController : MonoBehaviour,ISaveable
         _velocity.y += gravity * Time.deltaTime;
         _controller.Move(_velocity * Time.deltaTime);
 
-        _steps.pitch = move_speed/ _pitchStepDivide;
+        // Stop Sound if not grounded
+        if (_isGrounded)
+        {
+            if (!_steps.isPlaying)
+            {
+                _steps.Play();
+            }
+        }
+        else
+        {
+            _steps.Stop();
+        }
+
+        _steps.pitch = move_speed / _pitchStepDivide;
 
         // Clamp Stamina
         _currentStamina = Mathf.Clamp(_currentStamina, 0f, stamina);
@@ -318,6 +358,46 @@ public class PlayerController : MonoBehaviour,ISaveable
         {
             inhalerUI.SetFillPercentage(_currentInhalerCooldown / inhalerCooldown);
         }
+    }
+
+    IEnumerator PlayExtraFootsteps()
+    {
+        _isPlayingExtraFootsteps = true;
+
+        float volume = 0.3f;
+        Vector3 start_position = transform.position + -transform.forward * UnityEngine.Random.Range(4f, 6f) + transform.right * UnityEngine.Random.Range(-5f, 5f);
+        start_position.y = transform.position.y;
+
+        Vector3 away_from_player = (start_position - transform.position).normalized;
+        Vector3 end_position = start_position + away_from_player * UnityEngine.Random.Range(3f, 5f);
+
+        // Set the audio location to a random location behind the player
+        extraFootsteps.transform.position = start_position;
+        extraFootsteps.pitch = UnityEngine.Random.Range(0.7f, 1.4f);
+        extraFootsteps.volume = volume;
+
+        extraFootsteps.Play();
+
+        float total_time = UnityEngine.Random.Range(2f, 5f);
+        float timer = total_time;
+        while (timer > 0f)
+        {
+            timer -= Time.deltaTime;
+
+            // Move the audio source away from the player
+            extraFootsteps.transform.position = Vector3.Lerp(start_position, end_position, 1 - (timer / total_time));
+
+            // Reduce the volume over time.
+            volume = Mathf.Lerp(0.3f, 0.1f, 1 - (timer / total_time));
+            extraFootsteps.volume = volume;
+            
+
+            yield return null;
+        }
+
+        extraFootsteps.Stop();
+
+        _isPlayingExtraFootsteps = false;
     }
 
     public float passed_noise_move_speed = 0f;

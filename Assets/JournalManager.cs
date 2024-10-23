@@ -46,6 +46,7 @@ public class JournalManager : MonoBehaviour
     private int currentGoalIndex = -1;
     
     public static JournalManager Instance;
+    public bool IsJournalOpenAndAvailable => !isClosed && HasValidCam;
     
     // UI Navigation
     [Serializable]
