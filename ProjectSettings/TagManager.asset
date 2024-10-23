@@ -7,6 +7,7 @@ TagManager:
   - SafeZone
   - OutOfBounds
   - MainVirtCam
+  - Campfire
   layers:
   - Default
   - TransparentFX

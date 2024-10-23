@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public enum MonsterState
 {
     Idle,
+    SinkVanish,
+    Lurk,
+
     Hide,
     Roam,
     Chase,
@@ -13,12 +17,14 @@ public enum MonsterState
 
 public class MonsterAI : MonoBehaviour
 {
+    [SerializeField] private bool destroyOnStateChange = false;
+
     [SerializeField] Renderer monsterRenderer;
     [SerializeField] private LayerMask monsterMask;
     [SerializeField] private LayerMask terrainMask;
-    [SerializeField] private Transform campfire;
 
     [SerializeField] private MonsterState currentState;
+
 
     [SerializeField] bool canApproachCampfire = false;
 
@@ -30,6 +36,8 @@ public class MonsterAI : MonoBehaviour
     [SerializeField] private float teleportThreshold = 30f;
     [SerializeField] private float roamIdleDistance = 30f;
 
+    [SerializeField] private float lurkDistance = 25f;
+
     [SerializeField] private float chaseSpeed = 7f;
     [SerializeField] private float killDistance = 3f;
     [SerializeField] private Vector2 hideTimeRange = new Vector2(5f, 10f);
@@ -37,15 +45,19 @@ public class MonsterAI : MonoBehaviour
     [SerializeField] private float raycastDistance = 50f;
 
     private Transform _player;
+    private Transform _campfire;
     private Camera _camera;
 
     private float _roamFlipTimer = 0f;
     private bool _roamClockwise;
     private float _hideTimer;
+    private bool _lockedState;
+    private float _lurkAngle;
 
-    private void Start()
+    private void OnEnable()
     {
         _player = GameObject.FindWithTag("Player").transform;
+        _campfire = GameObject.FindWithTag("Campfire").transform;
         _camera = Camera.main;
     }
 
@@ -53,13 +65,19 @@ public class MonsterAI : MonoBehaviour
 
     private void Update()
     {
-        bool is_visible = IsObjectBeingRendered(monsterRenderer) && IsMonsterInCameraView() && IsRaycastSuccess();
+        // Turn towards the player
+        transform.forward = (_player.position - transform.position).normalized;
+
+        bool is_visible = IsObjectBeingRendered(monsterRenderer) && IsMonsterInCameraView();
         isVisible = is_visible;
 
-        float player_distance_from_campfire = Vector3.Distance(_player.position, campfire.position);
+        if (_lockedState)
+            return;
+
+        float player_distance_from_campfire = Vector3.Distance(_player.position, _campfire.position);
         if (player_distance_from_campfire <= 50 && !canApproachCampfire)
         {
-            currentState = MonsterState.Hide;
+            SetState(MonsterState.Hide);
             _hideTimer = Random.Range(hideTimeRange.x, hideTimeRange.y);
             return;
         }
@@ -68,6 +86,12 @@ public class MonsterAI : MonoBehaviour
         {
             case MonsterState.Idle:
                 Idle();
+                break;
+            case MonsterState.SinkVanish:
+                StartCoroutine(SinkVanish());
+                break;
+            case MonsterState.Lurk:
+                Lurk();
                 break;
             case MonsterState.Hide:
                 Hide();
@@ -86,13 +110,82 @@ public class MonsterAI : MonoBehaviour
         transform.position = Vector3.zero;
     }
 
+    private IEnumerator SinkVanish()
+    {
+        _lockedState = true;
+        
+        float delay_timer = 5f;
+        while (delay_timer > 0f)
+        {
+            delay_timer -= Time.deltaTime;
+
+            // If the monster is visible, immediately break this while loop
+            if (isVisible)
+            {
+                delay_timer = 0f;
+            }
+
+            yield return null;
+        }
+
+        // Move the model away from the player
+        float disappear_timer = 2f;
+        float disappear_speed = 30f;
+
+        while (disappear_timer > 0f)
+        {
+            disappear_timer -= Time.deltaTime;
+            Vector3 move_direction = (transform.position - _player.position).normalized;
+            Vector3 next_position = transform.position + move_direction * disappear_speed * Time.deltaTime;
+            //next_position.y = GetRaycastYPosition(next_position);
+
+            transform.position = next_position;
+            yield return null;
+        }
+
+        _lockedState = false;
+        SetState(MonsterState.Idle);
+    }
+
+    private void Lurk()
+    {
+        // Random Low Chance to Change Target Angle
+        if (Random.value < 0.01f)
+        {
+            _lurkAngle = Random.Range(0f, 360f);
+        }
+
+        float lurk_distance = lurkDistance;
+        if (isVisible)
+        {
+            lurk_distance *= 2f;
+        }
+
+        // Get the angle between the monster and the player.
+        float current_angle = Vector3.SignedAngle(Vector3.forward, transform.position - _player.position, Vector3.up);
+        float next_angle = Mathf.MoveTowardsAngle(current_angle, _lurkAngle, 1f);
+
+        // Use the next angle to get the next position.
+        Vector3 next_position = _player.position + new Vector3(Mathf.Sin(next_angle * Mathf.Deg2Rad) * lurk_distance, 0, Mathf.Cos(next_angle * Mathf.Deg2Rad) * lurk_distance);
+
+        // Increase the speed when the player is close to the monster, proportional to the distance.
+        float distance_to_desired_position = Vector3.Distance(transform.position, next_position);
+        float move_speed = Mathf.Lerp(roamSpeed, roamSpeed * 5f, Mathf.Clamp01(distance_to_desired_position / 10f));
+
+        next_position = Vector3.MoveTowards(transform.position, next_position, move_speed * Time.deltaTime);
+        next_position.y = GetRaycastYPosition(next_position);
+
+        // Move the monster towards the desired position
+        transform.position = next_position;
+    }
+
     private void Hide()
     {
         _hideTimer -= Time.deltaTime;
 
         if (_hideTimer <= 0f && !isVisible)
         {
-            currentState = MonsterState.Roam;
+            SetState(MonsterState.Roam);
         }
 
         float distance = Vector3.Distance(transform.position, _player.position);
@@ -112,7 +205,7 @@ public class MonsterAI : MonoBehaviour
     {
         if (_player == null)
         {
-            currentState = MonsterState.Idle;
+            SetState(MonsterState.Idle);
             return;
         }
         
@@ -181,7 +274,7 @@ public class MonsterAI : MonoBehaviour
         float distance = Vector3.Distance(transform.position, _player.position);
         if (distance < killDistance)
         {
-            currentState = MonsterState.Idle;
+            SetState(MonsterState.Idle);
             _player.SendMessage("KillPlayer", SendMessageOptions.DontRequireReceiver);
         }
     }
@@ -196,7 +289,7 @@ public class MonsterAI : MonoBehaviour
 
         if (_spottedTime > 3f)
         {
-            currentState = MonsterState.Hide;
+            SetState(MonsterState.Hide);
             _hideTimer = Random.Range(hideTimeRange.x, hideTimeRange.y);
             _spottedTime = 0f;
         }
@@ -278,5 +371,21 @@ public class MonsterAI : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void SetVanish()
+    {
+        currentState = MonsterState.SinkVanish;
+    }
+
+    public void SetState(MonsterState state)
+    {
+        if (destroyOnStateChange)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        currentState = state;
     }
 }
