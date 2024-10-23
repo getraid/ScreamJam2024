@@ -45703,15 +45703,15 @@ PrefabInstance:
       objectReference: {fileID: 914609720}
     - target: {fileID: 8149946539002210407, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: <GoalOrderIndex>k__BackingField.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8149946539002210407, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: <GoalOrderIndex>k__BackingField.Array.data[3]
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8149946539002210407, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: <GoalOrderIndex>k__BackingField.Array.data[4]
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8149946539002210407, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: <GoalOrderIndex>k__BackingField.Array.data[5]
@@ -45723,6 +45723,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8149946539002210407, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: <GoalOrderIndex>k__BackingField.Array.data[7]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8149946539002210407, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
+      propertyPath: <GoalOrderIndex>k__BackingField.Array.data[8]
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8347033604701306835, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
