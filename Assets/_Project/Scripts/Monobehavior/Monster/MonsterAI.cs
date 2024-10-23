@@ -350,8 +350,12 @@ public class MonsterAI : MonoBehaviour
 
     public bool IsMonsterInCameraView()
     {
-        Vector3 screen_position = _camera.WorldToScreenPoint(transform.position);
-        return screen_position.x > 0 && screen_position.x < Screen.width && screen_position.y > 0 && screen_position.y < Screen.height;
+
+        float dotRes = Vector3.Dot(_camera.transform.forward, (transform.position - _player.transform.position).normalized);
+        return dotRes > 0.7f;
+            
+       // Vector3 screen_position = _camera.WorldToScreenPoint(transform.position);
+       // return screen_position.x > 0 && screen_position.x < Screen.width && screen_position.y > 0 && screen_position.y < Screen.height;
     }
 
     public bool IsObjectBeingRendered(Renderer obj)
