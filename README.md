@@ -9,6 +9,7 @@ Perhaps.
 Journey as Jake, a young man facing the unknown in this forest, tasked with seemingly simple trials and perhaps a simple conclusion.  
 
 Only you and the forest know the answer to that.  
+
 ## Screenshots
 
 ![gameplay_img](https://img.itch.zone/aW1hZ2UvMzA1ODE4OS8xODI4ODgzMy5wbmc=/original/rgaUA9.png)
@@ -20,36 +21,37 @@ Only you and the forest know the answer to that.
 
 Mouse - Look Around 
 
-Mouse Button Left - Interaction
+Mouse Button Left - Interaction  
 
-WASD - Movement
+WASD - Movement  
 
-Q - use the inhaler
+Q - use the inhaler  
 
-Tabulator - Journal (Map, Settings, Tasks)
+Tabulator - Journal (Map, Settings, Tasks)  
 
-If you exit the window with escape, press it again to refocus the game.
+If you exit the window with escape, press it again to refocus the game.  
 
-Also mouse sensitivity may not work in the first cutscene
+Also mouse sensitivity may not work in the first cutscene  
 
 
 ## Credits
 
-Programmers: SitronX, 8Biteme, RapidRaid
+Programmers: SitronX, 8Biteme, RapidRaid  
 
-3D Art: Lewis (Objects, Buildings, Foliage), Kabune3D (Enemies, Car) and RapidRaid (Journal)
+3D Art: Lewis (Objects, Buildings, Foliage), Kabune3D (Enemies, Car) and RapidRaid (Journal)  
 
-2D Art: RapidRaid, Lewis
-Music: R2Jeu
+2D Art: RapidRaid, Lewis    
 
-Voice Frat: Tricking Trapster
+Music: R2Jeu  
 
-Voice Player: RapidRaid
+Voice Frat: Tricking Trapster  
 
-SFX: CC0 sources
+Voice Player: RapidRaid  
+
+SFX: CC0 sources  
 
 
-Used Assets:
+## Used Assets:
 
 https://sketchfab.com/3d-models/psx-style-chain-fence-gate-02fb75f229fa47b5a5d59...
 
