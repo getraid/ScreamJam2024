@@ -672,6 +672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 32070632}
   - component: {fileID: 32070633}
+  - component: {fileID: 32070634}
   m_Layer: 0
   m_Name: GnomeTemp (6)
   m_TagString: Untagged
@@ -709,6 +710,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce37bcb81c279e4884bea1893493be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &32070634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 32070631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b76324d4f68bb418124a5a2cbc6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentActivityToTrack:
+  - {fileID: 32070633}
 --- !u!1001 &41620169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6154,6 +6169,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1732029839}
     - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
+      propertyPath: _canTeleport
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
       propertyPath: currentState
       value: 1
       objectReference: {fileID: 0}
@@ -6821,6 +6840,7 @@ MonoBehaviour:
   killDistance: 2
   hideTimeRange: {x: 5, y: 10}
   raycastDistance: 200
+  _canTeleport: 0
   isVisible: 0
 --- !u!114 &402826766
 MonoBehaviour:
@@ -7186,6 +7206,10 @@ PrefabInstance:
     - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
       propertyPath: roamSpeed
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
+      propertyPath: _canTeleport
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
       propertyPath: currentState
@@ -9972,6 +9996,7 @@ GameObject:
   m_Component:
   - component: {fileID: 585498805}
   - component: {fileID: 585498806}
+  - component: {fileID: 585498807}
   m_Layer: 0
   m_Name: GnomeTemp (2)
   m_TagString: Untagged
@@ -10009,6 +10034,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce37bcb81c279e4884bea1893493be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &585498807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585498804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b76324d4f68bb418124a5a2cbc6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentActivityToTrack:
+  - {fileID: 585498806}
 --- !u!1 &600399056
 GameObject:
   m_ObjectHideFlags: 0
@@ -18411,6 +18450,7 @@ GameObject:
   m_Component:
   - component: {fileID: 984741385}
   - component: {fileID: 984741386}
+  - component: {fileID: 984741387}
   m_Layer: 0
   m_Name: GnomeTemp (9)
   m_TagString: Untagged
@@ -18448,6 +18488,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce37bcb81c279e4884bea1893493be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &984741387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984741384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b76324d4f68bb418124a5a2cbc6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentActivityToTrack:
+  - {fileID: 984741386}
 --- !u!4 &985477265 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7523825997005308542, guid: 119045fc1f1c97445aa9ce408ac53667, type: 3}
@@ -20915,6 +20969,10 @@ PrefabInstance:
       propertyPath: campfire
       value: 
       objectReference: {fileID: 1796577811}
+    - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
+      propertyPath: _canTeleport
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
       propertyPath: currentState
       value: 1
@@ -24111,6 +24169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1296355460}
   - component: {fileID: 1296355461}
+  - component: {fileID: 1296355462}
   m_Layer: 0
   m_Name: GnomeTemp (4)
   m_TagString: Untagged
@@ -24148,6 +24207,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce37bcb81c279e4884bea1893493be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1296355462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296355459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b76324d4f68bb418124a5a2cbc6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentActivityToTrack:
+  - {fileID: 1296355461}
 --- !u!224 &1302907178 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2772922091213260998, guid: 1d2c2e20dbe84744cb268ead6012b3d1, type: 3}
@@ -34820,6 +34893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1659975892}
   - component: {fileID: 1659975893}
+  - component: {fileID: 1659975894}
   m_Layer: 0
   m_Name: GnomeTemp (8)
   m_TagString: Untagged
@@ -34857,6 +34931,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce37bcb81c279e4884bea1893493be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1659975894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659975891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b76324d4f68bb418124a5a2cbc6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentActivityToTrack:
+  - {fileID: 1659975893}
 --- !u!1 &1662496715
 GameObject:
   m_ObjectHideFlags: 0
@@ -36342,6 +36430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1772333579}
   - component: {fileID: 1772333580}
+  - component: {fileID: 1772333581}
   m_Layer: 0
   m_Name: GnomeTemp (5)
   m_TagString: Untagged
@@ -36379,6 +36468,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce37bcb81c279e4884bea1893493be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1772333581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1772333578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b76324d4f68bb418124a5a2cbc6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentActivityToTrack:
+  - {fileID: 1772333580}
 --- !u!1001 &1772470136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36671,6 +36774,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1787070382}
   - component: {fileID: 1787070383}
+  - component: {fileID: 1787070384}
   m_Layer: 0
   m_Name: GnomeTemp (7)
   m_TagString: Untagged
@@ -36708,6 +36812,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce37bcb81c279e4884bea1893493be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1787070384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787070381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b76324d4f68bb418124a5a2cbc6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentActivityToTrack:
+  - {fileID: 1787070383}
 --- !u!4 &1789795554 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7523825997005308542, guid: 119045fc1f1c97445aa9ce408ac53667, type: 3}
@@ -36761,6 +36879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1800800200}
   - component: {fileID: 1800800201}
+  - component: {fileID: 1800800202}
   m_Layer: 0
   m_Name: GnomeTemp
   m_TagString: Untagged
@@ -36798,6 +36917,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce37bcb81c279e4884bea1893493be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1800800202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800800199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b76324d4f68bb418124a5a2cbc6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentActivityToTrack:
+  - {fileID: 1800800201}
 --- !u!4 &1805068421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6627181873436826701, guid: b66f9cd6a5e23477dbf715c69f6d1e90, type: 3}
@@ -38259,6 +38392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1870664766}
   - component: {fileID: 1870664767}
+  - component: {fileID: 1870664768}
   m_Layer: 0
   m_Name: GnomeTemp (3)
   m_TagString: Untagged
@@ -38296,6 +38430,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce37bcb81c279e4884bea1893493be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1870664768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870664765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b76324d4f68bb418124a5a2cbc6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentActivityToTrack:
+  - {fileID: 1870664767}
 --- !u!1001 &1870991615
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41008,6 +41156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2023040798}
   - component: {fileID: 2023040799}
+  - component: {fileID: 2023040800}
   m_Layer: 0
   m_Name: GnomeTemp (1)
   m_TagString: Untagged
@@ -41045,6 +41194,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ce37bcb81c279e4884bea1893493be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2023040800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023040797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b76324d4f68bb418124a5a2cbc6e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentActivityToTrack:
+  - {fileID: 2023040799}
 --- !u!4 &2025304933 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4770616007258369673, guid: 462948558e1b04d41b0bdcd3392c37cb, type: 3}
@@ -45364,6 +45527,7 @@ MonoBehaviour:
   killDistance: 2
   hideTimeRange: {x: 5, y: 10}
   raycastDistance: 50
+  _canTeleport: 1
   isVisible: 0
 --- !u!114 &5110796728327005229
 MonoBehaviour:

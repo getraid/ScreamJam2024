@@ -43,6 +43,7 @@ public class MonsterAI : MonoBehaviour
     [SerializeField] private Vector2 hideTimeRange = new Vector2(5f, 10f);
 
     [SerializeField] private float raycastDistance = 50f;
+    [SerializeField] bool _canTeleport;
 
     private Transform _player;
     private Transform _campfire;
@@ -224,7 +225,9 @@ public class MonsterAI : MonoBehaviour
         // Teleport behind the player.
         if (distance > teleportThreshold)
         {
-            Teleport(player_position, desired_angle);
+            if(_canTeleport)
+                Teleport(player_position, desired_angle);
+
             return;
         }
 
