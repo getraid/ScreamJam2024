@@ -110,7 +110,6 @@ public class PlayerController : MonoBehaviour,ISaveable
 
         CameraPrioritiesOnGameLoad();
         StartCoroutine(AliveTransition(false));
-        SaveSystemManager.Instance.Save();
 
         InvokeRepeating("CheckForExtraFootsteps", 5f, 5f);
     }

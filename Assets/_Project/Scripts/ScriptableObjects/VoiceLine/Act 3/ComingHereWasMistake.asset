@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9dd2e65695ff6434dafdb05eb817e352, type: 3}
-  m_Name: SomeoneAtTheGate
+  m_Name: ComingHereWasMistake
   m_EditorClassIdentifier: 
   <PlayOneRandom>k__BackingField: 0
   <VoiceLines>k__BackingField:
-  - Text: Dude, i think Jake is at the gate, i will tell him off
-    Audio: {fileID: 8300000, guid: 1afbaa90c71de1a4782a09d3c0bcecce, type: 3}
+  - Text: Coming here was a mistake
+    Audio: {fileID: 8300000, guid: fe42a9604976fa043ad49bb43e956936, type: 3}
     TimeDelay: 0
-    TalkToWalkieTalkie: 1
+    TalkToWalkieTalkie: 0

@@ -1,8 +1,10 @@
+using GLTF.Schema;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveSystemManager : MonoBehaviour
 {
@@ -60,11 +62,22 @@ public class SaveSystemManager : MonoBehaviour
         
     }
 
+    bool _isBeingReloaded = false;
     public void ReloadLastSave()
     {
-        if(!_savedBefore)
+        if(!_savedBefore && !_isBeingReloaded)
         {
-            Debug.LogError("Nothing has been saved yet, cannot reload last save! Save with F1");
+            _isBeingReloaded = true;
+            Debug.LogError("Nothing has been saved yet, cannot reload last save! Reloading the game");
+
+            StartCoroutine(LoadSceneDelay());
+            IEnumerator LoadSceneDelay()
+            {
+                yield return new WaitForSeconds(3);
+                SceneManager.LoadScene(0);
+
+                _isBeingReloaded = false;
+            }
             return;
         }
         DateTime lastSave = _savedDateStamps.Last();
