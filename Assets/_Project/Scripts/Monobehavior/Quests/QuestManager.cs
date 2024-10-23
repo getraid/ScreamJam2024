@@ -5,6 +5,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class QuestManager : MonoBehaviour,ISaveable
 {
@@ -82,6 +83,17 @@ public class QuestManager : MonoBehaviour,ISaveable
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.QuestCompleted?.Invoke();
 
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.TryCompleteQuest -= OnQuestCompletion;
+
+        if(_lastCompletedQuest + 1>= _chronologicalQuests.Count)
+        {
+            StartCoroutine(LoadEndWithDelay());
+            IEnumerator LoadEndWithDelay()
+            {
+                yield return new WaitForSeconds(5);
+                SceneManager.LoadScene(1);
+
+            }
+        }
 
         _lastCompletedQuest = Math.Min(_lastCompletedQuest + 1, _chronologicalQuests.Count - 1);         //Clamp it so it doesnt go over the last quest
 

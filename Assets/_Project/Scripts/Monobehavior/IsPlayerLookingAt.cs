@@ -41,6 +41,7 @@ public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
     // Update is called once per frame
     void Update()
     {
+
         if(_mustBeReacheable)
         {
             if (Vector3.Distance(_playerTransform.transform.position, transform.position) > 5.0f)

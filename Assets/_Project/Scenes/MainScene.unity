@@ -10678,7 +10678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &686817713
 Transform:
   m_ObjectHideFlags: 0
@@ -24942,7 +24942,7 @@ MonoBehaviour:
   _onInteracted:
     m_PersistentCalls:
       m_Calls: []
-  _voiceLineToActivate: {fileID: 0}
+  _voiceLineToActivate: {fileID: 11400000, guid: 1006ea643bd25094d8a5086621b14ef4, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
       m_Calls: []
@@ -36549,20 +36549,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
       propertyPath: roamRadius
-      value: 7.4
+      value: 2.48
       objectReference: {fileID: 0}
     - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
       propertyPath: currentState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
+      propertyPath: lurkDistance
+      value: 24.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
       propertyPath: roamRadiusMax
-      value: 8.3
+      value: 5.62
       objectReference: {fileID: 0}
     - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
       propertyPath: monsterRenderer
       value: 
       objectReference: {fileID: 1355441010}
+    - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
+      propertyPath: roamIdleDistance
+      value: 24.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
+      propertyPath: teleportThreshold
+      value: 49.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5425018086517669613, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
       propertyPath: m_Pitch
       value: 1
@@ -38497,7 +38509,7 @@ MonoBehaviour:
   _onInteracted:
     m_PersistentCalls:
       m_Calls: []
-  _voiceLineToActivate: {fileID: 0}
+  _voiceLineToActivate: {fileID: 11400000, guid: d2f39008fb90bac4297c77b912e10a09, type: 2}
   _onVoiceLineCompleted:
     m_PersistentCalls:
       m_Calls: []
@@ -40850,6 +40862,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 402826764}
     m_Modifications:
+    - target: {fileID: 201507839932175609, guid: b5fa8208c23174d46b9b43da93cbb62a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 28996d3b81f683149bda01f193c87cf8, type: 2}
     - target: {fileID: 482842040711584397, guid: b5fa8208c23174d46b9b43da93cbb62a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -40922,6 +40938,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2f6d32825d2e70a41ae321b8161c9bfe, type: 2}
+    - target: {fileID: 2758401751162339786, guid: b5fa8208c23174d46b9b43da93cbb62a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 28996d3b81f683149bda01f193c87cf8, type: 2}
     - target: {fileID: 4013800427833412401, guid: b5fa8208c23174d46b9b43da93cbb62a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

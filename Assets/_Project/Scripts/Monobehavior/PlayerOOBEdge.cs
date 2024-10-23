@@ -30,12 +30,12 @@ public class PlayerOOBEdge : MonoBehaviour
 
     private void Update()
     {
-        if (waitOneFrame)
-        {
-            gameObject.transform.position = StartPos;
-            CC.enabled = true;
-            waitOneFrame = false;
-        }
+        //if (waitOneFrame)
+        //{
+        //    gameObject.transform.position = StartPos;
+        //    CC.enabled = true;
+        //    waitOneFrame = false;
+        //}
 
         if (moveToStart)
         {
@@ -44,11 +44,12 @@ public class PlayerOOBEdge : MonoBehaviour
             {
                 vignette.intensity.value = 1f;
             }
-
+            
             CC.enabled = false;
             moveToStart = false;
             waitOneFrame = true;
        
+            SaveSystemManager.Instance.ReloadLastSave();
         }
     }
 
