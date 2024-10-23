@@ -352,7 +352,7 @@ public class MonsterAI : MonoBehaviour
     {
 
         float dotRes = Vector3.Dot(_camera.transform.forward, (transform.position - _player.transform.position).normalized);
-        return dotRes > 0.7f;
+        return dotRes > 0.6f;
             
        // Vector3 screen_position = _camera.WorldToScreenPoint(transform.position);
        // return screen_position.x > 0 && screen_position.x < Screen.width && screen_position.y > 0 && screen_position.y < Screen.height;
