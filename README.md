@@ -24,6 +24,8 @@ Mouse Button Left - Interaction
 
 WASD - Movement
 
+Q - use the inhaler
+
 Tabulator - Journal (Map, Settings, Tasks)
 
 If you exit the window with escape, press it again to refocus the game.
