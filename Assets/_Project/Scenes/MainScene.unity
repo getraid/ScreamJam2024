@@ -44227,6 +44227,62 @@ PrefabInstance:
       propertyPath: audioGroups.Array.data[0].AudioClips.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: 1e02aad01f5144c589e18ed921d4549b, type: 3}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[1].AudioTracksList.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[2].AudioTracksList.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[3].AudioTracksList.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[4].AudioTracksList.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[1].AudioTracksList.Array.data[2]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[1].AudioTracksList.Array.data[3]
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[1].AudioTracksList.Array.data[4]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[1].AudioTracksList.Array.data[5]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[2].AudioTracksList.Array.data[5]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[3].AudioTracksList.Array.data[5]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[3].AudioTracksList.Array.data[6]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[4].AudioTracksList.Array.data[5]
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[4].AudioTracksList.Array.data[6]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8886132406516515049, guid: 89a27fae9092d45a08028e43cecf2525, type: 3}
+      propertyPath: <AudioGroups>k__BackingField.Array.data[4].AudioTracksList.Array.data[7]
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
