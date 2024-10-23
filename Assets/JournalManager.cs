@@ -85,6 +85,8 @@ public class JournalManager : MonoBehaviour
      
      [field: SerializeField] public Slider VolumeSlider {get;set;} // Reference to the volume slider
      [field: SerializeField] public AudioMixer AudioMixer {get;set;}
+
+    [SerializeField] Button _loadButton;
      
      private float currentBrightness = 0.5f; // Default brightness value
      private ColorAdjustments colorAdjustments;
@@ -205,6 +207,11 @@ public class JournalManager : MonoBehaviour
         {
             goal.gameObject.SetActive(false);
         }
+    }
+
+    public void EnableCheckpointLoad()
+    {
+        _loadButton.interactable = true;
     }
 
     public void ToggleJournal()

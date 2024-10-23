@@ -101,12 +101,19 @@ public class QuestManager : MonoBehaviour,ISaveable
 
         _lastCompletedQuest = _questSaveData[saveDateStamp];
 
-        for(int i=_lastCompletedQuest+1;i<_chronologicalQuests.Count;i++)                 //On the quest list returning to the previous task
+        for (int i = _lastCompletedQuest + 1; i < _chronologicalQuests.Count; i++)                 //On the quest list returning to the previous task
+        {
             _allChronologicalQuests[i].QuestUIText.enabled = false;
+            _allChronologicalQuests[i].JournalUIText.enabled = false;
+
+        }
         for (int i = _lastCompletedQuest; i < _chronologicalQuests.Count; i++)
         { 
             _allChronologicalQuests[i].QuestUIText.text = _allChronologicalQuests[i].QuestUIText.text.Replace("<s>", "");
             _allChronologicalQuests[i].QuestUIText.color = Color.white;
+
+            _allChronologicalQuests[i].JournalUIText.text = _allChronologicalQuests[i].JournalUIText.text.Replace("<s>", "");
+            _allChronologicalQuests[i].JournalUIText.color = Color.white;
         }
 
         _allChronologicalQuests[_lastCompletedQuest].SceneQuest.TryCompleteQuest += OnQuestCompletion;

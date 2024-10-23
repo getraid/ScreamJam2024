@@ -54,7 +54,7 @@ public class Interactor : MonoBehaviour
             }
         }
         SetIconActive(_targetInteractable != null);
-        SetText(_targetInteractable != null ? _targetParent.name : "");
+        //SetText(_targetInteractable != null ? _targetParent.name : "");
 
     }
 
