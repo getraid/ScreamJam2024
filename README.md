@@ -7,6 +7,11 @@ Perhaps.
 Journey as Jake, a young man facing the unknown in this forest, tasked with seemingly simple trials and perhaps a simple conclusion.  
 
 Only you and the forest know the answer to that.  
+## Screenshots
+
+![gameplay_img](https://img.itch.zone/aW1hZ2UvMzA1ODE4OS8xODI4ODgzMy5wbmc=/original/rgaUA9.png)
+![gameplay_img1](https://img.itch.zone/aW1hZ2UvMzA1ODE4OS8xODI4ODg0NC5wbmc=/original/r6TrVN.png)
+![gameplay_img2](https://img.itch.zone/aW1hZ2UvMzA1ODE4OS8xODI4ODgzNy5wbmc=/original/RRkmit.png)
 
 
 ## Controls 
