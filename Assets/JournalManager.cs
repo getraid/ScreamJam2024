@@ -26,6 +26,7 @@ public class JournalManager : MonoBehaviour
     [field: SerializeField] public Image CrossOverlay { get; set; }
     [field: SerializeField] public List<int> GoalOrderIndex { get; set; } = new List<int>();
 
+
     private static readonly int HasOpened = Animator.StringToHash("HasOpened");
     private static readonly int IsReady = Animator.StringToHash("IsReady");
 
@@ -86,6 +87,9 @@ public class JournalManager : MonoBehaviour
      
      [field: SerializeField] public Slider VolumeSlider {get;set;} // Reference to the volume slider
      [field: SerializeField] public AudioMixer AudioMixer {get;set;}
+
+    [field: SerializeField] public Slider MouseSensitvitySlider { get; set; } // Reference to the volume slider
+    [field: SerializeField] public CinemachineVirtualCamera MainVirtCam { get; set; }
 
     [SerializeField] Button _loadButton;
      
@@ -173,12 +177,34 @@ public class JournalManager : MonoBehaviour
         // VolumeSlider.value = Mathf.Pow(10, currentVolume / 20);
         VolumeSlider.value = 1f;
         VolumeSlider.onValueChanged.AddListener(SetVolume);
-        
+
+#if UNITY_EDITOR
+        MouseSensitvitySlider.value = 1f;
+#elif UNITY_WEBGL
+        MouseSensitvitySlider.value = 0.5f;
+        ChangeSensitvity(MouseSensitvitySlider.value);
+#else
+        MouseSensitvitySlider.value = 1f;
+#endif
+
+        MouseSensitvitySlider.onValueChanged.AddListener(ChangeSensitvity);
+
+
 
         DontDestroyOnLoad(gameObject);
     }
-    
-      public void SetVolume(float volume)
+
+    private void ChangeSensitvity(float arg0)
+    {
+        if(arg0 < 0.01f) 
+        {
+            arg0 = 0.01f;
+        }
+
+        SavedMouseSpeed = arg0 * 300f;
+    }
+
+    public void SetVolume(float volume)
       {
           float log_value = (volume <= 0f) ? -120f : Mathf.Log10(volume) * 20;
 
@@ -282,6 +308,8 @@ public class JournalManager : MonoBehaviour
                    MainCamera.ActiveVirtualCamera.VirtualCameraGameObject.CompareTag("MainVirtCam");
         }
     }
+
+    public float SavedMouseSpeed { get; internal set; } = 300f;
 
     private void OnCameraSwitched(ICinemachineCamera fromCam, ICinemachineCamera toCam)
     {
