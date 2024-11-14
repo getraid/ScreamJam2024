@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f813668c88050c4ebffdeebe55b742e, type: 3}
   m_Name: FireAfterInhaler
   m_EditorClassIdentifier: 
-  <QuestText>k__BackingField: Return to campfire
+  <QuestText>k__BackingField: Return to campsite

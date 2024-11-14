@@ -21,4 +21,4 @@ MonoBehaviour:
   - Text: 
     Audio: {fileID: 8300000, guid: 640de0930e06f5d458e7bf99b5ea1cd3, type: 3}
     TimeDelay: 0
-    TalkToWalkieTalkie: 1
+    TalkToWalkieTalkie: 0

@@ -6,8 +6,6 @@ using UnityEngine.Events;
 
 public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
 {
-    Transform _playerTransform;
-
     [field:SerializeField] public QuestSO QuestData { get; set; }
     [field:SerializeField] public QuestItemSO QuestItemNeeded { get; set; }
     [field: SerializeField] public QuestItemSO QuestItemToPickupOnCompletion { get; set; }
@@ -32,8 +30,6 @@ public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
 
     private void Start()
     {
-        _playerTransform = FindObjectOfType<PlayerController>().transform;
-
         if (_disableOnQuestCompletion)
             QuestCompleted.AddListener(() => { enabled = false; });
     }
@@ -44,11 +40,11 @@ public class IsPlayerLookingAt : MonoBehaviour,IQuest,ISaveable
 
         if(_mustBeReacheable)
         {
-            if (Vector3.Distance(_playerTransform.transform.position, transform.position) > 5.0f)
+            if (Vector3.Distance(Camera.main.transform.position, transform.position) > 5.0f)
                 return;
         }
 
-        Vector3 playerObjDir = (transform.position - _playerTransform.position).normalized;
+        Vector3 playerObjDir = (transform.position - Camera.main.transform.position).normalized;
 
         float dirDot = Vector3.Dot(Camera.main.transform.forward, playerObjDir);
 
