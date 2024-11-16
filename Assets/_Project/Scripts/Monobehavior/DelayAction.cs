@@ -12,7 +12,7 @@ public class DelayAction : MonoBehaviour,ISaveable
     [SerializeField] UnityEvent _onVoiceLineFinished;
     [SerializeField] SFXManager.SFXType _sfxToPlay;
 
-    Dictionary<DateTime, bool> _saveData = new Dictionary<DateTime, bool>();
+    Dictionary<DateTime, (bool Enabled,bool HasDoneAction)> _saveData = new Dictionary<DateTime, (bool,bool)>();
     bool _hasDoneAction = false;
 
     public void DoAction()
@@ -40,13 +40,16 @@ public class DelayAction : MonoBehaviour,ISaveable
     public void ReloadFromSafe(DateTime saveDateStamp)
     {
         if (enabled = _saveData.ContainsKey(saveDateStamp))
-            enabled = _saveData[saveDateStamp];
+        {
+            enabled = _saveData[saveDateStamp].Enabled;
+            _hasDoneAction = _saveData[saveDateStamp].HasDoneAction;
+        }
         else
             Destroy(gameObject);
     }
 
     public void SaveData(DateTime saveDateStamp)
     {
-        _saveData.Add(saveDateStamp, enabled);
+        _saveData.Add(saveDateStamp, (enabled,_hasDoneAction));
     }
 }

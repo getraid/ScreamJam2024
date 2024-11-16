@@ -15,7 +15,7 @@ public enum MonsterState
     Chase,
 }
 
-public class MonsterAI : MonoBehaviour
+public class MonsterAI : MonoBehaviour,ISaveable
 {
     [SerializeField] private bool destroyOnStateChange = false;
 
@@ -44,6 +44,7 @@ public class MonsterAI : MonoBehaviour
 
     [SerializeField] private float raycastDistance = 50f;
     [SerializeField] bool _canTeleport;
+    [SerializeField] AudioSource _audioSourceToPlayWhenChasing;
 
     private Transform _player;
     private Transform _campfire;
@@ -55,11 +56,23 @@ public class MonsterAI : MonoBehaviour
     private bool _lockedState;
     private float _lurkAngle;
 
+    public struct MonsterSaveData
+    {
+        public bool ObjectActive;
+        public Vector3 Position;
+        public MonsterState StateOfMonster;
+    }
+
+    Dictionary<System.DateTime,MonsterSaveData> _monsterSaveData = new Dictionary<System.DateTime,MonsterSaveData>();
+
     private void OnEnable()
     {
         _player = GameObject.FindWithTag("Player").transform;
         _campfire = GameObject.FindWithTag("Campfire").transform;
         _camera = Camera.main;
+
+        if (currentState==MonsterState.Chase&&_audioSourceToPlayWhenChasing != null)
+            _audioSourceToPlayWhenChasing.enabled = true;
     }
 
     public bool isVisible;
@@ -387,6 +400,9 @@ public class MonsterAI : MonoBehaviour
 
     public void SetState(MonsterState state)
     {
+        if (_audioSourceToPlayWhenChasing != null)
+            _audioSourceToPlayWhenChasing.enabled = state==MonsterState.Chase;
+
         if (destroyOnStateChange)
         {
             Destroy(gameObject);
@@ -394,5 +410,29 @@ public class MonsterAI : MonoBehaviour
         }
 
         currentState = state;
+    }
+
+    public void ReloadFromSafe(System.DateTime saveDateStamp)
+    {
+        if(_monsterSaveData.ContainsKey(saveDateStamp))
+        {
+            MonsterSaveData saveData = _monsterSaveData[saveDateStamp];
+            transform.position = saveData.Position;
+            gameObject.SetActive(saveData.ObjectActive);
+
+            SetState(saveData.StateOfMonster);
+        }
+        else
+            Destroy(gameObject);
+    }
+
+    public void SaveData(System.DateTime saveDateStamp)
+    {
+        MonsterSaveData data;
+        data.Position = transform.position;
+        data.StateOfMonster = currentState;
+        data.ObjectActive = gameObject.activeSelf;
+
+        _monsterSaveData.Add(saveDateStamp, data);
     }
 }

@@ -88,6 +88,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         public Quaternion Rotation;
         public bool CanPlayerMove;
         public float Stamina;
+        public float InhalerCooldown;
     }
     private void Awake()
     {
@@ -213,7 +214,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         _fatigueVM.Priority = (_isFatigued) ? 100 : 0;
 
 
-        if (_qPressed && _currentInhalerCooldown <= inhalerActivationThreshold)
+        if (hasInhaler && _qPressed && _currentInhalerCooldown <= inhalerActivationThreshold)
         {
             _isInhaling = true;
             _currentInhalerCooldown = inhalerCooldown;
@@ -364,7 +365,7 @@ public class PlayerController : MonoBehaviour,ISaveable
     {
         _isPlayingExtraFootsteps = true;
 
-        float volume = 0.3f;
+        float volume = 0.7f;
         Vector3 start_position = transform.position + -transform.forward * UnityEngine.Random.Range(4f, 6f) + transform.right * UnityEngine.Random.Range(-5f, 5f);
         start_position.y = transform.position.y;
 
@@ -388,7 +389,7 @@ public class PlayerController : MonoBehaviour,ISaveable
             extraFootsteps.transform.position = Vector3.Lerp(start_position, end_position, 1 - (timer / total_time));
 
             // Reduce the volume over time.
-            volume = Mathf.Lerp(0.3f, 0.1f, 1 - (timer / total_time));
+            volume = Mathf.Lerp(volume, 0.3f, 1 - (timer / total_time));
             extraFootsteps.volume = volume;
             
 
@@ -461,6 +462,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         CanPlayerMove = data.CanPlayerMove;
         hasInhaler = data.HasInhaler;
         hasAsthma = data.hasAshtma;
+        _currentInhalerCooldown = data.InhalerCooldown;
         _controller.enabled = true;
     }
 
@@ -473,6 +475,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         data.CanPlayerMove = CanPlayerMove;
         data.HasInhaler = hasInhaler;
         data.hasAshtma = hasAsthma;
+        data.InhalerCooldown = _currentInhalerCooldown;
 
         _saveData.Add(saveDateStamp, data);
     }

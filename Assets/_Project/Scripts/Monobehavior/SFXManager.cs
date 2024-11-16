@@ -27,7 +27,8 @@ public class SFXManager : MonoBehaviour
       Keys,
       ChickenNoise,
       GnomeWhisper,
-      Monster
+      Monster,
+      WrongPlace
     }
 
    [System.Serializable]
