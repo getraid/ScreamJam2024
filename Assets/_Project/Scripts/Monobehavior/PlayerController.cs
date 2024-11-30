@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour,ISaveable
     private bool _isInhaling;
     private float _currentInhalerCooldown;
     private bool _isPlayingExtraFootsteps;
+    float _headbobMultiplier = 1.0f;
 
     private CharacterController _controller;
     private Camera _camera;
@@ -413,8 +414,8 @@ public class PlayerController : MonoBehaviour,ISaveable
         float current_amplitude = _cameraNoise.m_AmplitudeGain;
         float current_frequency = _cameraNoise.m_FrequencyGain;
         
-        float target_amplitude = Mathf.Lerp(sprintAmplitudeRange.x, sprintAmplitudeRange.y, speed_percentage);
-        float target_frequency = Mathf.Lerp(sprintFrequencyRange.x, sprintFrequencyRange.y, speed_percentage);
+        float target_amplitude = Mathf.Lerp(sprintAmplitudeRange.x, sprintAmplitudeRange.y, speed_percentage)* _headbobMultiplier;
+        float target_frequency = Mathf.Lerp(sprintFrequencyRange.x, sprintFrequencyRange.y, speed_percentage)*_headbobMultiplier;
         
         _cameraNoise.m_AmplitudeGain = Mathf.Lerp(current_amplitude, target_amplitude, Time.deltaTime);
         _cameraNoise.m_FrequencyGain = Mathf.Lerp(current_frequency, target_frequency, Time.deltaTime);
@@ -430,6 +431,10 @@ public class PlayerController : MonoBehaviour,ISaveable
         float current_fov = _standingVM.m_Lens.FieldOfView;
         float target_fov = Mathf.Lerp(sprintFOVRange.x, sprintFOVRange.y, speed_percentage);
         _standingVM.m_Lens.FieldOfView = Mathf.Lerp(current_fov, target_fov, Time.deltaTime);
+    }
+    public void SetHeadbobMultiplier(float value)
+    {
+        _headbobMultiplier = value;
     }
 
     private void OnTriggerEnter(Collider other)

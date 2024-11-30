@@ -92,6 +92,8 @@ public class JournalManager : MonoBehaviour
     [field: SerializeField] public CinemachineVirtualCamera MainVirtCam { get; set; }
 
     [SerializeField] Button _loadButton;
+
+    [SerializeField] Slider _headbobSlider;
      
      private float currentBrightness = 0.5f; // Default brightness value
      private ColorAdjustments colorAdjustments;
@@ -178,9 +180,9 @@ public class JournalManager : MonoBehaviour
         VolumeSlider.value = 1f;
         VolumeSlider.onValueChanged.AddListener(SetVolume);
 
-#if UNITY_EDITOR
-        MouseSensitvitySlider.value = 1f;
-#elif UNITY_WEBGL
+        _headbobSlider.onValueChanged.AddListener(SetHeadbob);
+
+#if UNITY_WEBGL
         MouseSensitvitySlider.value = 0.5f;
         ChangeSensitvity(MouseSensitvitySlider.value);
 #else
@@ -205,22 +207,27 @@ public class JournalManager : MonoBehaviour
     }
 
     public void SetVolume(float volume)
-      {
-          float log_value = (volume <= 0f) ? -120f : Mathf.Log10(volume) * 20;
+    {
+        float log_value = (volume <= 0f) ? -120f : Mathf.Log10(volume) * 20;
 
-          AudioMixer.SetFloat("MainVolume", log_value);
+        AudioMixer.SetFloat("MainVolume", log_value);
           
        
-      }
+    }
+
+    public void SetHeadbob(float value)
+    {
+        PlayerController.SetHeadbobMultiplier(value);
+    }
       
-      public void SetBrightness(float brightness)
+    public void SetBrightness(float brightness)
+    {
+        if (colorAdjustments != null)
         {
-            if (colorAdjustments != null)
-            {
-                var newbrightness = (Mathf.Clamp01(brightness) -0.5f) * 2f;
-                colorAdjustments.postExposure.value = newbrightness;
-            }
+            var newbrightness = (Mathf.Clamp01(brightness) -0.5f) * 2f;
+            colorAdjustments.postExposure.value = newbrightness;
         }
+    }
     
     void Start()
     {
