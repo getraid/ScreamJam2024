@@ -405,11 +405,13 @@ public class MonsterAI : MonoBehaviour,ISaveable
         if (_audioSourceToPlayWhenChasing != null)
             _audioSourceToPlayWhenChasing.enabled = state==MonsterState.Chase;
 
-        if(state==MonsterState.Chase)
-            _monsterAnimator.SetBool("Chase", true);
-        else
-            _monsterAnimator.SetBool("Chase", false);
-
+        if (_monsterAnimator != null)
+        {
+            if (state == MonsterState.Chase)
+                _monsterAnimator.SetBool("Chase", true);
+            else
+                _monsterAnimator.SetBool("Chase", false);
+        }
 
         if (destroyOnStateChange)
         {
@@ -427,7 +429,9 @@ public class MonsterAI : MonoBehaviour,ISaveable
             MonsterSaveData saveData = _monsterSaveData[saveDateStamp];
             transform.position = saveData.Position;
             gameObject.SetActive(saveData.ObjectActive);
-            _monsterAnimator.SetBool("Chase", saveData.AnimatorChaseState);
+
+            if(_monsterAnimator != null)
+                 _monsterAnimator.SetBool("Chase", saveData.AnimatorChaseState);
 
             SetState(saveData.StateOfMonster);
         }
@@ -441,7 +445,7 @@ public class MonsterAI : MonoBehaviour,ISaveable
         data.Position = transform.position;
         data.StateOfMonster = currentState;
         data.ObjectActive = gameObject.activeSelf;
-        data.AnimatorChaseState = _monsterAnimator.GetBool("Chase");
+        data.AnimatorChaseState = _monsterAnimator==null?false: _monsterAnimator.GetBool("Chase");
 
         _monsterSaveData.Add(saveDateStamp, data);
     }
