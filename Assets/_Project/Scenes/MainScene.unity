@@ -5122,6 +5122,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 569546145}
     - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
+      propertyPath: _monsterAnimator
+      value: 
+      objectReference: {fileID: 1502628492}
+    - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
       propertyPath: _audioSourceToPlayWhenChasing
       value: 
       objectReference: {fileID: 228783243}
@@ -22843,7 +22847,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
       propertyPath: chaseSpeed
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
       propertyPath: currentState
@@ -23463,6 +23467,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8113975726398880142, guid: 6d263bf35d43b134d9b66abbb899e063, type: 3}
   m_PrefabInstance: {fileID: 1031379827}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1031379831 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3066580932605937756, guid: 6d263bf35d43b134d9b66abbb899e063, type: 3}
+  m_PrefabInstance: {fileID: 1031379827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1032071820 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 468165442152323567, guid: 69533ca933ad8b14fb5da934129fe6df, type: 3}
@@ -24043,6 +24052,10 @@ PrefabInstance:
       propertyPath: monsterRenderer
       value: 
       objectReference: {fileID: 1031379828}
+    - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
+      propertyPath: _monsterAnimator
+      value: 
+      objectReference: {fileID: 1031379831}
     - target: {fileID: 5110796727338875595, guid: 8a6257dd62f3642459c1087eb3ccf804, type: 3}
       propertyPath: _audioSourceToPlayWhenChasing
       value: 
@@ -33158,6 +33171,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d263bf35d43b134d9b66abbb899e063, type: 3}
+--- !u!95 &1502628492 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3066580932605937756, guid: 6d263bf35d43b134d9b66abbb899e063, type: 3}
+  m_PrefabInstance: {fileID: 569546144}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1505261542
 PrefabInstance:
   m_ObjectHideFlags: 0
