@@ -45,6 +45,7 @@ public class MonsterAI : MonoBehaviour,ISaveable
     [SerializeField] private float raycastDistance = 50f;
     [SerializeField] bool _canTeleport;
     [SerializeField] AudioSource _audioSourceToPlayWhenChasing;
+    [SerializeField] Animator _monsterAnimator;
 
     private Transform _player;
     private Transform _campfire;
@@ -61,6 +62,7 @@ public class MonsterAI : MonoBehaviour,ISaveable
         public bool ObjectActive;
         public Vector3 Position;
         public MonsterState StateOfMonster;
+        public bool AnimatorChaseState;
     }
 
     Dictionary<System.DateTime,MonsterSaveData> _monsterSaveData = new Dictionary<System.DateTime,MonsterSaveData>();
@@ -403,6 +405,12 @@ public class MonsterAI : MonoBehaviour,ISaveable
         if (_audioSourceToPlayWhenChasing != null)
             _audioSourceToPlayWhenChasing.enabled = state==MonsterState.Chase;
 
+        if(state==MonsterState.Chase)
+            _monsterAnimator.SetBool("Chase", true);
+        else
+            _monsterAnimator.SetBool("Chase", false);
+
+
         if (destroyOnStateChange)
         {
             Destroy(gameObject);
@@ -419,6 +427,7 @@ public class MonsterAI : MonoBehaviour,ISaveable
             MonsterSaveData saveData = _monsterSaveData[saveDateStamp];
             transform.position = saveData.Position;
             gameObject.SetActive(saveData.ObjectActive);
+            _monsterAnimator.SetBool("Chase", saveData.AnimatorChaseState);
 
             SetState(saveData.StateOfMonster);
         }
@@ -432,6 +441,7 @@ public class MonsterAI : MonoBehaviour,ISaveable
         data.Position = transform.position;
         data.StateOfMonster = currentState;
         data.ObjectActive = gameObject.activeSelf;
+        data.AnimatorChaseState = _monsterAnimator.GetBool("Chase");
 
         _monsterSaveData.Add(saveDateStamp, data);
     }

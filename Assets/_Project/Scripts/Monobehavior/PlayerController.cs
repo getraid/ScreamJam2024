@@ -439,19 +439,18 @@ public class PlayerController : MonoBehaviour,ISaveable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("SafeZone"))
+        if (other.gameObject.CompareTag("QuietZone"))
         {
-            MusicManager.Instance.IsInSafeZone = true;
-            MusicManager.Instance.StopMusic();
+            MusicManager.Instance.IsInQuietZone = true;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("SafeZone"))
+        if (other.gameObject.CompareTag("QuietZone"))
         {
-            MusicManager.Instance.IsInSafeZone = false;
-            MusicManager.Instance.StartMusic();
+            MusicManager.Instance.IsInQuietZone = false;
+            MusicManager.Instance.TryStartMusic();
             
         }
     }

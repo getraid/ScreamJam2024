@@ -15,7 +15,7 @@ MonoBehaviour:
   <PlayOneRandom>k__BackingField: 0
   <VoiceLines>k__BackingField:
   - Text: Ahh! What are you?! Dont go near us!
-    Audio: {fileID: 8300000, guid: 8c2e57b94b21e4257bbd0ddb3f6dd906, type: 3}
+    Audio: {fileID: 8300000, guid: dd9402d64dd897d4b8c7433549517105, type: 3}
     TimeDelay: 0
     TalkToWalkieTalkie: 1
   - Text: 

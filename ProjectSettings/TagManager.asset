@@ -8,6 +8,7 @@ TagManager:
   - OutOfBounds
   - MainVirtCam
   - Campfire
+  - QuietZone
   layers:
   - Default
   - TransparentFX

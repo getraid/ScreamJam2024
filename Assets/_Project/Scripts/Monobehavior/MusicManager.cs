@@ -36,17 +36,17 @@ public class MusicManager : MonoBehaviour
     [field: SerializeField] public List<AudioGroup> AudioGroups { get; set; }
     [field: SerializeField] public int CurrentAudioGroupIndex { get; set; } = 0;
 
-    [field: SerializeField] public bool IsInSafeZone { get; set; } = true;
+    [field: SerializeField] public bool IsInQuietZone { get; set; } = true;
 
     private Dictionary<string, AudioClip> audioFilesDict { get; set; }
     public static MusicManager Instance { get; private set; }
-    
+
+    float _maxVolume = 1;
+    bool _isMusicPlaying = false;
 
     private AudioSource activeSource;
     private AudioSource inactiveSource;
-    private bool isStopping = false;
     private Coroutine musicLoopCoroutine;
-    private bool isLevelChanging = false;
     private AudioClip currentClip = null; // Store the currently playing clip
 
     void Start()
@@ -68,22 +68,35 @@ public class MusicManager : MonoBehaviour
             activeSource = AudioSourceA;
             inactiveSource = AudioSourceB;
 
-            if (!IsInSafeZone)
+            if (!IsInQuietZone)
             {
-                StartMusic();
+                TryStartMusic();
             }
         }
     }
+    private void FixedUpdate()
+    {
+        if (IsInQuietZone)
+            _maxVolume = Mathf.Max(0, _maxVolume - 0.003f);
+        else
+            _maxVolume = Mathf.Min(1, _maxVolume + 0.002f);
+
+        activeSource.volume = _maxVolume;
+    }
+
     public void ChangeMusicGroup(int groupNumber)
     {
         CurrentAudioGroupIndex = groupNumber;
     }
 
-    public void StartMusic()
+    public void TryStartMusic()
     {
-        if (IsInSafeZone)
+        if(_isMusicPlaying)
+            return;
+        
+        if (IsInQuietZone)
         {
-            Debug.Log("Player is in the safe zone, music will not start.");
+            Debug.Log("Player is in the quiet zone, music will not start.");
             return;
         }
 
@@ -92,58 +105,9 @@ public class MusicManager : MonoBehaviour
             StopCoroutine(musicLoopCoroutine);
         }
 
+        _isMusicPlaying = true;
         // Start the music sequence with the start audio if specified
-        musicLoopCoroutine = StartCoroutine(PlayRandomMusicFromGroup(CurrentAudioGroupIndex, useStart: true));
-    }
-
-    // Play Start Sequence, then continue with the random song -> end song loop
-    private IEnumerator PlayStartSequenceThenMusic()
-    {
-        if (StartAudioSequence != null)
-        {
-            activeSource.clip = StartAudioSequence;
-            activeSource.Play();
-            yield return new WaitForSeconds(StartAudioSequence.length);
-        }
-
-        // Once the start sequence finishes, begin playing random songs and end sequence
-        musicLoopCoroutine = StartCoroutine(PlayRandomMusicFromGroup(CurrentAudioGroupIndex));
-    }
-
-    public void StopMusic()
-    {
-        if (musicLoopCoroutine != null && !isStopping)
-        {
-            isStopping = true;
-            StartCoroutine(PlayCurrentLoopThenEndSequence());
-        }
-    }
-
-
-    public void HardStopMusic()
-    {
-        if (musicLoopCoroutine != null )
-        {
-            isStopping = true;
-            activeSource.volume = 0f;
-            inactiveSource.volume = 0f;
-            activeSource.Stop();
-            inactiveSource.Stop();
-        }
-    }
-
-    private IEnumerator PlayCurrentLoopThenEndSequence()
-    {
-        // Wait for the current loop to finish
-        yield return new WaitWhile(() => activeSource.isPlaying);
-
-        // If there is an end audio sequence, crossfade to it
-        if (EndAudioSequence != null)
-        {
-            yield return StartCoroutine(PlayClipWithCrossfade(currentClip, EndAudioSequence, crossfadeBuffer: 2.0f, fadeDuration: 2.0f));
-        }
-
-        isStopping = false;
+        musicLoopCoroutine = StartCoroutine(PlayRandomMusicFromGroup(useStart: true));
     }
 
     public void ChangeLevel(int newAudioGroupIndex)
@@ -153,30 +117,10 @@ public class MusicManager : MonoBehaviour
             Debug.Log("Already playing music for the current level.");
             return;
         }
-
-        CurrentAudioGroupIndex = newAudioGroupIndex;
-        isLevelChanging = true;
-
-        if (musicLoopCoroutine != null)
-        {
-            StartCoroutine(SwitchToNewLevelAfterCurrentTrack());
-        }
-        else
-        {
-            musicLoopCoroutine = StartCoroutine(PlayRandomMusicFromGroup(CurrentAudioGroupIndex));
-        }
     }
 
-    private IEnumerator SwitchToNewLevelAfterCurrentTrack()
+    private IEnumerator PlayRandomMusicFromGroup(bool useStart = false)
     {
-        yield return new WaitWhile(() => activeSource.isPlaying);
-        isLevelChanging = false;
-        musicLoopCoroutine = StartCoroutine(PlayRandomMusicFromGroup(CurrentAudioGroupIndex));
-    }
-
-    private IEnumerator PlayRandomMusicFromGroup(int groupIndex, bool useStart = false)
-    {
-        List<AudioClip> audioClips = GetAudioClipsFromGroup(groupIndex);
 
         // If the start audio should be used, set it as the current clip
         if (useStart && StartAudioSequence != null)
@@ -185,8 +129,10 @@ public class MusicManager : MonoBehaviour
         }
 
         // Start playing the random song sequence
-        while (!IsInSafeZone && !isStopping && !isLevelChanging)
+        while (true)
         {
+            List<AudioClip> audioClips = GetAudioClipsFromGroup(CurrentAudioGroupIndex);
+
             if (audioClips.Count > 0)
             {
                 // Select a new random song if the current clip is not the start sequence
@@ -218,31 +164,13 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-
     private IEnumerator PlayClipWithCrossfade(AudioClip oldClip, AudioClip newClip, float crossfadeBuffer = 2.0f, float fadeDuration = 2.0f)
-    {
-        // If there is an old clip, set it to the active source
-        if (oldClip != null)
-        {
-            AudioClip activeCur = activeSource.clip;
-            AudioClip activeOld = oldClip;
-
-            activeSource.clip = oldClip;
-            activeSource.volume = 1f;
-
-            if (!activeSource.isPlaying || (activeCur!=activeOld))
-                activeSource.Play();
-        }
-
-        AudioClip inactiveCur = inactiveSource.clip;
-        AudioClip inactiveOld = newClip;
-
-        // Set the new clip to the inactive source but don't start it yet
+    {  
         inactiveSource.clip = newClip;
         inactiveSource.volume = 0f;
 
         // If there is an old clip, wait until `crossfadeBuffer` seconds are left before starting the new clip and crossfading
-        if (oldClip != null)
+        if (oldClip != null && activeSource.clip!=null)
         {
             float remainingTime = activeSource.clip.length - activeSource.time;
             if (remainingTime > crossfadeBuffer)
@@ -252,13 +180,13 @@ public class MusicManager : MonoBehaviour
 
             // Start the new clip exactly at the crossfadeBuffer time
 
-            if(!inactiveSource.isPlaying || (inactiveCur!=inactiveOld))
+            if(!inactiveSource.isPlaying)
                 inactiveSource.Play();
         }
         else
         {
             // If there's no old clip, just start playing the new clip immediately
-            if (!inactiveSource.isPlaying || (inactiveCur != inactiveOld))
+            if (!inactiveSource.isPlaying)
                 inactiveSource.Play();
         }
 
@@ -270,8 +198,8 @@ public class MusicManager : MonoBehaviour
             float progress = timer / fadeDuration;
 
             // Fade out the active source (old clip) and fade in the inactive source (new clip)
-            if (oldClip != null) activeSource.volume = 1 - progress;
-            inactiveSource.volume = progress;
+            if (oldClip != null) activeSource.volume = Math.Clamp(1 - progress,0, _maxVolume);
+            inactiveSource.volume = Math.Clamp(progress,0,_maxVolume);
 
             yield return null;
         }
@@ -280,7 +208,7 @@ public class MusicManager : MonoBehaviour
         if (oldClip != null)
         {
             activeSource.Stop();
-            activeSource.volume = 1f; // Reset volume for the next time
+            activeSource.volume = _maxVolume; // Reset volume for the next time
         }
 
         // Swap the active and inactive sources
