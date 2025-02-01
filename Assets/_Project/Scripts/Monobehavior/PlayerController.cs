@@ -163,6 +163,9 @@ public class PlayerController : MonoBehaviour,ISaveable
             // Change the standing vm aim component max speed to 0
             _standingVM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = 0;
             _standingVM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = 0;
+
+            _crouchVM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = 0;
+            _crouchVM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = 0;
         }
         else
         {
@@ -170,6 +173,9 @@ public class PlayerController : MonoBehaviour,ISaveable
             // Change the standing vm aim component max speed to 300
             _standingVM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = localMouse;
             _standingVM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = localMouse;
+            
+            _crouchVM.GetCinemachineComponent<CinemachinePOV>().m_HorizontalAxis.m_MaxSpeed = localMouse;
+            _crouchVM.GetCinemachineComponent<CinemachinePOV>().m_VerticalAxis.m_MaxSpeed = localMouse;
         }
 
         if (!CanPlayerMove)

@@ -18332,6 +18332,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2046031584}
     m_Modifications:
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_VerticalAxis.m_MaxSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_VerticalAxis.m_AccelTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_VerticalAxis.m_DecelTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_VerticalAxis.m_SpeedMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_HorizontalAxis.m_MaxSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_HorizontalAxis.m_AccelTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_HorizontalAxis.m_DecelTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_HorizontalAxis.m_SpeedMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1591657404359637383, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_Follow
       value: 
@@ -19606,7 +19638,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -26.199951, y: 302.8}
+  m_AnchoredPosition: {x: -26.199707, y: 302.80005}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &839822854
@@ -28833,7 +28865,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289827105}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1289827109
 Camera:
   m_ObjectHideFlags: 0
@@ -45794,11 +45826,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_VerticalAxis.m_MaxSpeed
-      value: 300
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_VerticalAxis.m_AccelTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_VerticalAxis.m_DecelTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_VerticalAxis.m_SpeedMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_HorizontalAxis.m_MaxSpeed
-      value: 300
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_HorizontalAxis.m_AccelTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_HorizontalAxis.m_DecelTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 489359276105420899, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
+      propertyPath: m_HorizontalAxis.m_SpeedMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1591657404359637383, guid: 5c002ebbb29724b9ca1dfeb375107554, type: 3}
       propertyPath: m_Follow
@@ -55277,8 +55333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8288704733096884057, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_text
-      value: Mouse sensitivity <size=0.02><color=yellow>(Sensitivity only works after
-        first task)
+      value: Mouse sensitivity <size=0.02><color=yellow>
       objectReference: {fileID: 0}
     - target: {fileID: 8347033604701306835, guid: 7551b606848794e6986c705dff1f06ef, type: 3}
       propertyPath: m_Layer

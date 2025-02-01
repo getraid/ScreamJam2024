@@ -183,10 +183,10 @@ public class JournalManager : MonoBehaviour
         _headbobSlider.onValueChanged.AddListener(SetHeadbob);
 
 #if UNITY_WEBGL
-        MouseSensitvitySlider.value = 0.5f;
+        MouseSensitvitySlider.value = 0.25f;
         ChangeSensitvity(MouseSensitvitySlider.value);
 #else
-        MouseSensitvitySlider.value = 1f;
+        MouseSensitvitySlider.value = 0.5f;
 #endif
 
         MouseSensitvitySlider.onValueChanged.AddListener(ChangeSensitvity);
@@ -198,12 +198,14 @@ public class JournalManager : MonoBehaviour
 
     private void ChangeSensitvity(float arg0)
     {
-        if(arg0 < 0.01f) 
+        arg0 *= 3f;
+
+        if(arg0 < 0.1f) 
         {
-            arg0 = 0.01f;
+            arg0 = 0.1f;
         }
 
-        SavedMouseSpeed = arg0 * 300f;
+        SavedMouseSpeed = arg0;
     }
 
     public void SetVolume(float volume)
@@ -316,7 +318,7 @@ public class JournalManager : MonoBehaviour
         }
     }
 
-    public float SavedMouseSpeed { get; internal set; } = 300f;
+    public float SavedMouseSpeed { get; internal set; } = 1;
 
     private void OnCameraSwitched(ICinemachineCamera fromCam, ICinemachineCamera toCam)
     {
