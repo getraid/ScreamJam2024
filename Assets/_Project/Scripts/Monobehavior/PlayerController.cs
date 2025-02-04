@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour,ISaveable
    
 
     Dictionary<DateTime, PlayerSaveData> _saveData = new Dictionary<DateTime, PlayerSaveData>();
+    bool _isPlayerBeingKilled = false;
     public struct PlayerSaveData
     {
         public bool HasInhaler;
@@ -492,6 +493,8 @@ public class PlayerController : MonoBehaviour,ISaveable
 
     public void KillPlayer()
     {
+        if (_isPlayerBeingKilled)
+            return;
 
 
         CanPlayerMove = false;
@@ -503,6 +506,8 @@ public class PlayerController : MonoBehaviour,ISaveable
 
     IEnumerator DeathTransition()
     {
+        _isPlayerBeingKilled = true;
+
         CinemachineBasicMultiChannelPerlin camera_noise = _deadVM.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
         float amplitude = 10f;
@@ -565,6 +570,7 @@ public class PlayerController : MonoBehaviour,ISaveable
         }
 
         CanPlayerMove = allowMove;
+        _isPlayerBeingKilled = false;
     }
 
     public void SetAsthma()

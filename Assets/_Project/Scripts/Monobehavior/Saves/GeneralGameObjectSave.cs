@@ -26,8 +26,8 @@ public class GeneralGameObjectSave : MonoBehaviour, ISaveable
         {
             GeneralGameObjectData dataToLoad = _savedData[saveDateStamp];
 
-            gameObject.transform.position = dataToLoad.Position;
-            gameObject.transform.rotation = dataToLoad.Rotation;
+            gameObject.transform.localPosition = dataToLoad.Position;
+            gameObject.transform.localRotation = dataToLoad.Rotation;
             gameObject.SetActive(dataToLoad.ActiveItself);
 
             for (int i = 0; i < _componentActivityToTrack.Count; i++)
@@ -50,8 +50,8 @@ public class GeneralGameObjectSave : MonoBehaviour, ISaveable
     public void SaveData(DateTime saveDateStamp)
     {
         GeneralGameObjectData saveData;
-        saveData.Position=gameObject.transform.position;
-        saveData.Rotation = gameObject.transform.rotation;
+        saveData.Position=gameObject.transform.localPosition;
+        saveData.Rotation = gameObject.transform.localRotation;
         saveData.ActiveItself = gameObject.activeSelf;
 
         saveData.ComponentActivity = _componentActivityToTrack.Select(x=> 
